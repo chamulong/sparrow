@@ -1,0 +1,39 @@
+/********************
+/*数据库表设计
+/********************
+
+//一、员工表 employee
+1.主键UUID,uuid, varchar(32),
+2.姓名,username, varchar(20),
+3.性别,sextype, varchar(10),
+4.所属部门UUID,depuuid, varchar(32),
+5.所属部门名称,depname, varchar(100),
+6.出生日期,birthdate, varchar(20),
+7.籍贯,nativeplace, varchar(40),
+8.家庭地址,homeaddress, varchar(100),
+9.邮箱,email, varchar(60),
+10.职位,position, varchar(20),
+11.级别,posilevel, varchar(20)
+
+//二、部门表 department
+1.主键UUID,uuid, varchar(32),
+2.部门名称,depname, varchar(100),
+3.主管姓名,chargename, varchar(20),
+4.部门简介,depbrief, varchar(300),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
