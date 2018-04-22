@@ -3,6 +3,7 @@ package com.jcj.sparrow.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @Author:江成军
