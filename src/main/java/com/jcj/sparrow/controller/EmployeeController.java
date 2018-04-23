@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +36,20 @@ public class EmployeeController
     {
         Sort sort=new Sort(Sort.Direction.DESC,"depname");
         return employeeService.findAllByPage(new PageRequest(page,size,sort));
+    }
+
+    @PostMapping("/comquery")
+    @ResponseBody
+    public List<Employee> myQuery(@RequestParam(defaultValue = "张三") String username)
+    {
+        return employeeService.findByJPQL(username);
+    }
+
+    @GetMapping("/qd")
+    @ResponseBody
+    public Page<Employee> getData(@RequestParam(defaultValue = "0") int page,String username,@RequestParam(defaultValue = "8") int size)
+    {
+        Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
+        return employeeService.queryData(username,new PageRequest(page,size,sort));
     }
 }

@@ -37,5 +37,15 @@ public class EmployeeService
         return employeeRepository.findAll(pageable);
     }
 
+    public List<Employee> findByJPQL(String name)
+    {
+        return employeeRepository.findByJPQL(name);
+    }
+
+    public Page<Employee> queryData(String name,Pageable pageable)
+    {
+        return employeeRepository.findByJPQLAndPage(name,pageable);
+    }
+
 }
 
