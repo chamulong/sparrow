@@ -7,9 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.*;
 
 /**
  * @Author:江成军
@@ -45,6 +50,31 @@ public class EmployeeService
     public Page<Employee> queryData(String name,Pageable pageable)
     {
         return employeeRepository.findByJPQLAndPage(name,pageable);
+    }
+
+    public Page<Employee>  queryDynamic(String datainfo, Pageable pageable)
+    {
+        Specification querySpecifi=new Specification<Employee>()
+        {
+            @Override
+            public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder)
+            {
+                List<Predicate> predicates = new ArrayList<>();
+                String[] arryCondition=datainfo.split("$");
+                if(!arryCondition[0].equals(""))//部门名称，like 模糊查询
+                {
+                    predicates.add(criteriaBuilder.like(root.get("depname"),arryCondition[0]);
+                }
+                if(!arryCondition[1].equals(""))//姓名，= 等于
+                {
+                    predicates.add(criteriaBuilder.equal(root.get("username"),arryCondition[1]);
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+
+        return this.employeeRepository.findAll(querySpecifi,pageable);
+
     }
 
 }

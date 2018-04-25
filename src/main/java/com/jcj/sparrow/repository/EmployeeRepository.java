@@ -21,4 +21,9 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>,JpaSpec
 
     @Query(value = "select * from employee where username like %?%1",nativeQuery = true)
     Page<Employee> findByJPQLAndPage(String name,Pageable pageable);
+
+    /**
+     * 动态条件查询
+     */
+    Page<Employee> findByDynamicAndPage(String datainfo,Pageable pageable);
 }
