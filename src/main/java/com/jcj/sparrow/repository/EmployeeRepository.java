@@ -4,6 +4,7 @@ import com.jcj.sparrow.domain.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description:员工数据访问接口
  * @Date:Created on 2018/4/21 17:19
  */
-public interface EmployeeRepository extends JpaRepository<Employee,Long>
+public interface EmployeeRepository extends JpaRepository<Employee,Long>,JpaSpecificationExecutor
 {
     @Query(value = "select * from employee where username=?1",nativeQuery = true)
     List<Employee> findByJPQL(String name);
