@@ -52,4 +52,15 @@ public class EmployeeController
         Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
         return employeeService.queryData(username,new PageRequest(page,size,sort));
     }
+
+    @GetMapping("/aa")
+    @ResponseBody
+    public Page<Employee> getDataD(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "3") int size,String username,String depname)
+    {
+        Employee employee=new Employee();
+        employee.setDepname(depname);
+        employee.setUsername(username);
+        Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
+        return employeeService.queryDynamic(employee,new PageRequest(page,size,sort));
+    }
 }

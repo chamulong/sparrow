@@ -52,7 +52,7 @@ public class EmployeeService
         return employeeRepository.findByJPQLAndPage(name,pageable);
     }
 
-    public Page<Employee>  queryDynamic(String datainfo, Pageable pageable)
+    public Page<Employee>  queryDynamic(Employee employee, Pageable pageable)
     {
         Specification querySpecifi=new Specification<Employee>()
         {
@@ -60,14 +60,14 @@ public class EmployeeService
             public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder)
             {
                 List<Predicate> predicates = new ArrayList<>();
-                String[] arryCondition=datainfo.split("$");
-                if(!arryCondition[0].equals(""))//部门名称，like 模糊查询
+                if(!employee.getDepname().equals(""))//部门名称，like 模糊查询
                 {
-                    predicates.add(criteriaBuilder.like(root.get("depname"),arryCondition[0]);
+                    System.out.println("部门名称:"+employee.getDepname());
+                    predicates.add(criteriaBuilder.like(root.get("depname"),"%"+employee.getDepname()+"%"));
                 }
-                if(!arryCondition[1].equals(""))//姓名，= 等于
+                if(!employee.getUsername().equals(""))//姓名，= 等于
                 {
-                    predicates.add(criteriaBuilder.equal(root.get("username"),arryCondition[1]);
+                    predicates.add(criteriaBuilder.equal(root.get("username"),employee.getUsername()));
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
