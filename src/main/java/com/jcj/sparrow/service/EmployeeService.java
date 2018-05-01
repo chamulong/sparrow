@@ -62,7 +62,6 @@ public class EmployeeService
                 List<Predicate> predicates = new ArrayList<>();
                 if(!employee.getDepname().equals(""))//部门名称，like 模糊查询
                 {
-                    System.out.println("部门名称:"+employee.getDepname());
                     predicates.add(criteriaBuilder.like(root.get("depname"),"%"+employee.getDepname()+"%"));
                 }
                 if(!employee.getUsername().equals(""))//姓名，= 等于

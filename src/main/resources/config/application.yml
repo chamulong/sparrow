@@ -10,4 +10,8 @@ spring:
       ddl-auto: update
     show-sql: true
   thymeleaf:
-    mode: HTML
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    suffix: .html

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,5 +63,13 @@ public class EmployeeController
         employee.setUsername(username);
         Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
         return employeeService.queryDynamic(employee,new PageRequest(page,size,sort));
+    }
+
+    @GetMapping("/d1")
+    public String showDIndex(Model model)
+    {
+        List<Employee> list=employeeService.findAll();
+        model.addAttribute("employee",list);
+        return "employee/index";
     }
 }
