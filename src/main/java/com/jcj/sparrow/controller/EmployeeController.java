@@ -72,4 +72,10 @@ public class EmployeeController
         model.addAttribute("employee",list);
         return "employee/index";
     }
+
+    @GetMapping("/index")
+    public String showIndex()
+    {
+        return "index";
+    }
 }
