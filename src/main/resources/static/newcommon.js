@@ -12,3 +12,6 @@ head.js("/Hplus/js/plugins/layer/layer.min.js");
 head.js("/Hplus/js/hplus.js?v=4.1.0");
 head.js("/Hplus/js/contabs.js");
 head.js("/Hplus/js/plugins/pace/pace.min.js");
+
+head.js("/Hplus/css/plugins/bootstrap-table/bootstrap-table.min.css");
+head.js("/Hplus/js/plugins/bootstrap-table/bootstrap-table.min.js");

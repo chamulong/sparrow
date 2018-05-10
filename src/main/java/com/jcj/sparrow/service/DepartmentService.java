@@ -3,6 +3,8 @@ package com.jcj.sparrow.service;
 import com.jcj.sparrow.domain.Department;
 import com.jcj.sparrow.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +24,6 @@ public class DepartmentService
     {
         return departmentRepository.findAll();
     }
+
+    public Page<Department> findAllPage(Pageable pageable){return departmentRepository.findAll(pageable);}
 }
