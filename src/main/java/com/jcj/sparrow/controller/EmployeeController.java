@@ -46,9 +46,9 @@ public class EmployeeController
         return employeeService.findByJPQL(username);
     }
 
-    @GetMapping("/qd")
+    @GetMapping("/PageEmployees")
     @ResponseBody
-    public Page<Employee> getData(@RequestParam(defaultValue = "0") int page,String username,@RequestParam(defaultValue = "8") int size)
+    public Page<Employee> getData(@RequestParam(defaultValue = "0") int page,String username,@RequestParam(defaultValue = "4") int size)
     {
         Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
         return employeeService.queryData(username,new PageRequest(page,size,sort));
