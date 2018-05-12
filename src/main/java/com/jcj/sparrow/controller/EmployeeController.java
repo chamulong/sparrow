@@ -1,5 +1,6 @@
 package com.jcj.sparrow.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jcj.sparrow.domain.Employee;
 import com.jcj.sparrow.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,17 @@ public class EmployeeController
       return employeeService.findAll();
     }
 
-    @GetMapping("/emppage")
+    @GetMapping("/PageEmployees")
     @ResponseBody
-    public Page<Employee> getPage(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "2") int size)
+    public String getPage(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "3") int size)
     {
         Sort sort=new Sort(Sort.Direction.DESC,"depname");
-        return employeeService.findAllByPage(new PageRequest(page,size,sort));
+        Page<Employee> pageinfo=employeeService.findAllByPage(new PageRequest(page,size,sort));
+        List<Employee> employees=pageinfo.getContent();
+        JSONObject result = new JSONObject();
+        result.put("rows",employees);
+        result.put("total",pageinfo.getTotalElements());
+        return result.toJSONString();
     }
 
     @PostMapping("/comquery")
@@ -46,7 +52,7 @@ public class EmployeeController
         return employeeService.findByJPQL(username);
     }
 
-    @GetMapping("/PageEmployees")
+    @GetMapping("/PageEmployeesSearch")
     @ResponseBody
     public Page<Employee> getData(@RequestParam(defaultValue = "0") int page,String username,@RequestParam(defaultValue = "4") int size)
     {
