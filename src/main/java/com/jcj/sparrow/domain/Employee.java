@@ -46,9 +46,6 @@ public class Employee
     @Column(length = 20)
     private String position;
 
-    @Column(length = 20)
-    private String posilevel;
-
     public String getUuid()
     {
         return uuid;
@@ -147,15 +144,5 @@ public class Employee
     public void setPosition(String position)
     {
         this.position = position;
-    }
-
-    public String getPosilevel()
-    {
-        return posilevel;
-    }
-
-    public void setPosilevel(String posilevel)
-    {
-        this.posilevel = posilevel;
     }
 }

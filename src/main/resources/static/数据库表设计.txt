@@ -12,8 +12,8 @@
 7.籍贯,nativeplace, varchar(40),
 8.家庭地址,homeaddress, varchar(100),
 9.邮箱,email, varchar(60),
-10.职位,position, varchar(20),
-11.级别,posilevel, varchar(20)
+10.职位,position, varchar(20)
+
 
 //二、部门表 department
 1.主键UUID,uuid, varchar(32),
