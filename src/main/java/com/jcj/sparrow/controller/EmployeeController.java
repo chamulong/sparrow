@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:江成军
@@ -32,12 +33,19 @@ public class EmployeeController
       return employeeService.findAll();
     }
 
-    @GetMapping("/PageEmployees")
+    @PostMapping("/PageEmployees")
     @ResponseBody
-    public String getPage(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "3") int size)
+    public String queryDynamic(@RequestBody Map<String,Object> reqMap)
     {
-        Sort sort=new Sort(Sort.Direction.DESC,"depname");
-        Page<Employee> pageinfo=employeeService.findAllByPage(new PageRequest(page,size,sort));
+        //固定不变的两个分页参数
+        int page=0;
+        if(reqMap.get("page").toString()!=null){page= Integer.parseInt(reqMap.get("page").toString());}
+        int size=3;
+        if(reqMap.get("size").toString()!=null){size= Integer.parseInt(reqMap.get("size").toString());}
+
+
+        Sort sort=new Sort(Sort.Direction.ASC,"depname");
+        Page<Employee> pageinfo=employeeService.queryDynamic(reqMap,new PageRequest(page,size,sort));
         List<Employee> employees=pageinfo.getContent();
         JSONObject result = new JSONObject();
         result.put("rows",employees);
@@ -60,16 +68,16 @@ public class EmployeeController
         return employeeService.queryData(username,new PageRequest(page,size,sort));
     }
 
-    @GetMapping("/aa")
-    @ResponseBody
-    public Page<Employee> getDataD(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "3") int size,String username,String depname)
+    //@GetMapping("/aa")
+    //@ResponseBody
+    /*public Page<Employee> getDataD(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "3") int size,String username,String depname)
     {
         Employee employee=new Employee();
         employee.setDepname(depname);
         employee.setUsername(username);
         Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
         return employeeService.queryDynamic(employee,new PageRequest(page,size,sort));
-    }
+    }*/
 
     @GetMapping("/d1")
     public String showDIndex(Model model)

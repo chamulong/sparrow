@@ -2,7 +2,8 @@
 window.onload=function(){
     $('#tb_employees').bootstrapTable({
         url: '/employee/PageEmployees',         //请求后台的URL（*）
-        method: 'get',                      //请求方式（*）
+        method: 'post',                      //请求方式（*）post/get
+        contentType: "application/json",//post请求的话就加上这句话
         //toolbar: '#toolbar',                //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
         cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -29,6 +30,9 @@ window.onload=function(){
                 var temp = {
                     size: params.limit,//页面大小
                     page: (params.offset / params.limit),//页码
+                    //页面动态查询条件
+                    username:$("#username").val(),
+                    depname:$("#depname").val()
                 };
             return temp;
             },
@@ -61,3 +65,9 @@ window.onload=function(){
         }]
     });
 };
+
+//多条件查询
+function searchRec()
+{
+    $("#tb_employees").bootstrapTable('refresh');
+}
