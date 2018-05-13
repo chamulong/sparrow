@@ -71,3 +71,18 @@ function searchRec()
 {
     $("#tb_employees").bootstrapTable('refresh');
 }
+
+//弹出新增员工窗口
+function showAddEmployee()
+{
+    parent.layer.open({
+        type: 2,
+        skin: 'layui-layer-molv',
+        title: '新增员工',
+        shadeClose: true,
+        shade: 0.4,
+        maxmin: false,
+        area: ['600px', '600px'],
+        content: '/employee/addEmployee.html'
+    });
+}

@@ -15,3 +15,6 @@ head.js("/Hplus/js/plugins/pace/pace.min.js");
 head.js("/Hplus/css/plugins/bootstrap-table/bootstrap-table.min.css");
 head.js("/Hplus/js/plugins/bootstrap-table/bootstrap-table.min.js");
 head.js("/Hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js");
+
+head.js("/Hplus/js/plugins/layer/layer.min.js");
+head.js("/Hplus/js/plugins/layer/skin/layer.css");
