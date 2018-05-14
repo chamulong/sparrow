@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>,JpaSpec
     @Query(value = "select * from employee where username=?1",nativeQuery = true)
     List<Employee> findByJPQL(String name);
 
-    @Query(value = "select * from employee where username like %?%1",nativeQuery = true)
+    @Query(value = "update * from employee where username like %?%1",nativeQuery = true)
     Page<Employee> findByJPQLAndPage(String name,Pageable pageable);
+
+    @Modifying
+    @Query(value = "update employee set status ='停用' where uuid=?1",nativeQuery = true)
+    void deleteByUuid(String uuid);
 }

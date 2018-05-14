@@ -33,7 +33,22 @@ public class EmployeeController
     {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         employee.setUuid(uuid);
+        employee.setStatus("启用");
         employeeService.save(employee);
+        return "OK";
+    }
+
+    @GetMapping("/deleteEmployee")
+    @ResponseBody
+    public String deleteEmployee(@RequestParam String uuids)
+    {
+        System.out.println("uuids："+uuids);
+        String[] arrUUID=uuids.split("_");
+        for (String uuid:arrUUID)
+        {
+            System.out.println("uuid："+uuid);
+            employeeService.deleteByUuid(uuid);
+        }
         return "OK";
     }
 

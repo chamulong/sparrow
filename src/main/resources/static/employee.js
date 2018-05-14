@@ -38,7 +38,11 @@ window.onload=function(){
             },
         columns: [{
             checkbox: true
-        }, {
+        },{
+            field: 'uuid',
+            title: 'UUID',
+            visible:false
+        },{
             field: 'username',
             title: '姓名'
         }, {
@@ -62,6 +66,9 @@ window.onload=function(){
         },{
             field: 'position',
             title: '职位'
+        },{
+            field: 'status',
+            title: '状态'
         }]
     });
 };
@@ -105,4 +112,29 @@ function saveEmployee() {
     };
     $('#FormEmployee').ajaxSubmit(options);
 }
+
+//删除员工信息(一条或多条)
+function deleteEmployee()
+{
+    var uuids="";
+    var arrData = $('#tb_employees').bootstrapTable('getSelections');//获取选择行数据
+    for (var i = 0; i < arrData.length; i++)
+    {
+        if(i==0){uuids=arrData[i].uuid;}
+        else{uuids=uuids+"_"+arrData[i].uuid;}
+    }
+    $.ajax({
+        url:'/employee/deleteEmployee',
+        type:'get',
+        data:'uuids='+uuids,
+        async:false,//true为异步，false为同步
+        complete:function(){
+            $("#tb_employees").bootstrapTable('refresh');
+        }
+
+    });
+
+}
+
+
 

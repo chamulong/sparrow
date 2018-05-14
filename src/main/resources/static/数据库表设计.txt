@@ -13,6 +13,7 @@
 8.家庭地址,homeaddress, varchar(100),
 9.邮箱,email, varchar(60),
 10.职位,position, varchar(20)
+11.状态,status, varchar(10)
 
 
 //二、部门表 department

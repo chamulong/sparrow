@@ -46,6 +46,10 @@ public class Employee
     @Column(length = 20)
     private String position;
 
+    @Column(length = 10)
+    private String status;
+
+
     public String getUuid()
     {
         return uuid;
@@ -145,4 +149,8 @@ public class Employee
     {
         this.position = position;
     }
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
 }
