@@ -76,13 +76,33 @@ function searchRec()
 function showAddEmployee()
 {
     parent.layer.open({
+        id: 'addlayer',
         type: 2,
         skin: 'layui-layer-molv',
         title: '新增员工',
         shadeClose: true,
         shade: 0.4,
         maxmin: false,
-        area: ['600px', '600px'],
-        content: '/employee/addEmployee.html'
+        area: ['800px', '450px'],
+        content: '/employee/addEmployee.html',
+        end: function () {
+            $("#tb_employees").bootstrapTable('refresh');
+        }
     });
 }
+
+//保存新增员工信息
+function saveEmployee() {
+    var options = {
+        complete:function(data){
+            alert("员工信息添加成功");
+            parent.layer.closeAll();
+        },
+        url:'/employee/saveEmployee',
+        dataType:'json',
+        resetForm: true,  // 成功提交后，重置所有的表单元素的值
+        timeout: 5000
+    };
+    $('#FormEmployee').ajaxSubmit(options);
+}
+

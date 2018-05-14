@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author:江成军
@@ -26,12 +27,16 @@ public class EmployeeController
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/employees")
+    @RequestMapping("/saveEmployee")
     @ResponseBody
-    public List<Employee> getAll()
+    public String saveEmployee(Employee employee)
     {
-      return employeeService.findAll();
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        employee.setUuid(uuid);
+        employeeService.save(employee);
+        return "OK";
     }
+
 
     @PostMapping("/PageEmployees")
     @ResponseBody
@@ -44,7 +49,7 @@ public class EmployeeController
         if(reqMap.get("size").toString()!=null){size= Integer.parseInt(reqMap.get("size").toString());}
 
 
-        Sort sort=new Sort(Sort.Direction.ASC,"depname");
+        Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
         Page<Employee> pageinfo=employeeService.queryDynamic(reqMap,new PageRequest(page,size,sort));
         List<Employee> employees=pageinfo.getContent();
         JSONObject result = new JSONObject();
@@ -52,6 +57,15 @@ public class EmployeeController
         result.put("total",pageinfo.getTotalElements());
         return result.toJSONString();
     }
+
+    @GetMapping("/employees")
+    @ResponseBody
+    public List<Employee> getAll()
+    {
+      return employeeService.findAll();
+    }
+
+
 
     @PostMapping("/comquery")
     @ResponseBody

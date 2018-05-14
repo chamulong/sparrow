@@ -18,3 +18,5 @@ head.js("/Hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js");
 
 head.js("/Hplus/js/plugins/layer/layer.min.js");
 head.js("/Hplus/js/plugins/layer/skin/layer.css");
+
+head.js("/Hplus/js/jquery.form.min.js");
