@@ -68,7 +68,13 @@ window.onload=function(){
             title: '职位'
         },{
             field: 'status',
-            title: '状态'
+            title: '状态',
+            formatter: function indexFormatter(value, row, index){
+                var newvalue="";
+                if(value == "停用"){newvalue= '<span style="color:#ff4c25">'+value+'</span>';}
+                else {newvalue= '<span style="color:#37b706">'+value+'</span>';}
+                return newvalue;
+            }
         }]
     });
 };
