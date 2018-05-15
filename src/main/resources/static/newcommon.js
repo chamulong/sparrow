@@ -12,11 +12,14 @@ head.js("/Hplus/js/hplus.js?v=4.1.0");
 head.js("/Hplus/js/contabs.js");
 head.js("/Hplus/js/plugins/pace/pace.min.js");
 
+//列表展示插件
 head.js("/Hplus/css/plugins/bootstrap-table/bootstrap-table.min.css");
 head.js("/Hplus/js/plugins/bootstrap-table/bootstrap-table.min.js");
 head.js("/Hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js");
 
+//弹出层插件
 head.js("/Hplus/js/plugins/layer/layer.min.js");
 head.js("/Hplus/js/plugins/layer/skin/layer.css");
 
+//表单提交插件
 head.js("/Hplus/js/jquery.form.min.js");

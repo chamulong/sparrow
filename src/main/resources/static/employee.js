@@ -108,8 +108,10 @@ function showAddEmployee()
 function saveEmployee() {
     var options = {
         complete:function(data){
-            alert("员工信息添加成功");
-            parent.layer.closeAll();
+            parent.layer.alert("新增员工【"+$('#username').val()+"】信息成功！", {
+                icon: 1,
+                closeBtn: 0,
+            },function(){parent.layer.closeAll();});
         },
         url:'/employee/saveEmployee',
         dataType:'json',
@@ -122,23 +124,30 @@ function saveEmployee() {
 //删除员工信息(一条或多条)
 function deleteEmployee()
 {
-    var uuids="";
-    var arrData = $('#tb_employees').bootstrapTable('getSelections');//获取选择行数据
-    for (var i = 0; i < arrData.length; i++)
-    {
-        if(i==0){uuids=arrData[i].uuid;}
-        else{uuids=uuids+"_"+arrData[i].uuid;}
-    }
-    $.ajax({
-        url:'/employee/deleteEmployee',
-        type:'get',
-        data:'uuids='+uuids,
-        async:false,//true为异步，false为同步
-        complete:function(){
-            $("#tb_employees").bootstrapTable('refresh');
+    parent.layer.confirm('是否要删除选定的记录？',{
+        icon: 0,
+        btn:['取 消','确 定']
+    },function(){
+        parent.layer.closeAll();
+    },function(){
+        var uuids="";
+        var arrData = $('#tb_employees').bootstrapTable('getSelections');//获取选择行数据
+        for (var i = 0; i < arrData.length; i++)
+        {
+            if(i==0){uuids=arrData[i].uuid;}
+            else{uuids=uuids+"_"+arrData[i].uuid;}
         }
+        $.ajax({
+            url:'/employee/deleteEmployee',
+            type:'get',
+            data:'uuids='+uuids,
+            async:false,//true为异步，false为同步
+            complete:function(){
+                $("#tb_employees").bootstrapTable('refresh');
+            }
 
-    });
+        });
+    })
 
 }
 

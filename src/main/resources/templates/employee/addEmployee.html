@@ -16,8 +16,8 @@
             <input type="text" name="username" id="username" class="form-control" placeholder="不超过5个汉字" style="width: 150px">
         </div>
         <div class="form-inline" style="margin-bottom: 6px">
-            <label for="sextype">性别：</label>
-            <input type="text" name="sextype" id="sextype" class="form-control" placeholder="男/女" style="width: 100px">
+            <label>性别：<input type="radio" checked name="sextype" value="男">男</label>&nbsp
+            <label><input type="radio" name="sextype" value="女">女</label>
         </div>
         <div class="form-inline" style="margin-bottom: 6px">
             <label for="depname">部门名称：</label>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-inline" style="margin-bottom: 6px">
             <label for="birthdate">出生日期：</label>
-            <input type="text" name="birthdate" id="birthdate" class="form-control" placeholder="如:1980.08.17" style="width: 150px">
+            <input type="date" name="birthdate" id="birthdate" class="form-control" value="1980-08-17" style="width: 150px">
         </div>
         <div class="form-inline" style="margin-bottom: 6px">
             <label for="nativeplace">籍贯：</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-inline" style="margin-bottom: 3px">
             <label for="email">邮箱：</label>
-            <input type="text" name="email" id="email" class="form-control" placeholder="填写常用邮箱" style="width: 200px">
+            <input type="email" name="email" id="email" class="form-control" placeholder="填写常用邮箱" style="width: 200px">
         </div>
         <div class="form-inline" style="margin-bottom: 6px">
             <label for="position">职位：</label>
