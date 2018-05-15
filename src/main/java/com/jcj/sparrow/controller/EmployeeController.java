@@ -3,6 +3,7 @@ package com.jcj.sparrow.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.jcj.sparrow.domain.Employee;
 import com.jcj.sparrow.service.EmployeeService;
+import com.jcj.sparrow.utils.UploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,10 +11,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+
 
 /**
  * @Author:江成军
@@ -27,6 +31,12 @@ public class EmployeeController
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private UploadFile uploadFile;
+
+    /*
+      保存信息
+     */
     @RequestMapping("/saveEmployee")
     @ResponseBody
     public String saveEmployee(Employee employee)
@@ -38,6 +48,9 @@ public class EmployeeController
         return "OK";
     }
 
+    /*
+      批量删除信息
+     */
     @GetMapping("/deleteEmployee")
     @ResponseBody
     public String deleteEmployee(@RequestParam String uuids)
@@ -52,7 +65,19 @@ public class EmployeeController
         return "OK";
     }
 
+    /*
+       接收上传的文件
+     */
+    @PostMapping("/upload")
+    @ResponseBody
+    public String upload(@RequestParam MultipartFile file)
+    {
+        return uploadFile.receiveFile(file,"img");
+    }
 
+    /*
+        实现动态查询、分页
+     */
     @PostMapping("/PageEmployees")
     @ResponseBody
     public String queryDynamic(@RequestBody Map<String,Object> reqMap)
