@@ -23,3 +23,7 @@ head.js("/Hplus/js/plugins/layer/skin/layer.css");
 
 //表单提交插件
 head.js("/Hplus/js/jquery.form.min.js");
+
+//引入第三方Jquery上传插件
+head.js("/jQuery.upload.min.js");
+head.js("/upload.css");

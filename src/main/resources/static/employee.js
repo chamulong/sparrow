@@ -1,6 +1,9 @@
 //基于bootstrap table插件的员工列表展示
 window.onload=function(){
-    $('#tb_employees').bootstrapTable({
+    //文件上传
+    $("#case").upload();
+
+$('#tb_employees').bootstrapTable({
         url: '/employee/PageEmployees',         //请求后台的URL（*）
         method: 'post',                      //请求方式（*）post/get
         contentType: "application/json",//post请求的话就加上这句话
@@ -96,7 +99,7 @@ function showAddEmployee()
         shadeClose: true,
         shade: 0.4,
         maxmin: false,
-        area: ['800px', '450px'],
+        area: ['800px', '600px'],
         content: '/employee/addEmployee.html',
         end: function () {
             $("#tb_employees").bootstrapTable('refresh');
@@ -148,8 +151,8 @@ function deleteEmployee()
 
         });
     })
-
 }
+
 
 
 
