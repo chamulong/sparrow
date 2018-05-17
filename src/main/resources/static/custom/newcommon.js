@@ -25,5 +25,5 @@ head.js("/Hplus/js/plugins/layer/skin/layer.css");
 head.js("/Hplus/js/jquery.form.min.js");
 
 //引入第三方Jquery上传插件
-head.js("/jQuery.upload.min.js");
-head.js("/upload.css");
+head.js("/custom/jQuery.upload.min.js");
+head.js("/custom/upload.css");
