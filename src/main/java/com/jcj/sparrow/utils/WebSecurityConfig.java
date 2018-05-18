@@ -1,15 +1,13 @@
 package com.jcj.sparrow.utils;
 
-import com.jcj.sparrow.service.UserinfoService;
+import com.jcj.sparrow.service.CustomUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 /**
  * @Author：江成军
@@ -22,9 +20,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     UserDetailsService customUserService()
     {
-        return new UserinfoService();
+        return new CustomUserService();
     }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
+        auth.userDetailsService(userDetailsService());
+    }
 
     /*  重要说明
         1.首先当我们要自定义Spring Security的时候我们需要继承自WebSecurityConfigurerAdapter来完成，相关配置重写对应 方法即可。
@@ -58,19 +61,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         http.authorizeRequests()            // 定义哪些URL需要被保护、哪些不需要被保护
                 .antMatchers("/login.html","/custom/**","/Hplus/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
-                .anyRequest().authenticated().and()
-                .formLogin().loginPage("/login.html")       // 设置登录页面
-                .defaultSuccessUrl("/index").permitAll().and() // 登录成功跳转路径url
+                .anyRequest().authenticated()
+            .and()
+                .formLogin().loginPage("/login")       // 设置登录页面
+                .defaultSuccessUrl("/index").permitAll()
+            .and() // 登录成功跳转路径url
                 .logout().permitAll();
 
-        http.logout().logoutSuccessUrl("/"); // 退出默认跳转页面
+
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
-    {
-        //AuthenticationManager使用我们的 lightSwordUserDetailService 来获取用户信息
-        auth.userDetailsService(userDetailsService());
-    }
 
 }

@@ -1,13 +1,13 @@
 package com.jcj.sparrow.controller;
 
-import com.jcj.sparrow.domain.Userinfo;
-import com.jcj.sparrow.repository.UserinfoRepository;
+import com.jcj.sparrow.domain.SysUser;
+import com.jcj.sparrow.service.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Author：江成军
@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController
 {
-    @RequestMapping("/")
-    public String index(Model model)
-    {
-        //如果登陆成功，自动跳转到首页
+    @RequestMapping(value = "/index")
+    public String index(){
         return "index";
     }
 }

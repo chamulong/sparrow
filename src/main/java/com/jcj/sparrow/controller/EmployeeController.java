@@ -55,7 +55,6 @@ public class EmployeeController
     @ResponseBody
     public String deleteEmployee(@RequestParam String uuids)
     {
-        System.out.println("uuids："+uuids);
         String[] arrUUID=uuids.split("_");
         for (String uuid:arrUUID)
         {
