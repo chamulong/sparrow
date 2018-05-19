@@ -1,9 +1,15 @@
 package com.jcj.sparrow.domain;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author:江成军
@@ -12,7 +18,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "employee")
-public class Employee
+public class Employee implements UserDetails
 {
     @Id
     @GenericGenerator(name="system-uuid",strategy = "uuid")
@@ -21,6 +27,12 @@ public class Employee
 
     @Column(length = 20)
     private String username;
+
+    @Column(length = 100)
+    private String password;
+
+    @Column(length = 20)
+    private String realname;
 
     @Column(length = 10)
     private String sextype;
@@ -49,6 +61,51 @@ public class Employee
     @Column(length = 10)
     private String status;
 
+    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    private List<SysRole> roles;
+
+    /**
+     * 通过用户表实体来完成用户认证功能，需要实现getAuthorities方法内容，将定义的角色列表添加到授权的列表内
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        List<GrantedAuthority> auths=new ArrayList<GrantedAuthority>();
+        List<SysRole> roles=getRoles();
+        for(SysRole role:roles)
+        {
+            auths.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return auths;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return true;
+    }
+
+
+
 
     public String getUuid()
     {
@@ -69,6 +126,14 @@ public class Employee
     {
         this.username = username;
     }
+
+    public String getPassword() {return password;}
+
+    public void setPassword(String password) {this.password = password;}
+
+    public String getRealname() {return realname;}
+
+    public void setRealname(String realname) {this.realname = realname;}
 
     public String getSextype()
     {
@@ -153,4 +218,8 @@ public class Employee
     public String getStatus() {return status;}
 
     public void setStatus(String status) {this.status = status;}
+
+    public List<SysRole> getRoles() {return roles;}
+
+    public void setRoles(List<SysRole> roles) {this.roles = roles;}
 }

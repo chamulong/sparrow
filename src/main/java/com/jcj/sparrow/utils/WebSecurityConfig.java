@@ -1,13 +1,12 @@
 package com.jcj.sparrow.utils;
 
-import com.jcj.sparrow.service.CustomUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @Author：江成军
@@ -23,14 +22,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new CustomUserService();
     }
 
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(customUserService()).passwordEncoder(new BCryptPasswordEncoder());//spring security 版本在5.0后就要加个PasswordEncoder
     }
 
     /*  重要说明
-        1.首先当我们要自定义Spring Security的时候我们需要继承自WebSecurityConfigurerAdapter来完成，相关配置重写对应 方法即可。
+        1.首先当我们要自定义Spring Security的时候我们需要继承自WebSecurityConfigurerAdapter来完成，相关配置重写对应方法即可。
         2.我们在这里注册CustomUserService的Bean，然后通过重写configure方法添加我们自定义的认证方式。
         3.在configure(HttpSecurity http)方法中，我们设置了登录页面，而且登录页面任何人都可以访问，然后设置了登录失败地址，也设置了注销请求，注销请求也是任何人都可以访问的。
         4.permitAll表示该请求任何人都可以访问，.anyRequest().authenticated(),表示其他的请求都必须要有权限认证。
@@ -60,8 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable();// 关闭csrf防护
 
         http.authorizeRequests()            // 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/login.html","/custom/**","/Hplus/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
+                .antMatchers("/login.html","/custom/**","/Hplus/**","/employee/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
                 .anyRequest().authenticated()
+            .and()
+                .headers().frameOptions().disable()//springSecurty使用X-Frame-Options防止网页被Frame，默认是deny，拒绝iframe嵌套
             .and()
                 .formLogin().loginPage("/login")       // 设置登录页面
                 .defaultSuccessUrl("/index").permitAll()

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,12 @@ public class EmployeeController
         String uuid = UUID.randomUUID().toString().replace("-", "");
         employee.setUuid(uuid);
         employee.setStatus("启用");
+
+        //密码进行BCrypt强哈希加密
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(employee.getPassword());
+        employee.setPassword(hashedPassword);
+
         employeeService.save(employee);
         return "OK";
     }

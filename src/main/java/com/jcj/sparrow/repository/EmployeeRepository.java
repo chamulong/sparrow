@@ -26,4 +26,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>,JpaSpec
     @Modifying
     @Query(value = "update employee set status ='停用' where uuid=?1",nativeQuery = true)
     void deleteByUuid(String uuid);
+
+    //使用SpringDataJPA方法定义查询
+    Employee findByUsername(String username);
 }

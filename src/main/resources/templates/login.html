@@ -6,16 +6,16 @@
     <title>Demo项目- 登录</title>
     <script src="/custom/head.min.js"></script>
     <script src="/custom/newcommon.js"></script>
-    <script>if (window.top !== window.self) { window.top.location = window.location; }</script>
 </head>
 
 <body class="gray-bg">
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">H+</h1>
+                <h5 class="logo-name">A+</h5>
             </div>
             <h3>欢迎使用Springboot+Bootstrap练手平台</h3>
+            <p th:if="${param.error}" class="bg-danger">用户名或密码有误，请重试</p>
 
             <form class="m-t" role="form" action="/login" method="post">
                 <div class="form-group">
