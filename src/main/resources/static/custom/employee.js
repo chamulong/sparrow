@@ -99,7 +99,7 @@ function showAddEmployee()
         shadeClose: true,
         shade: 0.4,
         maxmin: false,
-        area: ['800px', '600px'],
+        area: ['700px', '600px'],
         content: '/employee/addEmployee.html',
         end: function () {
             $("#tb_employees").bootstrapTable('refresh');

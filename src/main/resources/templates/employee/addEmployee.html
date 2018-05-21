@@ -7,50 +7,59 @@
     <script src="/custom/head.min.js"></script>
     <script src="/custom/newcommon.js"></script>
     <script src="/custom/employee.js"></script>
+    <style>
+        .table  tbody  tr  td ,th{
+            border-top:none;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper wrapper-content" style="padding: 20px" >
     <form role="form" id="FormEmployee" method="post">
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="username">账号：</label>
-            <input type="text" name="username" id="username" class="form-control" placeholder="不允许汉字" style="width: 150px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="password">密码：</label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="数字字母组合" style="width: 150px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="realname">真实姓名：</label>
-            <input type="text" name="realname" id="realname" class="form-control" placeholder="不超过5个汉字" style="width: 150px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label>性别：<input type="radio" checked name="sextype" value="男">男</label>&nbsp
-            <label><input type="radio" name="sextype" value="女">女</label>
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="depname">部门名称：</label>
-            <input type="text" name="depname" id="depname" class="form-control" placeholder="全称" style="width: 200px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="birthdate">出生日期：</label>
-            <input type="date" name="birthdate" id="birthdate" class="form-control" value="1980-08-17" style="width: 150px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="nativeplace">籍贯：</label>
-            <input type="text" name="nativeplace" id="nativeplace" class="form-control" placeholder="如:四川.资阳" style="width: 200px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="homeaddress">家庭地址：</label>
-            <input type="text" name="homeaddress" id="homeaddress" class="form-control" placeholder="填写详细的地址" style="width: 300px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 3px">
-            <label for="email">邮箱：</label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="填写常用邮箱" style="width: 200px">
-        </div>
-        <div class="form-inline" style="margin-bottom: 6px">
-            <label for="position">职位：</label>
-            <input type="text" name="position" id="position" class="form-control" placeholder="如:JAVA程序员" style="width: 100px">
-        </div>
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <td class="text-right" style="width: 100px"><label for="username">账号：</label></td>
+                <td><input type="text" name="username" id="username" class="form-control" placeholder="不允许汉字" style="width: 150px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="password">密码：</label></td>
+                <td><input type="password" name="password" id="password" class="form-control" placeholder="数字字母组合" style="width: 150px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="realname">真实姓名：</label></td>
+                <td><input type="text" name="realname" id="realname" class="form-control" placeholder="不超过5个汉字" style="width: 150px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label>性别：</td>
+                <td><label>性别：<input type="radio" checked name="sextype" value="男">男</label>&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="radio" name="sextype" value="女">女</label></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="depname">部门名称：</label></td>
+                <td><input type="text" name="depname" id="depname" class="form-control" placeholder="全称" style="width: 200px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="birthdate">出生日期：</label></td>
+                <td> <input type="date" name="birthdate" id="birthdate" class="form-control" value="1980-08-17" style="width: 150px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="nativeplace">籍贯：</label></td>
+                <td><input type="text" name="nativeplace" id="nativeplace" class="form-control" placeholder="如:四川.资阳" style="width: 200px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="homeaddress">家庭地址：</label></td>
+                <td><input type="text" name="homeaddress" id="homeaddress" class="form-control" placeholder="填写详细的地址" style="width: 300px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="email">邮箱：</label></td>
+                <td><input type="email" name="email" id="email" class="form-control" placeholder="填写常用邮箱" style="width: 200px"></td>
+            </tr>
+            <tr>
+                <td class="text-right"><label for="position">职位：</label></td>
+                <td><input type="text" name="position" id="position" class="form-control" placeholder="如:JAVA程序员" style="width: 100px"></td>
+            </tr>
+            </tbody>
+        </table>
         上传头像
         <div class="upload" id="case" name="case" action="/employee/upload" data-num="2" data-type="jpg,pdf,docx" data-value=""></div>
         <div class="form-inline text-right" style="margin-bottom: 6px">
