@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 /**
  * @Author：江成军
@@ -22,7 +25,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new CustomUserService();
     }
 
-
+    //使用SpirngTemplateEngine来注册SpringSecurityDislect
+    @Bean
+    public SpringTemplateEngine templateEngine(ITemplateResolver reslover){
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(reslover);
+        templateEngine.addDialect(new SpringSecurityDialect());
+        return templateEngine;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
@@ -45,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
            4)fullyAuthenticated     用户完全认证可访问（非remember me下自动登陆）
            5)hasAnyAuthority(String ...) 参数中任意权限的用户可访问
            6)hasAnyRole(String ...) 参数中任意角色的用户可访问
-           7)hasAnyAuthority(String) 某一权限的用户可访问
+           7)hasAuthority(String)    某一权限的用户可访问
            8)hasRole(String)         某一角色的用户可访问
            9)permitAll()             所有用户可访问
            10)rememberMe()           允许通过remember me登陆的用户访问
@@ -61,15 +71,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable();// 关闭csrf防护
 
         http.authorizeRequests()            // 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/login.html","/custom/**","/Hplus/**","/employee/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
+                .antMatchers("/custom/**","/Hplus/**","/employee/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
                 .anyRequest().authenticated()
-            .and()
-                .headers().frameOptions().disable()//springSecurty使用X-Frame-Options防止网页被Frame，默认是deny，拒绝iframe嵌套
-            .and()
-                .formLogin().loginPage("/login")       // 设置登录页面
-                .defaultSuccessUrl("/index").permitAll()
-            .and() // 登录成功跳转路径url
-                .logout().permitAll();
+                .and()
+            .headers().frameOptions().disable()//springSecurty使用X-Frame-Options防止网页被Frame，默认是deny，拒绝iframe嵌套
+                .and()
+            .formLogin()
+                .loginPage("/login")       // 设置登录页面
+                .defaultSuccessUrl("/index")
+                .permitAll()
+                .and() // 登录成功跳转路径url
+            .logout()
+                .permitAll();
 
 
     }

@@ -16,4 +16,9 @@ public class HomeController
     public String index(){
         return "index";
     }
+
+    @RequestMapping(value = "/listemployee")
+    public String listemployee(){
+        return "/employee/listEmployee";
+    }
 }
