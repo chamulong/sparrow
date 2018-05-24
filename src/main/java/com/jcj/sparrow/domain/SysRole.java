@@ -1,6 +1,7 @@
 package com.jcj.sparrow.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @Author：江成军
@@ -18,6 +19,9 @@ public class SysRole
 
     @Column(length=30)
     private  String name;
+
+    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
+    private List<Auth> auths;
 
     public int getId()
     {
@@ -37,5 +41,15 @@ public class SysRole
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public List<Auth> getAuths()
+    {
+        return auths;
+    }
+
+    public void setAuths(List<Auth> auths)
+    {
+        this.auths = auths;
     }
 }

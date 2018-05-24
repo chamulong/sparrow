@@ -1,5 +1,6 @@
 package com.jcj.sparrow.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -79,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .formLogin()
                 .loginPage("/login")       // 设置登录页面
                 .defaultSuccessUrl("/index")
+                .failureUrl("/login")      //登录失败
                 .permitAll()
                 .and() // 登录成功跳转路径url
             .logout()
@@ -86,6 +88,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
 
     }
-
-
 }

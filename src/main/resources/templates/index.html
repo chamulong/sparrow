@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,11 +56,11 @@
                             <li>
                                 <a class="J_menuItem" href="/main.html" data-index="0">信息总览</a>
                             </li>
-                            <li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
-                                <a class="J_menuItem" th:href="@{/department/PageDepartments}">部门信息</a>
+                            <li sec:authorize="hasAuthority('部门信息')">
+                                <a class="J_menuItem" href="department/PageDepartments">部门信息</a>
                             </li>
-                            <li sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a class="J_menuItem" th:href="@{/listemployee}">成员信息</a>
+                            <li sec:authorize="hasAuthority('成员信息')">
+                                <a class="J_menuItem" href="/listemployee">成员信息</a>
                             </li>
                         </ul>
 
