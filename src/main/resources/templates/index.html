@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <title>DEMO主体框架</title>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
     <script src="/custom/head.min.js"></script>
     <script src="/custom/newcommon.js"></script>
 </head>
@@ -57,10 +54,10 @@
                                 <a class="J_menuItem" href="/main.html" data-index="0">信息总览</a>
                             </li>
                             <li sec:authorize="hasAuthority('部门信息')">
-                                <a class="J_menuItem" href="department/PageDepartments">部门信息</a>
+                                <a class="J_menuItem" th:href="@{department/PageDepartments}">部门信息</a>
                             </li>
                             <li sec:authorize="hasAuthority('成员信息')">
-                                <a class="J_menuItem" href="/listemployee">成员信息</a>
+                                <a class="J_menuItem" th:href="@{/listemployee}">成员信息</a>
                             </li>
                         </ul>
 

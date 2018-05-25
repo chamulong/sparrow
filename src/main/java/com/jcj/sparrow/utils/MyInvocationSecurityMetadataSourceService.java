@@ -36,10 +36,6 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
         Collection<ConfigAttribute> array;
         List<Auth> auths=new ArrayList<Auth>();
         auths=authRepository.findAll();
-        for (Auth auth:auths)
-        {
-            System.out.println(auth.getName()+":"+auth.getUrl());
-        }
 
         for (Auth auth:auths)
         {
