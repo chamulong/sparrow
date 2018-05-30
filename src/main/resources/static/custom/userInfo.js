@@ -3,7 +3,7 @@ window.onload=function(){
     //文件上传
     $("#case").upload();
 
-$('#tb_employees').bootstrapTable({
+$('#tb_UserInfos').bootstrapTable({
         url: '/userinfo/list',         //请求后台的URL（*）
         method: 'post',                      //请求方式（*）post/get
         //contentType: "application/json",//post请求的话就加上这句话
@@ -85,11 +85,11 @@ $('#tb_employees').bootstrapTable({
 //多条件查询
 function searchRec()
 {
-    $("#tb_employees").bootstrapTable('refresh');
+    $("#tb_UserInfos").bootstrapTable('refresh');
 }
 
 //弹出新增员工窗口
-function showAddEmployee()
+function showAddUserInfo()
 {
     parent.layer.open({
         id: 'addlayer',
@@ -100,15 +100,15 @@ function showAddEmployee()
         shade: 0.4,
         maxmin: false,
         area: ['700px', '600px'],
-        content: '/employee/addEmployee.html',
+        content: '/userinfo/addUserInfo.html',
         end: function () {
-            $("#tb_employees").bootstrapTable('refresh');
+            $("#tb_UserInfos").bootstrapTable('refresh');
         }
     });
 }
 
 //保存新增员工信息
-function saveEmployee() {
+function saveUserInfo() {
     var options = {
         complete:function(data){
             parent.layer.alert("新增员工【"+$('#username').val()+"】信息成功！", {
@@ -121,11 +121,11 @@ function saveEmployee() {
         resetForm: true,  // 成功提交后，重置所有的表单元素的值
         timeout: 5000
     };
-    $('#FormEmployee').ajaxSubmit(options);
+    $('#FormUserInfo').ajaxSubmit(options);
 }
 
 //删除员工信息(一条或多条)
-function deleteEmployee()
+function deleteUserInfo()
 {
     parent.layer.confirm('是否要删除选定的记录？',{
         icon: 0,
@@ -134,7 +134,7 @@ function deleteEmployee()
         parent.layer.closeAll();
     },function(){
         var uuids="";
-        var arrData = $('#tb_employees').bootstrapTable('getSelections');//获取选择行数据
+        var arrData = $('#tb_UserInfos').bootstrapTable('getSelections');//获取选择行数据
         for (var i = 0; i < arrData.length; i++)
         {
             if(i==0){uuids=arrData[i].uuid;}
@@ -146,7 +146,7 @@ function deleteEmployee()
             data:'uuids='+uuids,
             async:false,//true为异步，false为同步
             complete:function(){
-                $("#tb_employees").bootstrapTable('refresh');
+                $("#tb_UserInfos").bootstrapTable('refresh');
             }
 
         });

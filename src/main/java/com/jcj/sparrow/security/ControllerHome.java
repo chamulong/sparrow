@@ -17,9 +17,9 @@ public class ControllerHome
         return "home";
     }
 
-    @RequestMapping(value = "/listemployee")
+    @RequestMapping(value = "/listuserinfo")
     public String listemployee()
     {
-        return "/employee/listEmployee";
+        return "/userinfo/listUserInfo";
     }
 }

@@ -121,7 +121,7 @@ public class UserInfoController
     {
         List<UserInfo> list=userinfoService.findAll();
         model.addAttribute("employee",list);
-        return "employee/index";
+        return "userinfo/index";
     }
 
     @GetMapping("/index")
