@@ -2,7 +2,7 @@
 /*数据库表设计
 /********************
 
-//一、员工表 employee
+//一、员工表 userInfo
 1.主键UUID,uuid, varchar(32),
 2.姓名,username, varchar(20),
 3.性别,sextype, varchar(10),

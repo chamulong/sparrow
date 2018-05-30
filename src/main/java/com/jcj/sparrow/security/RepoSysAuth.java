@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Description:权限明细访问接口
  * @Date:Create in 2018/5/29 14:32
  */
-public interface RepositorySysAuth extends JpaRepository<SysAuth,Long>
+public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
 {
 }

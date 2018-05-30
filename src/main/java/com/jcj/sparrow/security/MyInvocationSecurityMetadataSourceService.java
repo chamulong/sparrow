@@ -20,7 +20,7 @@ import java.util.*;
 public class MyInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource
 {
     @Autowired
-    private RepositorySysAuth repositorySysAuth;
+    private RepoSysAuth repoSysAuth;
 
     //key：资源的url，value：ConfigAttribute的集合
     private HashMap<String, Collection<ConfigAttribute>> map = null;
@@ -33,7 +33,7 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
         map = new HashMap<>();
         Collection<ConfigAttribute> array;
         List<SysAuth> sysAuths=new ArrayList<SysAuth>();
-        sysAuths=repositorySysAuth.findAll();
+        sysAuths= repoSysAuth.findAll();
 
         for (SysAuth sysAuth:sysAuths)
         {

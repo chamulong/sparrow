@@ -34,12 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return templateEngine;
     }
 
-    @Bean
-    public LoginSuccessHandler loginSuccessHandler()
-    {
-        return new LoginSuccessHandler();
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
@@ -83,7 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .headers().frameOptions().disable()//springSecurty使用X-Frame-Options防止网页被Frame，默认是deny，拒绝iframe嵌套
                 .and()
             .formLogin()
-                .successHandler(loginSuccessHandler()) //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
                 .loginPage("/login")       // 设置登录页面
                 .successForwardUrl("/home") //注意区分defaultSuccessUrl
                 .failureUrl("/login")      //登录失败

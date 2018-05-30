@@ -1,5 +1,6 @@
 package com.jcj.sparrow.domain;
 
+import com.jcj.sparrow.security.SysUser;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,12 +14,12 @@ import java.util.List;
 
 /**
  * @Author:江成军
- * @Description:员工表实体
+ * @Description:后台用户实体
  * @Date:Created on 2018/4/21 10:44
  */
 @Entity
-@Table(name = "employee")
-public class Employee implements UserDetails
+@Table(name = "userinfo")
+public class UserInfo
 {
     @Id
     @GenericGenerator(name="system-uuid",strategy = "uuid")
@@ -27,9 +28,6 @@ public class Employee implements UserDetails
 
     @Column(length = 20)
     private String username;
-
-    @Column(length = 100)
-    private String password;
 
     @Column(length = 20)
     private String realname;
@@ -61,52 +59,6 @@ public class Employee implements UserDetails
     @Column(length = 10)
     private String status;
 
-    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
-    private List<SysRole> roles;
-
-    /**
-     * 通过用户表实体来完成用户认证功能，需要实现getAuthorities方法内容，将定义的角色列表添加到授权的列表内
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        List<GrantedAuthority> auths=new ArrayList<GrantedAuthority>();
-        List<SysRole> roles=getRoles();
-        for(SysRole role:roles)
-        {
-            auths.add(new SimpleGrantedAuthority(role.getName()));
-        }
-
-        return auths;
-    }
-
-    @Override
-    public boolean isAccountNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled()
-    {
-        return true;
-    }
-
-
-
-
     public String getUuid()
     {
         return uuid;
@@ -127,9 +79,6 @@ public class Employee implements UserDetails
         this.username = username;
     }
 
-    public String getPassword() {return password;}
-
-    public void setPassword(String password) {this.password = password;}
 
     public String getRealname() {return realname;}
 
@@ -219,7 +168,4 @@ public class Employee implements UserDetails
 
     public void setStatus(String status) {this.status = status;}
 
-    public List<SysRole> getRoles() {return roles;}
-
-    public void setRoles(List<SysRole> roles) {this.roles = roles;}
 }

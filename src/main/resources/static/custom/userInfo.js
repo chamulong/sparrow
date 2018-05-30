@@ -4,7 +4,7 @@ window.onload=function(){
     $("#case").upload();
 
 $('#tb_employees').bootstrapTable({
-        url: '/employee/PageEmployees',         //请求后台的URL（*）
+        url: '/userinfo/list',         //请求后台的URL（*）
         method: 'post',                      //请求方式（*）post/get
         //contentType: "application/json",//post请求的话就加上这句话
         //toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -116,7 +116,7 @@ function saveEmployee() {
                 closeBtn: 0,
             },function(){parent.layer.closeAll();});
         },
-        url:'/employee/saveEmployee',
+        url:'/userinfo/save',
         dataType:'json',
         resetForm: true,  // 成功提交后，重置所有的表单元素的值
         timeout: 5000
@@ -141,7 +141,7 @@ function deleteEmployee()
             else{uuids=uuids+"_"+arrData[i].uuid;}
         }
         $.ajax({
-            url:'/employee/deleteEmployee',
+            url:'/userinfo/delete',
             type:'get',
             data:'uuids='+uuids,
             async:false,//true为异步，false为同步

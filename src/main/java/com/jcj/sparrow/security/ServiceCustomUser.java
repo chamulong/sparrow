@@ -21,13 +21,16 @@ import java.util.List;
 public class ServiceCustomUser  implements UserDetailsService
 {
     @Autowired
-    private RepositorySysUser repositorySysUser;
+    private RepoSysUser repoSysUser;
 
     @Override
     public UserDetails loadUserByUsername(String username)
     {
-        SysUser sysUser=repositorySysUser.findByUsername(username);
+        SysUser sysUser= repoSysUser.findByUsername(username);
         if(sysUser==null){throw new UsernameNotFoundException("用户名不存在");}
+
+        //创建session，把用户基本信息写入session
+
 
         //获取用户全部的权限
         List<SysAuth> sysAuths=new ArrayList<SysAuth>();

@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @Description:部门数据访问接口
  * @Date:Create in 2018/5/3 10:16
  */
-public interface DepartmentRepository extends JpaRepository<Department,Long>,JpaSpecificationExecutor
+public interface DepartmentRepo extends JpaRepository<Department,Long>,JpaSpecificationExecutor
 {
 }

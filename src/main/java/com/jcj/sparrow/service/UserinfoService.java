@@ -1,7 +1,7 @@
 package com.jcj.sparrow.service;
 
-import com.jcj.sparrow.domain.Employee;
-import com.jcj.sparrow.repository.EmployeeRepository;
+import com.jcj.sparrow.domain.UserInfo;
+import com.jcj.sparrow.repository.UserinfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,45 +21,46 @@ import java.util.*;
  * @Date:Created on 2018/4/21 17:27
  */
 @Service
-public class EmployeeService
+public class UserinfoService
 {
     @Autowired
-    private  EmployeeRepository employeeRepository;
+    private UserinfoRepo userinfoRepo;
 
-    public void save(Employee employee)
+    public void save(UserInfo userInfo)
     {
-        employeeRepository.save(employee);
+        userinfoRepo.save(userInfo);
     }
 
     @Transactional
-    public void deleteByUuid(String uuid){employeeRepository.deleteByUuid(uuid);}
+    public void deleteByUuid(String uuid){
+        userinfoRepo.deleteByUuid(uuid);}
 
-    public List<Employee> findAll()
+    public List<UserInfo> findAll()
     {
-        return employeeRepository.findAll();
+        return userinfoRepo.findAll();
     }
 
-    public Page<Employee> findAllByPage(Pageable pageable)
+    public Page<UserInfo> findAllByPage(Pageable pageable)
     {
-        return employeeRepository.findAll(pageable);
+        return userinfoRepo.findAll(pageable);
     }
 
-    public List<Employee> findByJPQL(String name)
+    public List<UserInfo> findByJPQL(String name)
     {
-        return employeeRepository.findByJPQL(name);
+        return userinfoRepo.findByJPQL(name);
     }
 
-    public Page<Employee> queryData(String name,Pageable pageable)
+    public Page<UserInfo> queryData(String name, Pageable pageable)
     {
-        return employeeRepository.findByJPQLAndPage(name,pageable);
+        return userinfoRepo.findByJPQLAndPage(name,pageable);
     }
 
-    public Page<Employee>  queryDynamic(Map<String,Object> reqMap, Pageable pageable)
+    public Page<UserInfo>  queryDynamic(Map<String,Object> reqMap, Pageable pageable)
     {
-        Specification querySpecifi=new Specification<Employee>()
+        Specification querySpecifi=new Specification<UserInfo>()
         {
             @Override
-            public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder)
+            public Predicate toPredicate(Root<UserInfo> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder)
             {
                 List<Predicate> predicates = new ArrayList<>();
                 if(!reqMap.get("username").toString().equals(""))//员工名称，like 模糊查询
@@ -74,7 +75,7 @@ public class EmployeeService
             }
         };
 
-        return this.employeeRepository.findAll(querySpecifi,pageable);
+        return this.userinfoRepo.findAll(querySpecifi,pageable);
 
     }
 
