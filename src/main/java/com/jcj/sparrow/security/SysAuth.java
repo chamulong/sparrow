@@ -26,6 +26,10 @@ public class SysAuth
 
     private String url;//授权链接
 
+    private int id;//本身id
+
+    private int pid;//父id
+
     public String getUuid()
     {
         return uuid;
@@ -65,4 +69,12 @@ public class SysAuth
     {
         this.url = url;
     }
+
+    public int getId(){return id;}
+
+    public void setId(int id){this.id = id;}
+
+    public int getPid(){return pid;}
+
+    public void setPid(int pid){this.pid = pid;}
 }

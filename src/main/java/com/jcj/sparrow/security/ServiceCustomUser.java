@@ -37,11 +37,15 @@ public class ServiceCustomUser  implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username)
     {
-        SysUser sysUser= repoSysUser.findByUsername(username);
-        if(sysUser==null){throw new UsernameNotFoundException("用户名不存在");}
+        //首先根据账号名称、邮箱、手机号在后台用户中进行查找，三者中有其一，则进入下面的权限验证流程
+        boolean blExist=false;
+        UserInfo userInfo=userinfoRepo.findByUsernameOrEmailOrMobile(username,username,username);
+        if(null==userInfo){throw new UsernameNotFoundException("用户不存在");}
+
+        SysUser sysUser= repoSysUser.findByUsername(userInfo.getUsername());
+        if(sysUser==null){throw new UsernameNotFoundException("用户名/密码错误");}
 
         //根据登录的用户，创建session,方便其他应用
-        UserInfo userInfo=userinfoRepo.findByUsername(username);
         session.setAttribute("userinfo",userInfo);
 
         //获取用户全部的权限

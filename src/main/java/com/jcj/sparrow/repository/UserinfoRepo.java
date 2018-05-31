@@ -27,6 +27,9 @@ public interface UserinfoRepo extends JpaRepository<UserInfo,Long>,JpaSpecificat
     @Query(value = "update employee set status ='停用' where uuid=?1",nativeQuery = true)
     void deleteByUuid(String uuid);
 
-    //使用SpringDataJPA方法定义查询
+    //使用SpringDataJPA方法定义查询,根据用户名，查询用户信息
     UserInfo findByUsername(String username);
+
+    //使用SpringDataJPA方法定义查询,根据用户名/邮件/手机号，查询用户信息
+    UserInfo findByUsernameOrEmailOrMobile(String username,String email,String mobile);
 }

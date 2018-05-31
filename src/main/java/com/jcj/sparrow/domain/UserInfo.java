@@ -57,6 +57,9 @@ public class UserInfo
     @Column(length = 60)
     private String email;
 
+    @Column(length = 11)
+    private String mobile;
+
     @Column(length = 20)
     private String position;
 
@@ -194,5 +197,15 @@ public class UserInfo
     public void setSysUser(SysUser sysUser)
     {
         this.sysUser = sysUser;
+    }
+
+    public String getMobile()
+    {
+        return mobile;
+    }
+
+    public void setMobile(String mobile)
+    {
+        this.mobile = mobile;
     }
 }
