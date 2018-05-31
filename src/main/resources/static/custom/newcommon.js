@@ -27,3 +27,8 @@ head.js("/Hplus/js/jquery.form.min.js");
 //引入第三方Jquery上传插件
 head.js("/custom/jQuery.upload.min.js");
 head.js("/custom/upload.css");
+
+
+//引入zTree_v3树形目录插件
+head.js("/zTree3/css/zTreeStyle/zTreeStyle.css");
+head.js("/zTree3/jquery.ztree.all.min.js");

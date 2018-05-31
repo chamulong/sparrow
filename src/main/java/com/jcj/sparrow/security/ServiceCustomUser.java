@@ -1,5 +1,8 @@
 package com.jcj.sparrow.security;
 
+import com.jcj.sparrow.domain.UserInfo;
+import com.jcj.sparrow.repository.UserinfoRepo;
+import com.jcj.sparrow.service.UserinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +27,22 @@ public class ServiceCustomUser  implements UserDetailsService
     @Autowired
     private RepoSysUser repoSysUser;
 
+    @Autowired
+    private UserinfoRepo userinfoRepo;
+
+    @Autowired
+    private HttpSession session;
+
+
     @Override
     public UserDetails loadUserByUsername(String username)
     {
         SysUser sysUser= repoSysUser.findByUsername(username);
         if(sysUser==null){throw new UsernameNotFoundException("用户名不存在");}
 
-        //创建session，把用户基本信息写入session
-
+        //根据登录的用户，创建session,方便其他应用
+        UserInfo userInfo=userinfoRepo.findByUsername(username);
+        session.setAttribute("userinfo",userInfo);
 
         //获取用户全部的权限
         List<SysAuth> sysAuths=new ArrayList<SysAuth>();

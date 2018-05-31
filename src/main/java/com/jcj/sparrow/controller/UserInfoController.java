@@ -2,17 +2,20 @@ package com.jcj.sparrow.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jcj.sparrow.domain.UserInfo;
+import com.jcj.sparrow.security.SysUser;
 import com.jcj.sparrow.service.UserinfoService;
 import com.jcj.sparrow.utils.UploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -74,8 +77,13 @@ public class UserInfoController
      */
     @PostMapping("/list")
     @ResponseBody
-    public String queryDynamic(@RequestBody Map<String,Object> reqMap)
+    public String queryDynamic(@RequestBody Map<String,Object> reqMap,HttpSession session)
     {
+        //测试一下session
+        UserInfo userInfo=(UserInfo)session.getAttribute("userinfo");
+        System.out.println("登录用户的所属部门："+userInfo.getDepname());
+
+
         //固定不变的两个分页参数
         int page=0;
         if(reqMap.get("page").toString()!=null){page= Integer.parseInt(reqMap.get("page").toString());}

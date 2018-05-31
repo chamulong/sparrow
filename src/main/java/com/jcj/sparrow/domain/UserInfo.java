@@ -22,12 +22,16 @@ import java.util.List;
 public class UserInfo
 {
     @Id
-    @GenericGenerator(name="system-uuid",strategy = "uuid")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name="uuid",strategy = "uuid")
     @Column(length = 32)
     private String uuid;
 
     @Column(length = 20)
     private String username;
+
+    @Column(length = 100)
+    private String password;
 
     @Column(length = 20)
     private String realname;
@@ -58,6 +62,10 @@ public class UserInfo
 
     @Column(length = 10)
     private String status;
+
+    @OneToOne(targetEntity = SysUser.class,cascade =CascadeType.ALL)
+    @JoinColumn(name = "sysuser_id",referencedColumnName = "uuid")
+    private SysUser sysUser;
 
     public String getUuid()
     {
@@ -168,4 +176,23 @@ public class UserInfo
 
     public void setStatus(String status) {this.status = status;}
 
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public SysUser getSysUser()
+    {
+        return sysUser;
+    }
+
+    public void setSysUser(SysUser sysUser)
+    {
+        this.sysUser = sysUser;
+    }
 }

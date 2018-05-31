@@ -2,10 +2,12 @@ package com.jcj.sparrow.service;
 
 import com.jcj.sparrow.domain.UserInfo;
 import com.jcj.sparrow.repository.UserinfoRepo;
+import com.jcj.sparrow.security.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,6 +30,20 @@ public class UserinfoService
 
     public void save(UserInfo userInfo)
     {
+        userInfo.setStatus("启用");//用户的默认状态是启用
+
+        //密码进行BCrypt强哈希加密
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(userInfo.getPassword());
+
+        //创建账户对象
+        SysUser sysUser=new SysUser();
+        sysUser.setUsername(userInfo.getUsername());
+        sysUser.setPassword(hashedPassword);
+        sysUser.setProjectname("sparrow");
+        userInfo.setSysUser(sysUser);
+
+        userInfo.setPassword(hashedPassword);
         userinfoRepo.save(userInfo);
     }
 
