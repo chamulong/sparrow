@@ -31,4 +31,4 @@ head.js("/custom/upload.css");
 
 //引入zTree_v3树形目录插件
 head.js("/zTree3/css/zTreeStyle/zTreeStyle.css");
-head.js("/zTree3/jquery.ztree.all.min.js");
+head.js("/zTree3/js/jquery.ztree.all.min.js");

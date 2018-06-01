@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>角色权限管理</title>
+    <script src="/custom/head.min.js"></script>
+    <script src="/custom/newcommon.js"></script>
+    <script src="/custom/RoleAuth.js"></script>
+</head>
+<body>
+<div id="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
+
+    <!--角色展示-->
+    <div class="panel panel-default list-inline">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6 text-left"><h4>系统角色</h4></div>
+                <div class="col-md-6 text-right">
+                    <button style="margin-right: 10px" id="btn_addrole" type="button" class="btn btn-outline btn-info btn-sm" onclick="showAddUserInfo()">
+                        <span class="glyphicon glyphicon-plus"></span>新增角色
+                    </button>
+                    <button style="margin-right: 10px" id="btn_deleterole" type="button" class="btn btn-outline btn-danger btn-sm" onclick="deleteUserInfo()">
+                        <span class="glyphicon glyphicon-remove"></span>删除角色
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body form-group">
+            <label style="margin-right: 15px"><input type="checkbox" value="option1" id="inlineCheckbox1"> 管理员</label>
+            <label style="margin-right: 15px"><input type="checkbox" value="option2" id="inlineCheckbox2"> 普通用户</label>
+            <label style="margin-right: 15px"><input type="checkbox" value="option3" id="inlineCheckbox3"> 运维人员</label>
+        </div>
+    </div>
+
+    <!--quanxian 展示-->
+    <div class="panel panel-default list-inline">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6 text-left"><h4>系统权限</h4></div>
+                <div class="col-md-6 text-right">
+                    <button style="margin-right: 10px" id="btn_addauth" type="button" class="btn btn-outline btn-warning btn-sm" onclick="showAddUserInfo()">
+                        <span class="glyphicon glyphicon-plus"></span>保存设置
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row" >
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块1</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块2</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info"  style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块3</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块4</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块5</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo5"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块6</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo6"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-info" style="margin: 15px;width: 260px;height:400px;overflow:auto">
+                        <div class="panel-heading">功能模块7</div>
+                        <div class="panel-body">
+                            <div class="panel" id="treedemo7"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

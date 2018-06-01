@@ -22,4 +22,10 @@ public class ControllerHome
     {
         return "/userinfo/listUserInfo";
     }
+
+    @RequestMapping(value = "/listRoleAuth")
+    public String listRoleAuth()
+    {
+        return "/authority/listRoleAuth";
+    }
 }
