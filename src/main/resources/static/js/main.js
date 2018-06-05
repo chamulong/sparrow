@@ -1,8 +1,8 @@
 /************
- * 登录模块
+ * 框架中右侧首页面对应的js
  ***********/
 require(
-    ['/custom/GlobleConfig.js'],
+    ['/js/GlobleConfig.js'],
     function(){
         requirejs(
             ['jquery','bootstrap'],

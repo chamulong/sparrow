@@ -3,7 +3,7 @@
  * 2018.06.01 江成军
  ***********/
 require(
-    ['/custom/GlobleConfig.js'],
+    ['/js/GlobleConfig.js'],
     function(){
         requirejs(
             ['jquery','bootstrap','ztree'],
@@ -121,15 +121,13 @@ require(
                     { id:23, pId:2, name:"随意勾选 2-3"}
                 ];
 
-                $(document).ready(function(){
-                    $.fn.zTree.init($("#treedemo1"), setting, zNodes1);
-                    $.fn.zTree.init($("#treedemo2"), setting, zNodes2);
-                    $.fn.zTree.init($("#treedemo3"), setting, zNodes3);
-                    $.fn.zTree.init($("#treedemo4"), setting, zNodes4);
-                    $.fn.zTree.init($("#treedemo5"), setting, zNodes5);
-                    $.fn.zTree.init($("#treedemo6"), setting, zNodes6);
-                    $.fn.zTree.init($("#treedemo7"), setting, zNodes7);
-                });
+                $.fn.zTree.init($("#treedemo1"), setting, zNodes1);
+                $.fn.zTree.init($("#treedemo2"), setting, zNodes2);
+                $.fn.zTree.init($("#treedemo3"), setting, zNodes3);
+                $.fn.zTree.init($("#treedemo4"), setting, zNodes4);
+                $.fn.zTree.init($("#treedemo5"), setting, zNodes5);
+                $.fn.zTree.init($("#treedemo6"), setting, zNodes6);
+                $.fn.zTree.init($("#treedemo7"), setting, zNodes7);
 
                 //自定义功能块，EndRegion
 

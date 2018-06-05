@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable();// 关闭csrf防护
 
         http.authorizeRequests()            // 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/custom/**","/Hplus/**","/userinfo/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
+                .antMatchers("/js/**","/lib/**","/userinfo/**").permitAll()     // 设置所有人都可以访问的登录页、静态资源
                 .anyRequest().authenticated()
                 .and()
             .headers().frameOptions().disable()//springSecurty使用X-Frame-Options防止网页被Frame，默认是deny，拒绝iframe嵌套
