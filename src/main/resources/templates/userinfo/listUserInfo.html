@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" data-main="/js/userinfo/userInfo.js" src="/lib/require.js"></script>
+    <script type="text/javascript" data-main="/js/userinfo/listUserInfo.js" src="/lib/require.js"></script>
     <title>员工列表</title>
 </head>
 <body>
@@ -11,7 +11,7 @@
         <!--增删改按钮和查询条件-->
         <div class="row" style="margin-bottom: 5px">
             <div class="col-md-4">
-                <button style="margin-right: 10px" id="btn_add" type="button" class="btn btn-info btn-sm" onclick="showAddUserInfo()">
+                <button style="margin-right: 10px" id="btn_add" type="button" class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-plus"></span>新增
                 </button>
                 <button style="margin-right: 10px" id="btn_edit" type="button" class="btn btn-warning btn-sm">
@@ -37,7 +37,7 @@
                         <option value="福建息技术研发部2">福建息技术研发部2</option>
                     </select>
 
-                    <button type="button" class="btn btn-sm" onclick="searchRec()">
+                    <button type="button" class="btn btn-sm" id="btnSearch">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
                     </button>
                 </form>

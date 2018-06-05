@@ -41,10 +41,10 @@ require.config({
             deps:['jquery','bootstrap','bootstraptable']
         },
         layer:{
-            deps:['jquery']
+            deps:['jquery','css!/lib/Hplus/js/plugins/layer-v3.1.1/layer/mobile/need/layer.css']
         },
         jqueryform:{
-            deps:'jquery'
+            deps:['jquery']
         },
         jqueryupload:{
             deps:['jquery','css!/lib/upload.css']

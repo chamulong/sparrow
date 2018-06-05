@@ -90,52 +90,37 @@ require(
                     }]
                 });
 
+                //多条件查询刷新
+                $("#btnSearch").click(function(){
+                    $("#tb_UserInfos").bootstrapTable('refresh');
+                });
+
+                //弹出新增员工窗口
+                $("#btn_add").on('click',function(){
+                    layer.open({
+                        type: 2,
+                        skin: 'layui-layer-molv',
+                        title: '新增员工',
+                        shadeClose: true,
+                        shade: 0.4,
+                        maxmin: false,
+                        area: ['700px', '600px'],
+                        content: '/userinfo/addUserInfo.html',
+                        end: function () {
+                            $("#tb_UserInfos").bootstrapTable('refresh');
+                        }
+                    });
+                });
+
+
 
                 //自定义功能块 EndRegion
             });
     });
 
-
-//多条件查询
-function searchRec()
-{
-    $("#tb_UserInfos").bootstrapTable('refresh');
-}
-
-//弹出新增员工窗口
-function showAddUserInfo()
-{
-    parent.layer.open({
-        id: 'addlayer',
-        type: 2,
-        skin: 'layui-layer-molv',
-        title: '新增员工',
-        shadeClose: true,
-        shade: 0.4,
-        maxmin: false,
-        area: ['700px', '600px'],
-        content: '/userinfo/addUserInfo.html',
-        end: function () {
-            $("#tb_UserInfos").bootstrapTable('refresh');
-        }
-    });
-}
-
 //保存新增员工信息
 function saveUserInfo() {
-    var options = {
-        complete:function(data){
-            parent.layer.alert("新增员工【"+$('#username').val()+"】信息成功！", {
-                icon: 1,
-                closeBtn: 0,
-            },function(){parent.layer.closeAll();});
-        },
-        url:'/userinfo/save',
-        dataType:'json',
-        resetForm: true,  // 成功提交后，重置所有的表单元素的值
-        timeout: 5000
-    };
-    $('#FormUserInfo').ajaxSubmit(options);
+
 }
 
 //删除员工信息(一条或多条)
