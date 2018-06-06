@@ -10,7 +10,7 @@ require.config({
         pace:'/lib/Hplus/js/plugins/pace/pace.min',
         bootstraptable:['/lib/Hplus/js/plugins/bootstrap-table/bootstrap-table.min'],
         bootstraptableCN:['/lib/Hplus/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN'],
-        layer:['/lib/Hplus/js/plugins/layer-v3.1.1/layer/layer'],
+        layer:['/lib/layer/layer.min'],
         jqueryform:['/lib/Hplus/js/jquery.form.min'],
         jqueryupload:'/lib/jQuery.upload.min',
         ztree:'/lib/zTree3/js/jquery.ztree.all.min'
@@ -41,7 +41,7 @@ require.config({
             deps:['jquery','bootstrap','bootstraptable']
         },
         layer:{
-            deps:['jquery','css!/lib/Hplus/js/plugins/layer-v3.1.1/layer/mobile/need/layer.css']
+            deps:['css!/lib/layer/skin/layer.css']
         },
         jqueryform:{
             deps:['jquery']

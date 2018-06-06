@@ -9,9 +9,6 @@ require(
             function($){
                 //自定义功能块 Region
 
-                //文件上传
-                $("#case").upload();
-
                 $('#tb_UserInfos').bootstrapTable({
                     url: '/userinfo/list',         //请求后台的URL（*）
                     method: 'post',                      //请求方式（*）post/get
@@ -97,18 +94,46 @@ require(
 
                 //弹出新增员工窗口
                 $("#btn_add").on('click',function(){
-                    layer.open({
+                    parent.layer.open({
                         type: 2,
                         skin: 'layui-layer-molv',
                         title: '新增员工',
                         shadeClose: true,
-                        shade: 0.4,
+                        shade: 0.2,
                         maxmin: false,
-                        area: ['700px', '600px'],
+                        area: ['55%', '95%'],
                         content: '/userinfo/addUserInfo.html',
                         end: function () {
                             $("#tb_UserInfos").bootstrapTable('refresh');
                         }
+                    });
+                });
+
+                //删除员工信息(一条或多条,逻辑删除)
+                $("#btn_delete").click(function(){
+                    parent.layer.confirm('是否要删除选定的记录？',{
+                        icon: 0,
+                        btn:['取 消','确 定']
+                    },function(){
+                        parent.layer.closeAll();
+                    },function(){
+                        var uuids="";
+                        var arrData = $('#tb_UserInfos').bootstrapTable('getSelections');//获取选择行数据
+                        for (var i = 0; i < arrData.length; i++)
+                        {
+                            if(i==0){uuids=arrData[i].uuid;}
+                            else{uuids=uuids+"_"+arrData[i].uuid;}
+                        }
+                        $.ajax({
+                            url:'/userinfo/delete',
+                            type:'post',
+                            data:{uuids:uuids},
+                            async:true,//true为异步，false为同步
+                            complete:function(){
+                                $("#tb_UserInfos").bootstrapTable('refresh');
+                            }
+
+                        });
                     });
                 });
 
@@ -117,40 +142,6 @@ require(
                 //自定义功能块 EndRegion
             });
     });
-
-//保存新增员工信息
-function saveUserInfo() {
-
-}
-
-//删除员工信息(一条或多条)
-function deleteUserInfo()
-{
-    parent.layer.confirm('是否要删除选定的记录？',{
-        icon: 0,
-        btn:['取 消','确 定']
-    },function(){
-        parent.layer.closeAll();
-    },function(){
-        var uuids="";
-        var arrData = $('#tb_UserInfos').bootstrapTable('getSelections');//获取选择行数据
-        for (var i = 0; i < arrData.length; i++)
-        {
-            if(i==0){uuids=arrData[i].uuid;}
-            else{uuids=uuids+"_"+arrData[i].uuid;}
-        }
-        $.ajax({
-            url:'/userinfo/delete',
-            type:'get',
-            data:'uuids='+uuids,
-            async:false,//true为异步，false为同步
-            complete:function(){
-                $("#tb_UserInfos").bootstrapTable('refresh');
-            }
-
-        });
-    })
-}
 
 
 

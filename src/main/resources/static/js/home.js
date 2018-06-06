@@ -5,7 +5,7 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','metismenu','slimscroll','hplus','contabs','pace'],
+            ['jquery','bootstrap','metismenu','slimscroll','hplus','contabs','pace','layer'],
             function($){
                 //自定义功能块
             });

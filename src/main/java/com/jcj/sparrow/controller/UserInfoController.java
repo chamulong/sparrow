@@ -49,14 +49,14 @@ public class UserInfoController
     /*
       批量删除信息
      */
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @ResponseBody
     public String deleteEmployee(@RequestParam String uuids)
     {
+        System.out.println("uuids:"+uuids);
         String[] arrUUID=uuids.split("_");
         for (String uuid:arrUUID)
         {
-            System.out.println("uuid："+uuid);
             userinfoService.deleteByUuid(uuid);
         }
         return "OK";
@@ -107,34 +107,4 @@ public class UserInfoController
       return userinfoService.findAll();
     }
 
-
-
-    @PostMapping("/comquery")
-    @ResponseBody
-    public List<UserInfo> myQuery(@RequestParam(defaultValue = "张三") String username)
-    {
-        return userinfoService.findByJPQL(username);
-    }
-
-    @GetMapping("/PageUserInfosSearch")
-    @ResponseBody
-    public Page<UserInfo> getData(@RequestParam(defaultValue = "0") int page, String username, @RequestParam(defaultValue = "4") int size)
-    {
-        Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
-        return userinfoService.queryData(username,new PageRequest(page,size,sort));
-    }
-
-    @GetMapping("/d1")
-    public String showDIndex(Model model)
-    {
-        List<UserInfo> list=userinfoService.findAll();
-        model.addAttribute("employee",list);
-        return "userinfo/index";
-    }
-
-    @GetMapping("/index")
-    public String showIndex()
-    {
-        return "index";
-    }
 }

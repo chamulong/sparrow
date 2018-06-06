@@ -17,14 +17,14 @@ import java.util.List;
  */
 public interface UserinfoRepo extends JpaRepository<UserInfo,Long>,JpaSpecificationExecutor
 {
-    @Query(value = "select * from employee where username=?1",nativeQuery = true)
+    @Query(value = "select * from userinfo where username=?1",nativeQuery = true)
     List<UserInfo> findByJPQL(String name);
 
-    @Query(value = "update * from employee where username like %?%1",nativeQuery = true)
+    @Query(value = "update * from userinfo where username like %?%1",nativeQuery = true)
     Page<UserInfo> findByJPQLAndPage(String name, Pageable pageable);
 
     @Modifying
-    @Query(value = "update employee set status ='停用' where uuid=?1",nativeQuery = true)
+    @Query(value = "update userinfo set status ='停用' where uuid=?1",nativeQuery = true)
     void deleteByUuid(String uuid);
 
     //使用SpringDataJPA方法定义查询,根据用户名，查询用户信息

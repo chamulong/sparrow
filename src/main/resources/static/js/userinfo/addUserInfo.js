@@ -5,10 +5,14 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','jqueryform','jqueryupload'],
+            ['jquery','bootstrap','jqueryform','layer','jqueryupload'],
             function($){
-
                 //自定义功能块 region
+
+                //文件上传
+                $("#case").upload();
+
+                //保存文件
                 $("#btn_Save").click(function(){
                     var options = {
                         complete:function(data){
