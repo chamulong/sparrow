@@ -9,6 +9,17 @@ require(
             function($){
                 //自定义功能块 Region
 
+                //绑定列表中各按钮的事件
+                window.operateEvents={
+                    'click .detail':function(e,value,row,index){
+                        alert("姓名:"+row.realname+",index:"+index);
+                    },
+                    'click .delete':function(e,value,row,index){
+                        alert("value:"+value+",删除");
+                    }
+                };
+
+                //数据列表展示
                 $('#tb_UserInfos').bootstrapTable({
                     url: '/userinfo/list',         //请求后台的URL（*）
                     method: 'post',                      //请求方式（*）post/get
@@ -53,6 +64,9 @@ require(
                         visible:false
                     },{
                         field: 'username',
+                        title: '账号'
+                    }, {
+                        field: 'realname',
                         title: '姓名'
                     }, {
                         field: 'sextype',
@@ -83,6 +97,16 @@ require(
                             if(value == "停用"){newvalue= '<span style="color:#ff4c25">'+value+'</span>';}
                             else {newvalue= '<span style="color:#37b706">'+value+'</span>';}
                             return newvalue;
+                        }
+                    },{
+                        field:'',
+                        title:'操 作',
+                        events:operateEvents,
+                        formatter:function (value, row, index){
+                            return[
+                                '<button style="margin-right: 10px" type="button" class="detail btn btn-outline btn-info btn-sm">详 情</button>',
+                                '<button style="margin-right: 10px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>'
+                            ].join('');
                         }
                     }]
                 });
