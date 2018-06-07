@@ -3,6 +3,7 @@ package com.jcj.sparrow.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -17,4 +18,7 @@ public class ServiceSysRole
     private RepoSysRole repoSysRole;
 
     public List<SysRole> findAll(){return repoSysRole.findAll();}
+
+    @Transactional
+    public void deleteByUuid(String uuid){repoSysRole.deleteByUuid(uuid);}
 }

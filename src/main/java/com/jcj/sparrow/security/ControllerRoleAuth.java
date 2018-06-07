@@ -3,7 +3,9 @@ package com.jcj.sparrow.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,6 +27,14 @@ public class ControllerRoleAuth
     {
         List<SysRole> list=serviceSysRole.findAll();
         model.addAttribute("sysroles",list);
+        return "/authority/listRoleAuth";
+    }
+
+    //根据uuid删除指定的角色
+    @PostMapping("/deleterole")
+    public String deleteByUuid(@RequestParam String uuid)
+    {
+        serviceSysRole.deleteByUuid(uuid);
         return "/authority/listRoleAuth";
     }
 }

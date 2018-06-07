@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <title>角色权限管理</title>
-    <script type="text/javascript" data-main="/js/RoleAuth.js" src="/lib/require.js"></script>
+    <script type="text/javascript" data-main="/js/authority/RoleAuth.js" src="/lib/require.js"></script>
 </head>
 <body>
 <div id="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
@@ -27,8 +27,21 @@
             </div>
         </div>
         <div class="panel-body">
-            <label th:each="sysrole,iterStat:${sysroles}" style="margin-right: 20px;display:inline-block;color: #0d8ddb"><input type="radio" name="optradio" value="option1" th:disabled="${sysrole.name=='超级管理员'}?true:false" th:attr="value=#{sysrole.uuid}" th:text="${sysrole.name}"></label>
+            <label th:each="sysrole,iterStat:${sysroles}" style="margin-right: 20px;display:inline-block;color: #0d8ddb"><input type="radio" name="radiorole" value="option1" th:disabled="${sysrole.name=='超级管理员'}?true:false" th:attr="value=${sysrole.uuid}" th:text="${sysrole.name}"></label>
         </div>
+    </div>
+
+    <!--增加角色-->
+    <div id="addrolediv" style="display: none;margin: 15px">
+        <form role="form" class="form-inline" id="FormSysRole" method="post">
+            <div class="form-group" style="margin-bottom: 30px">
+                <label for="name">角色名称：</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="不允许与已有的重名" style="width: 180px">
+            </div>
+            <div class="text-center">
+                <button id="btn_Save" type="button" class="btn btn-w-m btn-primary" >保 存</button>
+            </div>
+        </form>
     </div>
 
     <!--quanxian 展示-->

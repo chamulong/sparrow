@@ -6,10 +6,54 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','ztree'],
+            ['jquery','bootstrap','ztree','layer'],
             function($){
-
                 //自定义功能块，region
+
+                //增加角色
+                $("#btn_addrole").click(function(){
+                    layer.open({
+                        type: 1,
+                        title: '新增角色',
+                        shadeClose: false,
+                        skin: 'layui-layer-molv', //加上边框
+                        area: ['320px', '190px'], //宽高
+                        content: $('#addrolediv')
+                    });
+
+                });
+
+                //删除角色
+                $("#btn_deleterole").click(function(){
+                     var seluuid=$('input:radio[name="radiorole"]:checked').val();
+                    parent.layer.confirm('是否要删除选定的角色？',{
+                        icon: 0,
+                        closeBtn:0,
+                        btn:['取 消','确 定']
+                    },function(){
+                        parent.layer.closeAll();
+                    },function(){
+                        $.ajax({
+                            url:'/roleauth/deleterole',
+                            type:'post',
+                            data:{uuid:seluuid},
+                            async:true,//true为异步，false为同步
+                            complete:function(){
+                                window.location.reload();
+                            }
+
+                        });
+                    });
+
+                });
+
+
+
+
+
+
+
+
                 var setting = {
                     check: {
                         enable: true
