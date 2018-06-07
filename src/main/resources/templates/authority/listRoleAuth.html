@@ -26,10 +26,8 @@
                 </div>
             </div>
         </div>
-        <div class="panel-body form-group">
-            <label style="margin-right: 15px"><input type="checkbox" value="option1" id="inlineCheckbox1"> 管理员</label>
-            <label style="margin-right: 15px"><input type="checkbox" value="option2" id="inlineCheckbox2"> 普通用户</label>
-            <label style="margin-right: 15px"><input type="checkbox" value="option3" id="inlineCheckbox3"> 运维人员</label>
+        <div class="panel-body">
+            <label th:each="sysrole,iterStat:${sysroles}" style="margin-right: 20px;display:inline-block;color: #0d8ddb"><input type="radio" name="optradio" value="option1" th:disabled="${sysrole.name=='超级管理员'}?true:false" th:attr="value=#{sysrole.uuid}" th:text="${sysrole.name}"></label>
         </div>
     </div>
 
