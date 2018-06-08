@@ -20,11 +20,11 @@ public class SysAuth
     @Column(length = 32)
     private String uuid;
 
-    private String name;//权限名称
+    @Column(length = 200)
+    private String name;//权限名称（唯一），如‘系统管理’,‘系统管理_部门成员_增加’
 
-    private String descritpion;//权限描述
-
-    private String url;//授权链接
+    @Column(length = 20)
+    private String treename;//树形节点名称，如‘增加’
 
     private int id;//本身id
 
@@ -50,24 +50,14 @@ public class SysAuth
         this.name = name;
     }
 
-    public String getDescritpion()
+    public String getTreename()
     {
-        return descritpion;
+        return treename;
     }
 
-    public void setDescritpion(String descritpion)
+    public void setTreename(String treename)
     {
-        this.descritpion = descritpion;
-    }
-
-    public String getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl(String url)
-    {
-        this.url = url;
+        this.treename = treename;
     }
 
     public int getId(){return id;}
