@@ -1,6 +1,9 @@
 package com.jcj.sparrow.security;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Author：江成军
@@ -9,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
 {
+    @Query(value = "select * from sysauth where pid=0",nativeQuery = true)
+    List<SysAuth> findMainAuth();
 }

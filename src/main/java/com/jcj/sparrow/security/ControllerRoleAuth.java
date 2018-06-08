@@ -22,6 +22,9 @@ public class ControllerRoleAuth
     @Autowired
     private ServiceSysRole serviceSysRole;
 
+    @Autowired
+    private  ServiceSysAuth serviceSysAuth;
+
     //查询全部的角色
     @RequestMapping("/listrole")
     public String findAllRole(Model model)
@@ -38,6 +41,7 @@ public class ControllerRoleAuth
         serviceSysRole.deleteByUuid(uuid);
         return "/authority/listRoleAuth";
     }
+
     //保存角色
     @PostMapping("/save")
     @ResponseBody
@@ -46,4 +50,13 @@ public class ControllerRoleAuth
         serviceSysRole.save(sysRole);
         return "OK";
     }
+
+    //获取一级目录（主功能模块）
+    @PostMapping("/findMainAuth")
+    @ResponseBody
+    public List<SysAuth> findMainAuth()
+    {
+        return serviceSysAuth.findMainAuth();
+    }
+
 }

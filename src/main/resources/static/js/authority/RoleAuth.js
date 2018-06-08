@@ -15,7 +15,9 @@ require(
                     layer.open({
                         type: 1,
                         title: '新增角色',
-                        shadeClose: false,
+                        shadeClose: true,
+                        shade: 0.2,
+                        maxmin: false,
                         skin: 'layui-layer-molv', //加上边框
                         area: ['320px', '190px'], //宽高
                         content: $('#addrolediv')
@@ -75,6 +77,21 @@ require(
                             }
 
                         });
+                    });
+
+                });
+
+                //弹出主功能编辑窗口
+                $("#btn_managermainfun").click(function(){
+                    parent.layer.open({
+                        type: 2,
+                        skin: 'layui-layer-molv',
+                        title: '一级功能模块管理',
+                        shadeClose: true,
+                        shade: 0.2,
+                        maxmin: false,
+                        area: ['800px', '550px'], //宽高
+                        content:'/authority/managerMainAuth.html'
                     });
 
                 });

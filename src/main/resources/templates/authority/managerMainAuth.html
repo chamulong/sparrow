@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>管理主功能模块</title>
+    <script type="text/javascript" data-main="/js/authority/managerMainAuth.js" src="/lib/require.js"></script>
+</head>
+<body>
+<div class="wrapper wrapper-content" style="padding: 8px" >
+
+    <!--添加或者修改主功能模块的名称-->
+    <form class="form-inline" style="margin-bottom: 15px">
+        <label for="name">主功能名称:</label>
+        <input type="text" class="form-control input-sm" id="name" name="name" placeholder="名称不能重复" style="width: 240px;margin-right: 15px" >
+        <button type="submit" class="btn btn-w-m btn-info">保 存</button>
+    </form>
+
+
+
+
+
+    <!--主功能列表展示-->
+    <table id="tb_MainAuth"> </table>
+
+</div>
+</body>
+</html>
