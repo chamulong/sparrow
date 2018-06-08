@@ -21,4 +21,6 @@ public class ServiceSysRole
 
     @Transactional
     public void deleteByUuid(String uuid){repoSysRole.deleteByUuid(uuid);}
+
+    public void save(SysRole sysRole){repoSysRole.save(sysRole);}
 }

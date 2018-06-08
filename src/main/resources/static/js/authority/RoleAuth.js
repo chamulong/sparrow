@@ -6,11 +6,11 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','ztree','layer'],
+            ['jquery','bootstrap','ztree','layer','jqueryform'],
             function($){
                 //自定义功能块，region
 
-                //增加角色
+                //弹出新增角色层
                 $("#btn_addrole").click(function(){
                     layer.open({
                         type: 1,
@@ -22,6 +22,38 @@ require(
                     });
 
                 });
+
+                //保存新增角色
+                $("#btn_SaveRole").click(function(){
+                    //遍历页面上所有radio，得到已有的角色名称，并与输入项进行比较，判断是否重复
+                    var newRoleName=$("#name").val();
+                    var items = document.getElementsByName("radiorole");
+                    for(var i=0,n=items.length;i<n;i++)
+                    {
+                        var tempName=items[i].nextSibling.nodeValue;//获取每个radio的显示文本（不是value）
+                        if(tempName==newRoleName)
+                        {
+                            alert("角色名称重复，请重新输入!");
+                            return false;
+                        }
+                    }
+
+                    //保存数据到数据库
+                    var options = {
+                        complete:function(data){
+                            layer.alert("新增角色【"+newRoleName+"】信息成功！", {
+                                icon: 1,
+                                closeBtn: 0,
+                            },function(){ window.location.reload();});
+                        },
+                        url:'/roleauth/save',
+                        dataType:'json',
+                        resetForm: true,  // 成功提交后，重置所有的表单元素的值
+                        timeout: 5000
+                    };
+                    $('#FormSysRole').ajaxSubmit(options);
+                });
+
 
                 //删除角色
                 $("#btn_deleterole").click(function(){

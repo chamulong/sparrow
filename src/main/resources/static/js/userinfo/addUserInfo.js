@@ -12,7 +12,7 @@ require(
                 //文件上传
                 $("#case").upload();
 
-                //保存文件
+                //保存员工信息
                 $("#btn_Save").click(function(){
                     var options = {
                         complete:function(data){
