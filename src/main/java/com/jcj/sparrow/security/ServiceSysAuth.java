@@ -17,4 +17,9 @@ public class ServiceSysAuth
     private RepoSysAuth repoSysAuth;
 
     public List<SysAuth> findMainAuth(){return repoSysAuth.findMainAuth();}
+
+    public void save(SysAuth sysAuth){repoSysAuth.save(sysAuth);}
+
+    //根据父节点的id，获取其直接子节点的最大id
+    public int findMaxId(int pid){return repoSysAuth.findMaxId(pid);}
 }

@@ -1,5 +1,6 @@
 package com.jcj.sparrow.security;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,11 +53,25 @@ public class ControllerRoleAuth
     }
 
     //获取一级目录（主功能模块）
-    @PostMapping("/findMainAuth")
+    @RequestMapping("/findMainAuth")
     @ResponseBody
     public List<SysAuth> findMainAuth()
     {
         return serviceSysAuth.findMainAuth();
+    }
+
+    //保存一级目录
+    @PostMapping("/saveMainAuth")
+    @ResponseBody
+    public String saveMainAuth(SysAuth sysAuth)
+    {
+        sysAuth.setPid(0);
+        int newId=serviceSysAuth.findMaxId(0)+1;
+        sysAuth.setId(newId);
+        sysAuth.setTreename(sysAuth.getName());
+        serviceSysAuth.save(sysAuth);
+
+        return "OK";
     }
 
 }

@@ -96,13 +96,7 @@ require(
 
                 });
 
-
-
-
-
-
-
-
+                //加载权限树
                 var setting = {
                     check: {
                         enable: true
