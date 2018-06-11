@@ -22,4 +22,10 @@ public class ServiceSysAuth
 
     //根据父节点的id，获取其直接子节点的最大id
     public int findMaxId(int pid){return repoSysAuth.findMaxId(pid);}
+
+    //查询所有权限明细(为多个权限树提供数据)
+    public List<SysAuth> findAll(){return repoSysAuth.findAll();}
+
+
+
 }

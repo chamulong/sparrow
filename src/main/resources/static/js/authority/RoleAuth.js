@@ -108,6 +108,8 @@ require(
                     }
                 };
 
+                //加载权限明细树
+
                 var zNodes1 =[
                     { id:1, pId:0, name:"随意勾选 1", open:true},
                     { id:11, pId:1, name:"随意勾选 1-1", open:true},
