@@ -18,4 +18,7 @@ public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
     //根据父节点的id，获取其直接子节点的最大id
     @Query(value = "select max(id) from sysauth where pid=?1",nativeQuery = true)
     int findMaxId(int pid);
+
+    //按照id升序排列后的全部权限明细
+    List<SysAuth> findAllByOrderByPidAsc();
 }

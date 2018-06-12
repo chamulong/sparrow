@@ -74,12 +74,12 @@ public class ControllerRoleAuth
         return "OK";
     }
 
-    //获取全部的权限明细，用于分组树形展示和编辑
+    //获取全部的权限明细（按照id进行升序排列），用于分组树形展示和编辑
     @RequestMapping("/listAuth")
     @ResponseBody
     public List<SysAuth> listAuth()
     {
-        return serviceSysAuth.findAll();
+        return serviceSysAuth.findAllByOrderByPidAsc();
     }
 
 }
