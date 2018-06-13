@@ -24,7 +24,7 @@ public class ServiceSysAuth
     public int findMaxId(int pid){return repoSysAuth.findMaxId(pid);}
 
     //查询所有权限明细(为多个权限树提供数据,以id升序进行排序)
-    public List<SysAuth> findAllByOrderByPidAsc(){return repoSysAuth.findAllByOrderByPidAsc();}
+    public List<SysAuth> findAllByOrderByNameAsc(){return repoSysAuth.findAllByOrderByNameAsc();}
 
 
 

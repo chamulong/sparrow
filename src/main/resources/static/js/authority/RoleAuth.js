@@ -115,30 +115,44 @@ require(
                     datatype:'json',
                     async:true,//true为异步，false为同步
                     success:function(data){
-                        var sysauths=eval(data);alert(JSON.stringify(sysauths));
-                        var partauth={};
+                        var sysauths=eval(data);
+                        var partauth=[];
                         var blStart=false;//是否开始建立树
-                        var totalcount=sysauths.length;
+                        var totalcount=sysauths.length-1;
                         var m=0;
+                        var modulename="";
                         for(var i in sysauths)
                         {
-                            if(sysauths[i].pid==0||(i+1==totalcount))
+                            if(sysauths[i].pid==0)
                             {
                                 if(blStart)
                                 {
                                     var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+sysauths[i].name+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                     $("#allAuthbody").append(str);
                                     $.fn.zTree.init($("#"+id+""), setting, partauth);
 
                                     m++;
-                                    partauth='{ id:'+sysauths[i].id+', pId:'+sysauths[i].pid+', name:"'+sysauths[i].treename+'", open:true}';
+                                    partauth=[];
+                                    var row={};
+                                    modulename=sysauths[i].name;
+                                    row.id=sysauths[i].id;
+                                    row.pId=sysauths[i].pid;
+                                    row.name=sysauths[i].treename;
+                                    row.open=true;
+                                    partauth.push(row);
                                     continue;
                                 }
                                 else
                                 {
+                                    modulename=sysauths[i].name;
                                     blStart=true;
-                                    partauth='{ id:'+sysauths[i].id+', pId:'+sysauths[i].pid+', name:"'+sysauths[i].treename+'", open:true}';
+                                    var row={};
+                                    row.id=sysauths[i].id;
+                                    row.pId=sysauths[i].pid;
+                                    row.name=sysauths[i].treename;
+                                    row.open=true;
+                                    partauth.push(row);
                                     continue;
                                 }
 
@@ -146,8 +160,20 @@ require(
 
                             if(blStart)
                             {
-                                var auth='{ id:'+sysauths[i].id+', pId:'+sysauths[i].pid+', name:"'+sysauths[i].treename+'", open:true}';
-                                partauth.push(JSON.parse(auth));
+                                var row={};
+                                row.id=sysauths[i].id;
+                                row.pId=sysauths[i].pid;
+                                row.name=sysauths[i].treename;
+                                row.open=true;
+                                partauth.push(row);
+
+                                if(i==totalcount)
+                                {
+                                    var id="model"+m;
+                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                    $("#allAuthbody").append(str);
+                                    $.fn.zTree.init($("#"+id+""), setting, partauth);
+                                }
                             }
 
                         }

@@ -20,5 +20,5 @@ public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
     int findMaxId(int pid);
 
     //按照id升序排列后的全部权限明细
-    List<SysAuth> findAllByOrderByPidAsc();
+    List<SysAuth> findAllByOrderByNameAsc();
 }
