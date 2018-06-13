@@ -101,6 +101,12 @@ require(
                     check: {
                         enable: true
                     },
+                    edit:{
+                        enable: true,
+                        editNameSelectAll: true,
+                        showRemoveBtn: showRemoveBtn,
+                        showRenameBtn: showRenameBtn
+                    },
                     data: {
                         simpleData: {
                             enable: true
@@ -182,11 +188,17 @@ require(
 
                 });
 
+                //显示节点的删除按钮
+                function showRemoveBtn(treeId, treeNode)
+                {
+                    return !treeNode.isFirstNode;
+                };
 
-
-
-
-
+                //显示节点重命名按钮
+                function showRenameBtn(treeId, treeNode)
+                {
+                    return !treeNode.isLastNode;
+                };
 
                 //自定义功能块，EndRegion
 
