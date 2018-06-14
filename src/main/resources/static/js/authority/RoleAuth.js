@@ -6,7 +6,7 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','ztree','layer','jqueryform'],
+            ['jquery','bootstrap','ztree','layer','jqueryform','contextify'],
             function($){
                 //自定义功能块，region
 
@@ -101,16 +101,13 @@ require(
                     check: {
                         enable: true
                     },
-                    edit:{
-                        enable: true,
-                        editNameSelectAll: true,
-                        showRemoveBtn: showRemoveBtn,
-                        showRenameBtn: showRenameBtn
-                    },
                     data: {
                         simpleData: {
                             enable: true
                         }
+                    },
+                    callback:{
+                        onRightClick: onRightClick
                     }
                 };
 
@@ -146,6 +143,7 @@ require(
                                     row.pId=sysauths[i].pid;
                                     row.name=sysauths[i].treename;
                                     row.open=true;
+                                    row.right=false;
                                     partauth.push(row);
                                     continue;
                                 }
@@ -158,6 +156,7 @@ require(
                                     row.pId=sysauths[i].pid;
                                     row.name=sysauths[i].treename;
                                     row.open=true;
+                                    row.right=false;
                                     partauth.push(row);
                                     continue;
                                 }
@@ -171,6 +170,7 @@ require(
                                 row.pId=sysauths[i].pid;
                                 row.name=sysauths[i].treename;
                                 row.open=true;
+                                row.right=true;
                                 partauth.push(row);
 
                                 if(i==totalcount)
@@ -188,17 +188,24 @@ require(
 
                 });
 
-                //显示节点的删除按钮
-                function showRemoveBtn(treeId, treeNode)
+                //右键进行节点的编辑(添加、改名、删除)
+                function onRightClick(event, treeId, treeNode)
                 {
-                    return !treeNode.isFirstNode;
-                };
-
-                //显示节点重命名按钮
-                function showRenameBtn(treeId, treeNode)
-                {
-                    return !treeNode.isLastNode;
-                };
+                    if(treeNode.getParentNode().id!=0)
+                    {
+                        //借助contextify插件实现右键菜单
+                        var options = {items:[
+                                {header: 'Options'},
+                                {text: 'First Link', href: '#'},
+                                {text: 'Second Link', onclick: function(e) {
+                                        alert('Hello ' + e.data.name);
+                                    }},
+                                {divider: true},
+                                {text: 'Stuff', href: '#'}
+                            ]}
+                        $('.foo').contextify(options);
+                    }
+                }
 
                 //自定义功能块，EndRegion
 
