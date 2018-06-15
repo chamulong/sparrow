@@ -105,18 +105,20 @@ require(
                         simpleData: {
                             enable: true
                         }
+                    },
+                    callback:{
+                        onClick: onClick
                     }
                 };
 
-                //根据当前选中的点，进行增、删、改操作,参数是各模块树所在容器的id
-                function editNode(id)
+                //节点单击事件，获取节点的相关信息，并赋值给隐藏表单
+                function onClick(event, treeId, treeNode, clickFlag)
                 {
-                    var zTree = $.fn.zTree.getZTreeObj("#"+id);
-                    var nodes = zTree.getSelectedNodes();
-                    var treeNode = nodes[0];
-
-                    alert(JSON.parse(treeNode))
+                    $("#nowid"+treeId).val(treeNode.id);
+                    $("#nowpid"+treeId).val(treeNode.pId);//当前节点为根节点时，该值为空
+                    $("#nowname"+treeId).val(treeNode.name);
                 }
+
 
                 //加载权限明细树
                 $.ajax({
@@ -138,9 +140,27 @@ require(
                                 if(blStart)
                                 {
                                     var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button class="btn btn-warning btn-xs pull-right" type="button" onclick="editNode('+id+')"><i class="fa fa-plus-square"></i></button><button class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="pencil'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                     $("#allAuthbody").append(str);
+                                    var strVal=$('<input  id="nowid'+id+'" type="hidden" value="无"><input  id="nowpid'+id+'" type="hidden" value="无"><input  id="nowname'+id+'" type="hidden" value="无">');
+                                    $("#allAuthbody").append(strVal);
                                     $.fn.zTree.init($("#"+id), setting, partauth);
+
+                                    //在当前节点下增加子节点
+                                    $("#plus"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
+
+                                    //修改当前节点的名称
+                                    $("#pencil"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
+
+                                    //删除当前节点（如果有子节点则一并删除）
+                                    $("#minus"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
+
 
                                     m++;
                                     partauth=[];
@@ -180,9 +200,26 @@ require(
                                 if(i==totalcount)
                                 {
                                     var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="pencil'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                     $("#allAuthbody").append(str);
+                                    var strVal=$('<input  id="nowid'+id+'" type="hidden" value="无"><input  id="nowpid'+id+'" type="hidden" value="无"><input  id="nowname'+id+'" type="hidden" value="无">');
+                                    $("#allAuthbody").append(strVal);
                                     $.fn.zTree.init($("#"+id), setting, partauth);
+
+                                    //在当前节点下增加子节点
+                                    $("#plus"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
+
+                                    //修改当前节点的名称
+                                    $("#pencil"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
+
+                                    //删除当前节点（如果有子节点则一并删除）
+                                    $("#minus"+id).click(function(){
+                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                    });
                                 }
                             }
 
