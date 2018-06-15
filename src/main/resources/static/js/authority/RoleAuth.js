@@ -6,7 +6,7 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','ztree','layer','jqueryform','contextify'],
+            ['jquery','bootstrap','ztree','layer','jqueryform'],
             function($){
                 //自定义功能块，region
 
@@ -105,11 +105,18 @@ require(
                         simpleData: {
                             enable: true
                         }
-                    },
-                    callback:{
-                        onRightClick: onRightClick
                     }
                 };
+
+                //根据当前选中的点，进行增、删、改操作,参数是各模块树所在容器的id
+                function editNode(id)
+                {
+                    var zTree = $.fn.zTree.getZTreeObj("#"+id);
+                    var nodes = zTree.getSelectedNodes();
+                    var treeNode = nodes[0];
+
+                    alert(JSON.parse(treeNode))
+                }
 
                 //加载权限明细树
                 $.ajax({
@@ -131,9 +138,9 @@ require(
                                 if(blStart)
                                 {
                                     var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button class="btn btn-warning btn-xs pull-right" type="button" onclick="editNode('+id+')"><i class="fa fa-plus-square"></i></button><button class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                     $("#allAuthbody").append(str);
-                                    $.fn.zTree.init($("#"+id+""), setting, partauth);
+                                    $.fn.zTree.init($("#"+id), setting, partauth);
 
                                     m++;
                                     partauth=[];
@@ -143,7 +150,6 @@ require(
                                     row.pId=sysauths[i].pid;
                                     row.name=sysauths[i].treename;
                                     row.open=true;
-                                    row.right=false;
                                     partauth.push(row);
                                     continue;
                                 }
@@ -156,7 +162,6 @@ require(
                                     row.pId=sysauths[i].pid;
                                     row.name=sysauths[i].treename;
                                     row.open=true;
-                                    row.right=false;
                                     partauth.push(row);
                                     continue;
                                 }
@@ -170,7 +175,6 @@ require(
                                 row.pId=sysauths[i].pid;
                                 row.name=sysauths[i].treename;
                                 row.open=true;
-                                row.right=true;
                                 partauth.push(row);
 
                                 if(i==totalcount)
@@ -178,7 +182,7 @@ require(
                                     var id="model"+m;
                                     var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                     $("#allAuthbody").append(str);
-                                    $.fn.zTree.init($("#"+id+""), setting, partauth);
+                                    $.fn.zTree.init($("#"+id), setting, partauth);
                                 }
                             }
 
@@ -188,24 +192,6 @@ require(
 
                 });
 
-                //右键进行节点的编辑(添加、改名、删除)
-                function onRightClick(event, treeId, treeNode)
-                {
-                    if(treeNode.getParentNode().id!=0)
-                    {
-                        //借助contextify插件实现右键菜单
-                        var options = {items:[
-                                {header: 'Options'},
-                                {text: 'First Link', href: '#'},
-                                {text: 'Second Link', onclick: function(e) {
-                                        alert('Hello ' + e.data.name);
-                                    }},
-                                {divider: true},
-                                {text: 'Stuff', href: '#'}
-                            ]}
-                        $('.foo').contextify(options);
-                    }
-                }
 
                 //自定义功能块，EndRegion
 
