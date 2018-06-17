@@ -126,103 +126,32 @@ require(
                     type:'post',
                     datatype:'json',
                     async:true,//true为异步，false为同步
-                    success:function(data){
-                        var sysauths=eval(data);
-                        var partauth=[];
-                        var blStart=false;//是否开始建立树
-                        var totalcount=sysauths.length-1;
+                    success:function(map){
                         var m=0;
-                        var modulename="";
-                        for(var i in sysauths)
+                        for(var key in map)
                         {
-                            if(sysauths[i].pid==0)
-                            {
-                                if(blStart)
-                                {
-                                    var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="pencil'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
-                                    $("#allAuthbody").append(str);
-                                    var strVal=$('<input  id="nowid'+id+'" type="hidden" value="无"><input  id="nowpid'+id+'" type="hidden" value="无"><input  id="nowname'+id+'" type="hidden" value="无">');
-                                    $("#allAuthbody").append(strVal);
-                                    $.fn.zTree.init($("#"+id), setting, partauth);
+                            m++;
+                            var id="model"+m;
+                            var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="pencil'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                            $("#allAuthbody").append(str);
+                            var strVal=$('<input  id="nowid'+id+'" type="hidden" value="无"><input  id="nowpid'+id+'" type="hidden" value="无"><input  id="nowname'+id+'" type="hidden" value="无">');
+                            $("#allAuthbody").append(strVal);
+                            $.fn.zTree.init($("#"+id), setting, map[key]);
 
-                                    //在当前节点下增加子节点
-                                    $("#plus"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
+                            //在当前节点下增加子节点
+                            $("#plus"+id).click(function(){
+                                alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                            });
 
-                                    //修改当前节点的名称
-                                    $("#pencil"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
+                            //修改当前节点的名称
+                            $("#pencil"+id).click(function(){
+                                alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                            });
 
-                                    //删除当前节点（如果有子节点则一并删除）
-                                    $("#minus"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
-
-
-                                    m++;
-                                    partauth=[];
-                                    var row={};
-                                    modulename=sysauths[i].name;
-                                    row.id=sysauths[i].id;
-                                    row.pId=sysauths[i].pid;
-                                    row.name=sysauths[i].treename;
-                                    row.open=true;
-                                    partauth.push(row);
-                                    continue;
-                                }
-                                else
-                                {
-                                    modulename=sysauths[i].name;
-                                    blStart=true;
-                                    var row={};
-                                    row.id=sysauths[i].id;
-                                    row.pId=sysauths[i].pid;
-                                    row.name=sysauths[i].treename;
-                                    row.open=true;
-                                    partauth.push(row);
-                                    continue;
-                                }
-
-                            }
-
-                            if(blStart)
-                            {
-                                var row={};
-                                row.id=sysauths[i].id;
-                                row.pId=sysauths[i].pid;
-                                row.name=sysauths[i].treename;
-                                row.open=true;
-                                partauth.push(row);
-
-                                if(i==totalcount)
-                                {
-                                    var id="model"+m;
-                                    var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+modulename+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="pencil'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-pencil-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
-                                    $("#allAuthbody").append(str);
-                                    var strVal=$('<input  id="nowid'+id+'" type="hidden" value="无"><input  id="nowpid'+id+'" type="hidden" value="无"><input  id="nowname'+id+'" type="hidden" value="无">');
-                                    $("#allAuthbody").append(strVal);
-                                    $.fn.zTree.init($("#"+id), setting, partauth);
-
-                                    //在当前节点下增加子节点
-                                    $("#plus"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
-
-                                    //修改当前节点的名称
-                                    $("#pencil"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
-
-                                    //删除当前节点（如果有子节点则一并删除）
-                                    $("#minus"+id).click(function(){
-                                        alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
-                                    });
-                                }
-                            }
-
+                            //删除当前节点（如果有子节点则一并删除）
+                            $("#minus"+id).click(function(){
+                                alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                            });
                         }
 
                     }

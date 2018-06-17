@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author：江成军
@@ -77,9 +78,9 @@ public class ControllerRoleAuth
     //获取全部的权限明细（按照name进行升序排列），用于分组树形展示和编辑
     @RequestMapping("/listAuth")
     @ResponseBody
-    public List<SysAuth> listAuth()
+    public Map<String,List<ServiceSysAuth.ztree>> listAuth()
     {
-        return serviceSysAuth.findAllByOrderByNameAsc();
+        return serviceSysAuth.findAllModule();
     }
 
 }

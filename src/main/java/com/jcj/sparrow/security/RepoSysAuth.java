@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author：江成军
@@ -19,6 +20,7 @@ public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
     @Query(value = "select max(id) from sysauth where pid=?1",nativeQuery = true)
     int findMaxId(int pid);
 
-    //按照id升序排列后的全部权限明细
-    List<SysAuth> findAllByOrderByNameAsc();
+    //根据父节点的name，获取其全部的子节点
+    @Query(value = "select * from sysauth where name LIKE ?1",nativeQuery = true)
+    List<SysAuth> findChildAuth(String name);
 }
