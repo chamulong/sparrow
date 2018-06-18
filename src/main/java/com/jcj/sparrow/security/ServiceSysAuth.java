@@ -41,7 +41,7 @@ public class ServiceSysAuth
             {
                 ztree z=new ztree();
                 z.id=s.getId();
-                z.pid=s.getPid();
+                z.pId=s.getPid();
                 z.name=s.getTreename();
                 z.open=true;
                 listztree.add(z);
@@ -56,7 +56,7 @@ public class ServiceSysAuth
     //树形节点类
     class ztree{
         public int id;
-        public int pid;
+        public int pId;
         public String name;
         public boolean open;
     }
