@@ -1,6 +1,7 @@
 package com.jcj.sparrow.security;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -23,4 +24,9 @@ public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
     //根据父节点的name，获取其全部的子节点
     @Query(value = "select * from sysauth where name LIKE ?1",nativeQuery = true)
     List<SysAuth> findChildAuth(String name);
+
+    //根据name删除指定一级功能及其包含的子功能
+    @Modifying
+    @Query(value = "delete from sysauth where name LIKE ?1",nativeQuery = true)
+    void deleteByName(String name);
 }

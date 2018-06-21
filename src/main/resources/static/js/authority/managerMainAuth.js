@@ -9,6 +9,30 @@ require(
             function($){
                 //自定义功能块Region
 
+                //绑定列表中各按钮的事件
+                window.operateEvents={
+                    'click .delete':function(e,value,row,index){
+                        var nameinfo=row.name;
+                        parent.layer.confirm('是否要删除功能模块【'+nameinfo+'】？',{
+                            icon: 0,
+                            btn:['取 消','确 定']
+                        },function(index){
+                            parent.layer.close(index);
+                        },function(){
+                            $.ajax({
+                                url:'/roleauth/deleteByName',
+                                type:'post',
+                                data:{name:nameinfo},
+                                async:true,//true为异步，false为同步
+                                success:function(){
+                                    $("#tb_MainAuth").bootstrapTable('refresh');
+                                }
+
+                            });
+                        });
+                    }
+                };
+
                 //数据列表展示
                 $('#tb_MainAuth').bootstrapTable({
                     url: '/roleauth/findMainAuth',         //请求后台的URL（*）
@@ -26,6 +50,7 @@ require(
                         title:'操 作',
                         align:'center',
                         width:'20%',
+                        events:operateEvents,
                         formatter:function (value, row, index){
                             return[
                                 '<button style="margin-right: 10px" type="button" class="delete btn btn-outline btn-danger btn-sm"> 删 除 </button>'

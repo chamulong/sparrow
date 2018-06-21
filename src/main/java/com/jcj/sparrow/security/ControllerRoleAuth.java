@@ -83,4 +83,12 @@ public class ControllerRoleAuth
         return serviceSysAuth.findAllModule();
     }
 
+    //删除指定的一级功能模块及其所辖子功能模块
+    @PostMapping("/deleteByName")
+    @ResponseBody
+    public String deleteByName(@RequestParam String name)
+    {
+        serviceSysAuth.deleteByName(name);
+        return "OK";
+    }
 }

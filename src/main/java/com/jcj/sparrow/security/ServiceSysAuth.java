@@ -3,6 +3,7 @@ package com.jcj.sparrow.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,10 @@ public class ServiceSysAuth
 
     //根据父节点的id，获取其直接子节点的最大id
     public int findMaxId(int pid){return repoSysAuth.findMaxId(pid);}
+
+    //根据name删除指定一级功能及其包含的子功能
+    @Transactional
+    public void deleteByName(String name){repoSysAuth.deleteByName(name+"%");}
 
     //查询所有权限明细(为多个权限树提供数据)
     public Map<String,List<ztree>> findAllModule()
