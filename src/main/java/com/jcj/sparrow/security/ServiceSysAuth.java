@@ -1,5 +1,6 @@
 package com.jcj.sparrow.security;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,15 @@ public class ServiceSysAuth
     public void save(SysAuth sysAuth){repoSysAuth.save(sysAuth);}
 
     //根据父节点的id，获取其直接子节点的最大id
-    public int findMaxId(int pid){return repoSysAuth.findMaxId(pid);}
+    public int findMaxId(int pid)
+    {
+        //判断是否有子节点
 
-    //根据name删除指定一级功能及其包含的子功能
+
+        return repoSysAuth.findMaxId(pid);
+    }
+
+    //根据name删除指定的节点及子节点
     @Transactional
     public void deleteByName(String name){repoSysAuth.deleteByName(name+"%");}
 
@@ -56,6 +63,43 @@ public class ServiceSysAuth
         }
         return map;
     }
+
+    //首先根据节点id查询到对应的节点信息，
+    //再根据该节点信息和新的节点名称进行名称组合，以该组合名称查询对应的节点信息是否存在，
+    //如果新节点信息不存在，则保存该新节点
+    public String saveChildAuth(int id,String childname)
+    {
+        SysAuth sysAuth_Parent=repoSysAuth.findById(id);
+        String strChildName=sysAuth_Parent.getName()+"_"+childname;
+        SysAuth sysAuth_Child=repoSysAuth.findByName(strChildName);
+        if(sysAuth_Child!=null)//子节点已经存在
+        {
+            JSONObject result = new JSONObject();
+            result.put("msg","exist");
+            return result.toJSONString();
+        }
+        else//节点未存在
+        {
+            SysAuth newAuth=new SysAuth();
+            newAuth.setName(strChildName);
+            newAuth.setPid(id);
+
+            int newid=findMaxId(id);
+            System.out.println("newid:"+newid);
+
+            newAuth.setId(findMaxId(id));
+            newAuth.setTreename(childname);
+            repoSysAuth.save(newAuth);
+
+            JSONObject result = new JSONObject();
+            result.put("msg","ok");
+            return result.toJSONString();
+        }
+
+    }
+
+
+
 
 
     //树形节点类

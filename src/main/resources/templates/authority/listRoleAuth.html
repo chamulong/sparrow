@@ -23,6 +23,19 @@
     </form>
 </div>
 
+<!--增加权限-->
+<div id="addauthdiv" style="display: none;margin: 15px">
+    <form role="form" class="form-inline" id="FormSysAuth" method="post">
+        <div class="form-group" style="margin-bottom: 30px">
+            <label for="name">权限名称：</label>
+            <input type="text" name="authname" id="authname" class="form-control" placeholder="不允许与已有的重名" style="width: 180px">
+        </div>
+        <div class="text-center">
+            <button id="btn_SaveAuth" type="button" class="btn btn-w-m btn-primary" >保 存</button>
+        </div>
+    </form>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
     <!--角色展示-->
     <div class="panel panel-default list-inline">
@@ -48,7 +61,12 @@
     <div class="panel panel-default list-inline">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-md-6 text-left"><h4>系统权限</h4></div>
+                <div class="col-md-6 text-left">
+                    <h4>系统权限</h4>
+                    <input  id="nowid" type="hidden" value="无">
+                    <input  id="nowpid" type="hidden" value="无">
+                    <input  id="nowname" type="hidden" value="无">
+                </div>
                 <div class="col-md-6 text-right">
                     <button style="margin-right: 10px" id="btn_managermainfun" type="button" class="btn btn-outline btn-info btn-sm">
                         <span clazss="glyphicon glyphicon-pencil"></span> 管理一级功能

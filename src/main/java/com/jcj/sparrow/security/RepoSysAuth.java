@@ -25,8 +25,14 @@ public interface RepoSysAuth extends JpaRepository<SysAuth,Long>
     @Query(value = "select * from sysauth where name LIKE ?1",nativeQuery = true)
     List<SysAuth> findChildAuth(String name);
 
-    //根据name删除指定一级功能及其包含的子功能
+    //根据name删除指定的节点及子节点
     @Modifying
     @Query(value = "delete from sysauth where name LIKE ?1",nativeQuery = true)
     void deleteByName(String name);
+
+    //根据指定的节点id,查询对应的节点信息
+    SysAuth findById(int id);
+
+    //节点的名称，查询对应的节点信息
+    SysAuth findByName(String name);
 }

@@ -83,12 +83,20 @@ public class ControllerRoleAuth
         return serviceSysAuth.findAllModule();
     }
 
-    //删除指定的一级功能模块及其所辖子功能模块
+    //根据name删除指定的节点及子节点
     @PostMapping("/deleteByName")
     @ResponseBody
     public String deleteByName(@RequestParam String name)
     {
         serviceSysAuth.deleteByName(name);
         return "OK";
+    }
+
+    //保存子节点（需要判断是否有重复，如果没有重复,保存信息）
+    @PostMapping("/saveChildAuth")
+    @ResponseBody
+    public String saveChildAuth(@RequestParam int id,String name)
+    {
+        return serviceSysAuth.saveChildAuth(id,name);
     }
 }
