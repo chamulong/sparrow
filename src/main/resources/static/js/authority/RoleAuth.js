@@ -171,7 +171,7 @@ require(
                             //在当前节点下增加子节点
                             $("#plus"+id).click(function(){
 
-                                var authname=$("#nowname"+id).val();
+                                var authname=$("#nowname").val();
                                 if(authname=="无")
                                 {
                                     alert("请先点击相应的节点，再进行操作！");
@@ -193,7 +193,35 @@ require(
 
                             //删除当前节点（如果有子节点则一并删除）
                             $("#minus"+id).click(function(){
-                                //alert($("#nowid"+id).val()+";"+$("#nowpid"+id).val()+";"+$("#nowname"+id).val());
+                                var authname=$("#nowname").val();
+                                var id=$("#nowid").val();
+                                if(authname=="无")
+                                {
+                                    alert("请先点击相应的节点，再进行操作！");
+                                    return;
+                                }
+
+                                parent.layer.confirm('是否删除节点【'+authname+'】？',{
+                                    icon: 0,
+                                    btn:['取 消','确 定']
+                                },function(index){
+                                    parent.layer.close(index);
+                                },function(index){
+                                    $.ajax({
+                                        url:'/roleauth/deleteByChild',
+                                        type:'post',
+                                        data:{id:id},
+                                        async:true,//true为异步，false为同步
+                                        success:function(){
+                                            $("#nowid").val("无");
+                                            $("#nowpid").val("无");
+                                            $("#nowname").val("无");
+                                            window.location.reload();
+                                        }
+
+                                    });
+                                });
+
                             });
                         }
 

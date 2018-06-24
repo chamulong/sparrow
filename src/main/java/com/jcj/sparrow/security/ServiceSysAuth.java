@@ -25,18 +25,35 @@ public class ServiceSysAuth
 
     public void save(SysAuth sysAuth){repoSysAuth.save(sysAuth);}
 
-    //根据父节点的id，获取其直接子节点的最大id
+    //根据父节点的id，获取其子节点的最大id
     public int findMaxId(int pid)
     {
         //判断是否有子节点
+        List<SysAuth> sysAuths=repoSysAuth.findAllChildByPid(pid);
+        if(sysAuths.size()==0)//没有子节点
+        {
+            int intNewId=pid*10+1;
+            return intNewId;
+        }
+        else//有子节点
+        {
+            return repoSysAuth.findMaxId(pid)+1;
+        }
 
-
-        return repoSysAuth.findMaxId(pid);
     }
 
     //根据name删除指定的节点及子节点
     @Transactional
     public void deleteByName(String name){repoSysAuth.deleteByName(name+"%");}
+
+    //根据节点的id删除节点及子节点
+    @Transactional
+    public void deleteByChild(int id)
+    {
+        SysAuth sysAuth=repoSysAuth.findById(id);
+        repoSysAuth.deleteByName(sysAuth.getName()+"%");
+    }
+
 
     //查询所有权限明细(为多个权限树提供数据)
     public Map<String,List<ztree>> findAllModule()
@@ -83,10 +100,7 @@ public class ServiceSysAuth
             SysAuth newAuth=new SysAuth();
             newAuth.setName(strChildName);
             newAuth.setPid(id);
-
-            int newid=findMaxId(id);
-            System.out.println("newid:"+newid);
-
+            System.out.println("id:"+findMaxId(id));
             newAuth.setId(findMaxId(id));
             newAuth.setTreename(childname);
             repoSysAuth.save(newAuth);

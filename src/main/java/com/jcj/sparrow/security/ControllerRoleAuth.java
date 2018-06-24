@@ -67,7 +67,7 @@ public class ControllerRoleAuth
     public String saveMainAuth(SysAuth sysAuth)
     {
         sysAuth.setPid(0);
-        int newId=serviceSysAuth.findMaxId(0)+1;
+        int newId=serviceSysAuth.findMaxId(0);
         sysAuth.setId(newId);
         sysAuth.setTreename(sysAuth.getName());
         serviceSysAuth.save(sysAuth);
@@ -89,6 +89,15 @@ public class ControllerRoleAuth
     public String deleteByName(@RequestParam String name)
     {
         serviceSysAuth.deleteByName(name);
+        return "OK";
+    }
+
+    //根据节点的id删除节点及子节点
+    @PostMapping("/deleteByChild")
+    @ResponseBody
+    public String deleteByChild(@RequestParam int id)
+    {
+        serviceSysAuth.deleteByChild(id);
         return "OK";
     }
 
