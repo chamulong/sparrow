@@ -108,4 +108,13 @@ public class ControllerRoleAuth
     {
         return serviceSysAuth.saveChildAuth(id,name);
     }
+
+    //保存角色对应的权限信息,,其中‘authinfo’是以$分割的节点id字符串
+    @PostMapping("/editRole")
+    @ResponseBody
+    public String editRole(@RequestParam String uuid,String authinfo)
+    {
+        serviceSysRole.editRole(uuid,authinfo);
+        return "OK";
+    }
 }

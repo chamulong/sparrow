@@ -152,6 +152,8 @@ require(
                 }
 
 
+                var arrModuleID=new Array();//用于记录全部树的id
+
                 //加载权限明细树
                 $.ajax({
                     url:'/roleauth/listAuth',
@@ -160,10 +162,12 @@ require(
                     async:true,//true为异步，false为同步
                     success:function(map){
                         var m=0;
+                        arrModuleID=new Array();
                         for(var key in map)
                         {
-                            m++;
                             var id="model"+m;
+                            arrModuleID[m]=id;
+
                             var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                             $("#allAuthbody").append(str);
                             $.fn.zTree.init($("#"+id), setting, map[key]);
@@ -223,11 +227,57 @@ require(
                                 });
 
                             });
+
+                            m++;
                         }
 
                     }
 
                 });
+
+
+                //保存相应权限勾选的权限
+                $("#btn_saveRoleAuth").click(function(){
+                    var seluuid=$('input:radio[name="radiorole"]:checked').val();
+                    if(seluuid==null)
+                    {
+                        alert("请先选中对应的角色");
+                        return;
+                    }
+
+                    var arrAuths=new Array()//存放勾选的所有权限id的数组
+                    var m=0;
+                    for(var i=0,num=arrModuleID.length;i<num;i++)
+                    {
+                        var zTreeObj = $.fn.zTree.getZTreeObj(arrModuleID[i]);
+                        var checkedNodes = zTreeObj.getCheckedNodes();
+                        for(var j=0,len=checkedNodes.length;j<len;j++)
+                        {
+                            arrAuths[m]=checkedNodes[j].id;
+                            m++;
+                        }
+                    }
+
+                    var strAuths=arrAuths.join('$');//转换成以'$'分割的字符串
+
+                    //把角色对应的所有权限映射进行保存
+                    $.ajax({
+                        url:'/roleauth/editRole',
+                        type:'post',
+                        data:{uuid:seluuid,authinfo:strAuths},
+                        async:true,//true为异步，false为同步
+                        success:function(){
+                            alert("角色对应的权限分配成功！");
+                        }
+
+                    });
+
+
+                });
+
+
+
+
 
 
                 //自定义功能块，EndRegion

@@ -14,4 +14,7 @@ public interface RepoSysRole  extends JpaRepository<SysRole,Long>
     @Modifying
     @Query(value = "delete from sysrole where uuid=?1",nativeQuery = true)
     void deleteByUuid(String uuid);
+
+    //根据uuid查找角色角色信息
+    SysRole findByUuid(String uuid);
 }
