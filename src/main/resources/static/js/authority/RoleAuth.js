@@ -128,113 +128,129 @@ require(
 
                 });
 
-                //加载权限树
-                var setting = {
-                    check: {
-                        enable: true
-                    },
-                    data: {
-                        simpleData: {
-                            enable: true
-                        }
-                    },
-                    callback:{
-                        onClick: onClick
-                    }
-                };
-
-                //节点单击事件，获取节点的相关信息，并赋值给统一的隐藏表单
-                function onClick(event, treeId, treeNode, clickFlag)
-                {
-                    $("#nowid").val(treeNode.id);
-                    $("#nowpid").val(treeNode.pId);//当前节点为根节点时，该值为空
-                    $("#nowname").val(treeNode.name);
-                }
-
 
                 var arrModuleID=new Array();//用于记录全部树的id
 
-                //加载权限明细树
-                $.ajax({
-                    url:'/roleauth/listAuth',
-                    type:'post',
-                    datatype:'json',
-                    async:true,//true为异步，false为同步
-                    success:function(map){
-                        var m=0;
-                        arrModuleID=new Array();
-                        for(var key in map)
-                        {
-                            var id="model"+m;
-                            arrModuleID[m]=id;
+                //加载权限树
+                function showAuthTree()
+                {
+                    //清空系统权限模块页面内容
+                    $("#allAuthbody").html("");
 
-                            var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
-                            $("#allAuthbody").append(str);
-                            $.fn.zTree.init($("#"+id), setting, map[key]);
-
-                            //在当前节点下增加子节点
-                            $("#plus"+id).click(function(){
-
-                                var authname=$("#nowname").val();
-                                if(authname=="无")
-                                {
-                                    alert("请先点击相应的节点，再进行操作！");
-                                    return;
-                                }
-
-                                layer.open({
-                                    type: 1,
-                                    title: '增加【'+authname+'】的子节点',
-                                    shadeClose: true,
-                                    shade: 0.2,
-                                    maxmin: false,
-                                    skin: 'layui-layer-molv', //加上边框
-                                    area: ['320px', '190px'], //宽高
-                                    content: $('#addauthdiv')
-                                });
-
-                            });
-
-                            //删除当前节点（如果有子节点则一并删除）
-                            $("#minus"+id).click(function(){
-                                var authname=$("#nowname").val();
-                                var id=$("#nowid").val();
-                                if(authname=="无")
-                                {
-                                    alert("请先点击相应的节点，再进行操作！");
-                                    return;
-                                }
-
-                                parent.layer.confirm('是否删除节点【'+authname+'】？',{
-                                    icon: 0,
-                                    btn:['取 消','确 定']
-                                },function(index){
-                                    parent.layer.close(index);
-                                },function(index){
-                                    $.ajax({
-                                        url:'/roleauth/deleteByChild',
-                                        type:'post',
-                                        data:{id:id},
-                                        async:true,//true为异步，false为同步
-                                        success:function(){
-                                            $("#nowid").val("无");
-                                            $("#nowpid").val("无");
-                                            $("#nowname").val("无");
-                                            window.location.reload();
-                                        }
-
-                                    });
-                                });
-
-                            });
-
-                            m++;
-                        }
-
+                    //获取对应的角色
+                    var seluuid=$('input:radio[name="radiorole"]:checked').val();
+                    if(seluuid==null)//如果没有选中任何角色，则赋一个默认值
+                    {
+                        seluuid="nouuid";
                     }
 
-                });
+                    //ztree参数设置
+                    var setting = {
+                        check: {
+                            enable: true
+                        },
+                        data: {
+                            simpleData: {
+                                enable: true
+                            }
+                        },
+                        callback:{
+                            onClick: onClick
+                        }
+                    };
 
+                    //节点单击事件，获取节点的相关信息，并赋值给统一的隐藏表单
+                    function onClick(event, treeId, treeNode, clickFlag)
+                    {
+                        $("#nowid").val(treeNode.id);
+                        $("#nowpid").val(treeNode.pId);//当前节点为根节点时，该值为空
+                        $("#nowname").val(treeNode.name);
+                    }
+
+                    //加载权限明细树
+                    $.ajax({
+                        url:'/roleauth/listAuth',
+                        type:'post',
+                        datatype:'json',
+                        data:{roleuuid:seluuid},
+                        async:true,//true为异步，false为同步
+                        success:function(map){
+                            var m=0;
+                            arrModuleID=new Array();
+                            for(var key in map)
+                            {
+                                var id="model"+m;
+                                arrModuleID[m]=id;
+
+                                var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                $("#allAuthbody").append(str);
+                                $.fn.zTree.init($("#"+id), setting, map[key]);
+
+                                //在当前节点下增加子节点
+                                $("#plus"+id).click(function(){
+
+                                    var authname=$("#nowname").val();
+                                    if(authname=="无")
+                                    {
+                                        alert("请先点击相应的节点，再进行操作！");
+                                        return;
+                                    }
+
+                                    layer.open({
+                                        type: 1,
+                                        title: '增加【'+authname+'】的子节点',
+                                        shadeClose: true,
+                                        shade: 0.2,
+                                        maxmin: false,
+                                        skin: 'layui-layer-molv', //加上边框
+                                        area: ['320px', '190px'], //宽高
+                                        content: $('#addauthdiv')
+                                    });
+
+                                });
+
+                                //删除当前节点（如果有子节点则一并删除）
+                                $("#minus"+id).click(function(){
+                                    var authname=$("#nowname").val();
+                                    var id=$("#nowid").val();
+                                    if(authname=="无")
+                                    {
+                                        alert("请先点击相应的节点，再进行操作！");
+                                        return;
+                                    }
+
+                                    parent.layer.confirm('是否删除节点【'+authname+'】？',{
+                                        icon: 0,
+                                        btn:['取 消','确 定']
+                                    },function(index){
+                                        parent.layer.close(index);
+                                    },function(index){
+                                        $.ajax({
+                                            url:'/roleauth/deleteByChild',
+                                            type:'post',
+                                            data:{id:id},
+                                            async:true,//true为异步，false为同步
+                                            success:function(){
+                                                $("#nowid").val("无");
+                                                $("#nowpid").val("无");
+                                                $("#nowname").val("无");
+                                                window.location.reload();
+                                            }
+
+                                        });
+                                    });
+
+                                });
+
+                                m++;
+                            }
+
+                        }
+
+                    });
+                }
+
+                showAuthTree();
 
                 //保存相应权限勾选的权限
                 $("#btn_saveRoleAuth").click(function(){

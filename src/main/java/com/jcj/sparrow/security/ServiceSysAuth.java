@@ -54,9 +54,8 @@ public class ServiceSysAuth
         repoSysAuth.deleteByName(sysAuth.getName()+"%");
     }
 
-
     //查询所有权限明细(为多个权限树提供数据)
-    public Map<String,List<ztree>> findAllModule()
+    public Map<String,List<ztree>> findAllModule(String uuid)
     {
         Map<String,List<ztree>> map=new HashMap<String,List<ztree>>();
 
@@ -122,6 +121,7 @@ public class ServiceSysAuth
         public int pId;
         public String name;
         public boolean open;
+        public boolean checked;
     }
 
 
