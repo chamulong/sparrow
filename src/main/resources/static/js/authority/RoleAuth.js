@@ -128,10 +128,15 @@ require(
 
                 });
 
+                //角色勾选状态变化后，重新加载权限树
+                $('input:radio[name="radiorole"]').change( function(){
+                    showAuthTree();
+                })
+
 
                 var arrModuleID=new Array();//用于记录全部树的id
 
-                //加载权限树
+                //******加载权限树 Start******
                 function showAuthTree()
                 {
                     //清空系统权限模块页面内容
@@ -147,7 +152,8 @@ require(
                     //ztree参数设置
                     var setting = {
                         check: {
-                            enable: true
+                            enable: true,
+                            chkboxType: {"Y":"p","N":"ps"}
                         },
                         data: {
                             simpleData: {
@@ -249,6 +255,8 @@ require(
 
                     });
                 }
+                //******加载权限树 End******
+
 
                 showAuthTree();
 

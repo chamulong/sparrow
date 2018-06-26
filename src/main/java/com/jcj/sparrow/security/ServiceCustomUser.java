@@ -31,8 +31,10 @@ public class ServiceCustomUser  implements UserDetailsService
     private UserinfoRepo userinfoRepo;
 
     @Autowired
-    private HttpSession session;
+    private RepoSysAuth repoSysAuth;
 
+    @Autowired
+    private HttpSession session;
 
     @Override
     public UserDetails loadUserByUsername(String username)
@@ -50,13 +52,31 @@ public class ServiceCustomUser  implements UserDetailsService
 
         //获取用户全部的权限
         List<SysAuth> sysAuths=new ArrayList<SysAuth>();
-        for (SysRole sysRole:sysUser.getSysRoles())
+
+        //判断用户对应的角色是否是‘超级管理员’，如果是直接获取全部的权限
+        List<SysRole> list=sysUser.getSysRoles();
+        if(list.get(0).getName().equals("超级管理员"))
         {
-            for (SysAuth sysAuth:sysRole.getSysAuths())
+            List<SysAuth> listAuth=repoSysAuth.findAll();
+            for (SysAuth sysAuth:listAuth)
             {
                 sysAuths.add(sysAuth);
             }
         }
+        else
+        {
+            for (SysRole sysRole:sysUser.getSysRoles())
+            {
+                for (SysAuth sysAuth:sysRole.getSysAuths())
+                {
+                    sysAuths.add(sysAuth);
+                }
+            }
+        }
+
+
+
+
 
         //将权限信息添加到GrantedAuthority对象中，在后面进行权限验证时会使用GrantedAuthority对象
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

@@ -24,7 +24,11 @@ public class ServiceSysRole
     public List<SysRole> findAll(){return repoSysRole.findAll();}
 
     @Transactional
-    public void deleteByUuid(String uuid){repoSysRole.deleteByUuid(uuid);}
+    public void deleteByUuid(String uuid)
+    {
+        repoSysRole.deleteByUuid(uuid);
+        repoSysRole.deleteMaptabByUuid(uuid);
+    }
 
     public void save(SysRole sysRole){repoSysRole.save(sysRole);}
 

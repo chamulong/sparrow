@@ -21,6 +21,9 @@ public class ServiceSysAuth
     @Autowired
     private RepoSysAuth repoSysAuth;
 
+    @Autowired
+    private RepoSysRole repoSysRole;
+
     public List<SysAuth> findMainAuth(){return repoSysAuth.findMainAuth();}
 
     public void save(SysAuth sysAuth){repoSysAuth.save(sysAuth);}
@@ -59,19 +62,37 @@ public class ServiceSysAuth
     {
         Map<String,List<ztree>> map=new HashMap<String,List<ztree>>();
 
+        SysRole sysRole=repoSysRole.findByUuid(uuid);//根据角色uuid获取角色对应的权限
+
         List<SysAuth> sysAuths=findMainAuth();
         for (SysAuth sysAuth:sysAuths)
         {
-           String name=sysAuth.getName();
+            String name=sysAuth.getName();
            List<SysAuth> list=repoSysAuth.findChildAuth(name+"%");
            List<ztree> listztree=new ArrayList<ztree>();
             for (SysAuth s:list)
             {
+                //遍历角色对应的权限，比较是否在全部权限之中（在其中时，则勾选属性为true）
+                boolean blChecked=false;
+                if(!uuid.equals("nouuid"))
+                {
+                    String strRoleAuthName=s.getName();
+                    for(SysAuth all_s:sysRole.getSysAuths())
+                    {
+                        if(all_s.getName().equals(strRoleAuthName))
+                        {
+                            blChecked=true;
+                            break;
+                        }
+                    }
+                }
+
                 ztree z=new ztree();
                 z.id=s.getId();
                 z.pId=s.getPid();
                 z.name=s.getTreename();
                 z.open=true;
+                z.checked=blChecked;
                 listztree.add(z);
             }
 

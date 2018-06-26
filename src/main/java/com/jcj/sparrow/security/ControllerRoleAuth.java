@@ -78,9 +78,9 @@ public class ControllerRoleAuth
     //获取全部的权限明细，用于分组树形展示和编辑
     @RequestMapping("/listAuth")
     @ResponseBody
-    public Map<String,List<ServiceSysAuth.ztree>> listAuth(@RequestParam String uuid)
+    public Map<String,List<ServiceSysAuth.ztree>> listAuth(@RequestParam String roleuuid)
     {
-        return serviceSysAuth.findAllModule(uuid);
+        return serviceSysAuth.findAllModule(roleuuid);
     }
 
     //根据name删除指定的节点及子节点

@@ -17,4 +17,9 @@ public interface RepoSysRole  extends JpaRepository<SysRole,Long>
 
     //根据uuid查找角色角色信息
     SysRole findByUuid(String uuid);
+
+    //删除角色权限关联表中角色对应的记录
+    @Modifying
+    @Query(value = "delete from sysrole_sys_auths where sys_role_uuid=?1",nativeQuery = true)
+    void deleteMaptabByUuid(String uuid);
 }
