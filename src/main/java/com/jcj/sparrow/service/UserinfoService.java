@@ -2,6 +2,8 @@ package com.jcj.sparrow.service;
 
 import com.jcj.sparrow.domain.UserInfo;
 import com.jcj.sparrow.repository.UserinfoRepo;
+import com.jcj.sparrow.security.ServiceSysRole;
+import com.jcj.sparrow.security.SysRole;
 import com.jcj.sparrow.security.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,9 @@ public class UserinfoService
     @Autowired
     private UserinfoRepo userinfoRepo;
 
+    @Autowired
+    private ServiceSysRole serviceSysRole;
+
     public void save(UserInfo userInfo)
     {
         userInfo.setStatus("启用");//用户的默认状态是启用
@@ -41,6 +46,12 @@ public class UserinfoService
         sysUser.setUsername(userInfo.getUsername());
         sysUser.setPassword(hashedPassword);
         sysUser.setProjectname("sparrow");
+        //根据roleuuid，得到角色信息
+        SysRole sysRole=serviceSysRole.findByUuid(userInfo.getRoleuuid());
+        List<SysRole> list=new ArrayList<SysRole>();
+        list.add(sysRole);
+        sysUser.setSysRoles(list);
+
         userInfo.setSysUser(sysUser);
 
         userInfo.setPassword(hashedPassword);

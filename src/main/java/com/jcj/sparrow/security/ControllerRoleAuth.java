@@ -27,11 +27,21 @@ public class ControllerRoleAuth
     @Autowired
     private  ServiceSysAuth serviceSysAuth;
 
-    //查询全部的角色
+    //查询全部的角色(填充添加用户中的下拉列表)
+    @RequestMapping("/roles")
+    @ResponseBody
+    public List<SysRole> findRoles()
+    {
+        List<SysRole> list=serviceSysRole.findRolesNoAdmin();
+        return list;
+    }
+
+
+    //查询全部的角色(跳转到模板)
     @RequestMapping("/listrole")
     public String findAllRole(Model model)
     {
-        List<SysRole> list=serviceSysRole.findAll();
+        List<SysRole> list=serviceSysRole.findRolesNoAdmin();
         model.addAttribute("sysroles",list);
         return "/authority/listRoleAuth";
     }

@@ -7,7 +7,24 @@ require(
         requirejs(
             ['jquery','bootstrap','jqueryform','layer','jqueryupload'],
             function($){
-                //自定义功能块 region
+                //*****自定义功能块 region*****
+
+                //从后台获取角色，自动填充到下拉表单
+                $.ajax({
+                    url:'/roleauth/roles',
+                    type:'post',
+                    async:true,//true为异步，false为同步
+                    success:function(data){
+                        var options = '';
+                        for (var i = 0; i <data.length; i++)
+                        {
+                            options += '<option value="' + data[i].uuid + '">' + data[i].name + '</option>';
+                        }
+                        $("#roleuuid").html(options);
+                    }
+
+                });
+
 
                 //文件上传
                 $("#case").upload();
@@ -28,6 +45,6 @@ require(
                     };
                     $('#FormUserInfo').ajaxSubmit(options);
                 });
-                //自定义功能块 EndRegion
+                //*****自定义功能块 EndRegion*****
             });
     });

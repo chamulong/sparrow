@@ -66,6 +66,9 @@ public class UserInfo
     @Column(length = 10)
     private String status;
 
+    @Column(length = 32)
+    private String roleuuid;
+
     @OneToOne(targetEntity = SysUser.class,cascade =CascadeType.ALL)
     @JoinColumn(name = "sysuser_id",referencedColumnName = "uuid")
     private SysUser sysUser;
@@ -208,4 +211,8 @@ public class UserInfo
     {
         this.mobile = mobile;
     }
+
+    public String getRoleuuid() {return roleuuid;}
+
+    public void setRoleuuid(String roleuuid) {this.roleuuid = roleuuid;}
 }

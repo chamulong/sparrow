@@ -21,7 +21,17 @@ public class ServiceSysRole
     @Autowired
     private RepoSysAuth repoSysAuth;
 
-    public List<SysRole> findAll(){return repoSysRole.findAll();}
+    //根据UUID，查找角色信息
+    public SysRole findByUuid(String uuid)
+    {
+        return repoSysRole.findByUuid(uuid);
+    }
+
+    //查询所有的角色，‘超级管理员除外’
+    public List<SysRole> findRolesNoAdmin()
+    {
+        return repoSysRole.findRolesNoAdmin();
+    }
 
     @Transactional
     public void deleteByUuid(String uuid)
@@ -30,6 +40,10 @@ public class ServiceSysRole
         repoSysRole.deleteMaptabByUuid(uuid);
     }
 
+
+
+
+    //保存用户信息（包括对应的）
     public void save(SysRole sysRole){repoSysRole.save(sysRole);}
 
     //给选定的角色赋予权限,其中‘authsinfo’是以$分割的节点id字符串
