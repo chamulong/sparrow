@@ -43,41 +43,40 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#">
+                        <a sec:authorize="hasAuthority('部门及人员')" href="#">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">部门及人员</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level collapse in">
-                            <li>
+                            <li sec:authorize="hasAuthority('部门及人员_信息总览')">
                                 <a class="J_menuItem" href="/main.html" data-index="0">信息总览</a>
                             </li>
-                            <li sec:authorize="hasAuthority('部门信息')">
+                            <li sec:authorize="hasAuthority('部门及人员_部门信息')">
                                 <a class="J_menuItem" th:href="@{department/PageDepartments}">部门信息</a>
                             </li>
-                            <li sec:authorize="hasAuthority('成员信息')">
+                            <li sec:authorize="hasAuthority('部门及人员_成员信息')">
                                 <a class="J_menuItem" th:href="@{/listuserinfo}">成员信息</a>
                             </li>
                         </ul>
-
                     </li>
                     <li>
-                        <a href="#">
+                        <a sec:authorize="hasAuthority('系统管理')" href="#">
                             <i class="fa fa fa-bar-chart-o"></i>
                             <span class="nav-label">系统管理</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level collapse in">
-                            <li>
+                            <li sec:authorize="hasAuthority('系统管理_角色权限')">
                                 <a class="J_menuItem" th:href="@{/roleauth/listrole}">角色权限</a>
                             </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_flot.html">员工统计</a>
+                            <li sec:authorize="hasAuthority('系统管理_Druid数据分析')">
+                                <a class="J_menuItem" href="http://localhost:8080/druid/">Druid数据源分析</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a>
+                        <a class="J_menuItem" href="css_animation.html"><i class="fa fa-magic"></i> <span class="nav-label">业务报表</span></a>
                     </li>
                 </ul>
             </div>

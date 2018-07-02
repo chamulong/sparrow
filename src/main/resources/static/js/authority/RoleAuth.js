@@ -134,9 +134,17 @@ require(
                 })
 
 
+                //******加载权限树 Start******
+
                 var arrModuleID=new Array();//用于记录全部树的id
 
-                //******加载权限树 Start******
+                //判断行详情和行删除按钮是否存在，用于处理是否显示对应的按钮
+                var blmodulAuth_add=true;
+                var blmodulAuth_delete=true;
+                if($("#modulAuth_add").length>0){blmodulAuth_add=true;}else{blmodulAuth_add=false;}
+                if($("#modulAuth_delete").length>0){blmodulAuth_delete=true;}else{blmodulAuth_delete=false;}
+
+
                 function showAuthTree()
                 {
                     //清空系统权限模块页面内容
@@ -187,6 +195,11 @@ require(
                             {
                                 var id="model"+m;
                                 arrModuleID[m]=id;
+                                var btnInfo='';
+                                if(blmodulAuth_add)
+                                {
+                                    btnInfo+=
+                                }
 
                                 var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                 $("#allAuthbody").append(str);

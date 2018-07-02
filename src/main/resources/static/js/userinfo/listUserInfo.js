@@ -19,6 +19,12 @@ require(
                     }
                 };
 
+                //判断行详情和行删除按钮是否存在，用于处理是否显示对应的按钮
+                var blRowDetail=true;
+                var blRowDelete=true;
+                if($("#rowdetail").length>0){blRowDetail=true;}else{blRowDetail=false;}
+                if($("#rowdelete").length>0){blRowDelete=true;}else{blRowDelete=false;}
+
                 //数据列表展示
                 $('#tb_UserInfos').bootstrapTable({
                     url: '/userinfo/list',         //请求后台的URL（*）
@@ -103,10 +109,17 @@ require(
                         title:'操 作',
                         events:operateEvents,
                         formatter:function (value, row, index){
-                            return[
-                                '<button style="margin-right: 10px" type="button" class="detail btn btn-outline btn-info btn-sm">详 情</button>',
-                                '<button style="margin-right: 10px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>'
-                            ].join('');
+                            var btnInfo='';
+                            if(blRowDetail)
+                            {
+                                btnInfo+='<button style="margin-right: 10px" type="button" class="detail btn btn-outline btn-info btn-sm">详 情</button>';
+                            }
+                            if(blRowDelete)
+                            {
+                                btnInfo+='<button style="margin-right: 10px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                            }
+
+                            return btnInfo;
                         }
                     }]
                 });

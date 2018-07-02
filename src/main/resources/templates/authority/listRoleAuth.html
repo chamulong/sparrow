@@ -43,10 +43,10 @@
             <div class="row">
                 <div class="col-md-6 text-left"><h4>系统角色</h4></div>
                 <div class="col-md-6 text-right">
-                    <button style="margin-right: 10px" id="btn_addrole" type="button" class="btn btn-outline btn-info btn-sm">
+                    <button sec:authorize="hasAuthority('系统管理_角色权限_新增角色')" style="margin-right: 10px" id="btn_addrole" type="button" class="btn btn-outline btn-info btn-sm">
                         <span class="glyphicon glyphicon-plus"></span> 新增角色
                     </button>
-                    <button style="margin-right: 10px" id="btn_deleterole" type="button" class="btn btn-outline btn-danger btn-sm">
+                    <button sec:authorize="hasAuthority('系统管理_角色权限_删除角色')" style="margin-right: 10px" id="btn_deleterole" type="button" class="btn btn-outline btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove"></span> 删除角色
                     </button>
                 </div>
@@ -68,10 +68,10 @@
                     <input  id="nowname" type="hidden" value="无">
                 </div>
                 <div class="col-md-6 text-right">
-                    <button style="margin-right: 10px" id="btn_managermainfun" type="button" class="btn btn-outline btn-info btn-sm">
+                    <button sec:authorize="hasAuthority('系统管理_角色权限_管理一级功能')" style="margin-right: 10px" id="btn_managermainfun" type="button" class="btn btn-outline btn-info btn-sm">
                         <span clazss="glyphicon glyphicon-pencil"></span> 管理一级功能
                     </button>
-                    <button style="margin-right: 10px" id="btn_saveRoleAuth" type="button" class="btn btn-outline btn-warning btn-sm">
+                    <button sec:authorize="hasAuthority('系统管理_角色权限_保存设置')" style="margin-right: 10px" id="btn_saveRoleAuth" type="button" class="btn btn-outline btn-warning btn-sm">
                         <span class="glyphicon glyphicon-floppy-disk"></span> 保存设置
                     </button>
                 </div>
@@ -84,6 +84,11 @@
 
         </div>
     </div>
+
+    <!--隐藏元素，对应页面中的添加和删除权限元素-->
+    <span id="modulAuth_add" sec:authorize="hasAuthority('系统管理_角色权限_新增权限')" style="display: none"></span>
+    <span id="modulAuth_delete" sec:authorize="hasAuthority('系统管理_角色权限_删除权限')" style="display: none"></span>
+
 
 </div>
 
