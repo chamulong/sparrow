@@ -196,12 +196,16 @@ require(
                                 var id="model"+m;
                                 arrModuleID[m]=id;
                                 var btnInfo='';
-                                if(blmodulAuth_add)
+                                if(blmodulAuth_add)//根据权限要求动态添加‘添加按钮’
                                 {
-                                    btnInfo+=
+                                    btnInfo+=' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button>';
+                                }
+                                if(blmodulAuth_delete)//根据权限要求动态添加‘删除按钮’
+                                {
+                                    btnInfo+='<button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button>';
                                 }
 
-                                var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+' <button id="plus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-plus-square"></i></button><button id="minus'+id+'" class="btn btn-warning btn-xs pull-right" type="button"><i class="fa fa-minus-square"></i></button></div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
+                                var str = $('<div class="col-md-3"><div class="panel panel-info" style="height:400px;overflow:auto"><div class="panel-heading">'+key+btnInfo+'</div><div class="panel-body" style="padding:2px"><div class="panel ztree" id="'+id+'"></div></div></div></div>');
                                 $("#allAuthbody").append(str);
                                 $.fn.zTree.init($("#"+id), setting, map[key]);
 
