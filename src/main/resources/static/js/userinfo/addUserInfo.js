@@ -74,7 +74,7 @@ require(
                                         },*/
                                         regexp: {
                                             regexp: /^[a-zA-Z0-9_\.]+$/,
-                                            message: '账号为以字母开头，可包含数字'
+                                            message: '账号以字母开头，可包含数字'
                                         }
                                     }
                                 },
@@ -91,7 +91,16 @@ require(
                                 password: {
                                     validators: {
                                         notEmpty: {
-                                            message: 'The password is required and can\'t be empty'
+                                            message: '密码不能为空'
+                                        },
+                                        stringLength: {
+                                            min: 8,
+                                            max: 100,
+                                            message: '密码长度在8-100个字符范围内'
+                                        },
+                                        regexp: {
+                                            regexp: /^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$/,
+                                            message: '密码必须同时包含字符和数字'
                                         }
                                     }
                                 }
