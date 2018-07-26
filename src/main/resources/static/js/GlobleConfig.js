@@ -13,7 +13,8 @@ require.config({
         layer:['/lib/layer/layer.min'],
         jqueryform:['/lib/Hplus/js/jquery.form.min'],
         jqueryupload:'/lib/jQuery.upload.min',
-        ztree:'/lib/zTree3/js/jquery.ztree.all.min'
+        ztree:'/lib/zTree3/js/jquery.ztree.all.min',
+        validator:'/lib/bootstrapvalidator/js/bootstrapValidator'
     },
     shim:{
         bootstrap:{
@@ -51,6 +52,9 @@ require.config({
         },
         ztree:{
             deps:['jquery','css!/lib/zTree3/css/zTreeStyle/zTreeStyle.css']
+        },
+        validator:{
+            deps:['jquery','bootstrap','css!/lib/bootstrapvalidator/css/bootstrapValidator.css']
         }
     },
     map:{

@@ -5,7 +5,7 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','jqueryform','layer','jqueryupload'],
+            ['jquery','bootstrap','jqueryform','layer','jqueryupload','validator'],
             function($){
                 //*****自定义功能块 region*****
 
@@ -45,6 +45,63 @@ require(
                     };
                     $('#FormUserInfo').ajaxSubmit(options);
                 });
+
+                //利用bootstrapvalidator进行表单验证
+                $(document).ready(function(){
+                    $('#FormUserInfo')
+                        .bootstrapValidator({
+                            message: '输入的值无效',
+                            feedbackIcons: {
+                                valid: 'glyphicon glyphicon-ok',
+                                invalid: 'glyphicon glyphicon-remove',
+                                validating: 'glyphicon glyphicon-refresh'
+                            },
+                            fields: {
+                                username: {
+                                    message: '账号名无效',
+                                    validators: {
+                                        notEmpty: {
+                                            message: '账号不能为空'
+                                        },
+                                        stringLength: {
+                                            min: 2,
+                                            max: 20,
+                                            message: '账号长度在2-20个字符范围内'
+                                        },
+                                        /*remote: {
+                                            url: 'remote.php',
+                                            message: 'The username is not available'
+                                        },*/
+                                        regexp: {
+                                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                                            message: '账号为以字母开头，可包含数字'
+                                        }
+                                    }
+                                },
+                                email: {
+                                    validators: {
+                                        notEmpty: {
+                                            message: '邮箱不能为空'
+                                        },
+                                        emailAddress: {
+                                            message: '邮箱格式不正确'
+                                        }
+                                    }
+                                },
+                                password: {
+                                    validators: {
+                                        notEmpty: {
+                                            message: 'The password is required and can\'t be empty'
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                });
+
+
+
+
                 //*****自定义功能块 EndRegion*****
             });
     });
