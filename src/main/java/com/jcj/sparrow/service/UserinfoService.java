@@ -106,5 +106,29 @@ public class UserinfoService
 
     }
 
+    //检查用户名的唯一性,如果用户已经存在，返回false，否则返回true
+    public boolean validateUsername(String username)
+    {
+        int intCount=userinfoRepo.validateUsername(username);
+        if(intCount==0){return true;}
+        else{return false;}
+    }
+
+    //检查手机号码的唯一性,如果手机号码已经存在，返回false，否则返回true
+    public boolean validateMobile(String mobile)
+    {
+        int intCount=userinfoRepo.validateMobile(mobile);
+        if(intCount==0){return true;}
+        else{return false;}
+    }
+
+    //检查邮箱号的唯一性,如果邮箱号已经存在，返回false，否则返回true
+    public boolean validateEmail(String email)
+    {
+        int intCount=userinfoRepo.validateEmail(email);
+        if(intCount==0){return true;}
+        else{return false;}
+    }
+
 }
 

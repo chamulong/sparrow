@@ -32,4 +32,16 @@ public interface UserinfoRepo extends JpaRepository<UserInfo,Long>,JpaSpecificat
 
     //使用SpringDataJPA方法定义查询,根据用户名/邮件/手机号，查询用户信息
     UserInfo findByUsernameOrEmailOrMobile(String username,String email,String mobile);
+
+    //查询对应的账号名称是否存在（服务层用于唯一性验证）
+    @Query(value = "select count(*) from userinfo where username=?1",nativeQuery = true)
+    int validateUsername(String username);
+
+    //查询对应的手机号码是否存在（服务层用于唯一性验证）
+    @Query(value = "select count(*) from userinfo where mobile=?1",nativeQuery = true)
+    int validateMobile(String mobile);
+
+    //查询对应的邮箱是否存在（服务层用于唯一性验证）
+    @Query(value = "select count(*) from userinfo where email=?1",nativeQuery = true)
+    int validateEmail(String email);
 }
