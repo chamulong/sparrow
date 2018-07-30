@@ -75,6 +75,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- 报表 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.6.0</version> <!-- 可选用最新的版本 -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
