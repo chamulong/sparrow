@@ -76,14 +76,27 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 报表 -->
+		<!-- JasperReport报表 -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.6.0</version> <!-- 可选用最新的版本 -->
+			<version>6.6.0</version>
 		</dependency>
 
-	</dependencies>
+		<!-- JasperReport报表的字体 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.0.1.RELEASE</version>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>

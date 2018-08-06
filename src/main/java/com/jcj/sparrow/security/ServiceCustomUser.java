@@ -39,14 +39,6 @@ public class ServiceCustomUser  implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username)
     {
-        //从session中查找是否存在对应的用户信息
-        UserInfo userInfo_session=(UserInfo)session.getAttribute("userinfo");
-        if(null!=userInfo_session)
-        {
-            username=userInfo_session.getUsername();
-            System.out.println("session:"+username);
-        }
-
         //根据账号名称、邮箱、手机号在后台用户中进行查找，三者中有其一，则进入下面的权限验证流程
         boolean blExist=false;
         UserInfo userInfo=userinfoRepo.findByUsernameOrEmailOrMobile(username,username,username);
