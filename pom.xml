@@ -97,12 +97,6 @@
 			<version>3.10.1</version> <!-- 过高版本会出现导出xls格式失败问题 -->
 		</dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.0.1.RELEASE</version>
-        </dependency>
-
     </dependencies>
 
 	<build>

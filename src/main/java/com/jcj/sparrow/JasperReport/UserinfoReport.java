@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +36,7 @@ public class UserinfoReport
     {
         JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
         Map<String, Object> map = new HashMap<>();
-        JasperExportUtils.exportToHtml("/jaspertemplate/sUserinfoReport.jasper", map, datasource, request, response);
+        JasperExportUtils.exportToHtml("/jaspertemplate/UserinfoReport.jasper", map, datasource, request, response);
 
     }
 }
