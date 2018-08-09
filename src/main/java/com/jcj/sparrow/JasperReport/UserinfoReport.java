@@ -1,5 +1,8 @@
 package com.jcj.sparrow.JasperReport;
 
+import com.jcj.sparrow.domain.Department;
+import com.jcj.sparrow.domain.UserInfo;
+import com.jcj.sparrow.service.DepartmentService;
 import com.jcj.sparrow.service.UserinfoService;
 import com.jcj.sparrow.utils.JasperExportUtils;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +28,7 @@ public class UserinfoReport
 {
     @Autowired
     private UserinfoService userinfoService;
+
 
     /**
      * 向页面输出html页面
@@ -68,7 +73,6 @@ public class UserinfoReport
         JasperExportUtils.exportToXls("/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
 
     }
-
 
 
 }
