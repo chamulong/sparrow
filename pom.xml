@@ -94,7 +94,14 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.10.1</version> <!-- 过高版本会出现导出xls格式失败问题 -->
+			<version>3.17</version>
+		</dependency>
+
+		<!--引入时如果只引poi,则无XSSFWorkbook和SXSSHWorkbook,还需引入下面的jar包，SXSSHWorkbook适用于处理大量数据-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
 		</dependency>
 
     </dependencies>

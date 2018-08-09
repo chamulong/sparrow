@@ -39,4 +39,36 @@ public class UserinfoReport
         JasperExportUtils.exportToHtml("/jaspertemplate/UserinfoReport.jasper", map, datasource, request, response);
 
     }
+
+    /**
+     * 向页面输出PDF报表
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping("/userinforeport_PDF")
+    public void reportPDF(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException, JRException
+    {
+        JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
+        Map<String, Object> map = new HashMap<>();
+        JasperExportUtils.exportToPdf("/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
+
+    }
+
+     /** 向页面输出Excel报表
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping("/userinforeport_xls")
+    public void reportExcel(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException, JRException
+    {
+        JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
+        Map<String, Object> map = new HashMap<>();
+        JasperExportUtils.exportToXls("/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
+
+    }
+
+
+
 }
