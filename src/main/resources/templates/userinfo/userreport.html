@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>用户信息报表</title>
+    <script type="text/javascript" data-main="/js/userinfo/userreport.js" src="/lib/require.js"></script>
+</head>
+<body>
+    <div class="wrapper wrapper-content animated fadeInRight" style="padding: 8px">
+        <!--工具按钮-->
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <button style="margin-right: 10px" id="btn_ExportExcel" type="button" class="btn btn-outline btn-info btn-sm">
+                    <i class="fa fa-file-excel-o"></i> 导出Excel
+                </button>
+                <button style="margin-right: 10px" id="btn_ExportPDF" type="button" class="btn btn-outline btn-danger btn-sm">
+                    <i class="fa fa-file-pdf-o"></i> 导出PDF
+                </button>
+            </div>
+        </div>
+
+        <!--显示报表-->
+        <div id="userinforeport"></div>
+
+    </div>
+</body>
+</html>
