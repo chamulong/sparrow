@@ -33,3 +33,10 @@ spring:
     suffix: .html
   resources:
     static-locations: classpath:/static/,classpath:/templates/
+  mail:
+    default-encoding: UTF-8
+    host: smtp.sina.com
+    password: 760628
+    port: 25
+    protocol: smtp
+    username: chamulong@sina.com
