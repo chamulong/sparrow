@@ -42,18 +42,16 @@ public class UserInfoController
      */
     @RequestMapping("/save")
     @ResponseBody
-    public String saveEmployee(UserInfo userInfo)
+    public String saveUserinfo(UserInfo userInfo)
     {
         userinfoService.save(userInfo);
         return "OK";
     }
 
-    /*
-      批量删除信息
-     */
-    @PostMapping("/delete")
+    //批量删除信息(逻辑删除)
+    @PostMapping("/deleteLogic")
     @ResponseBody
-    public String deleteEmployee(@RequestParam String uuids)
+    public String deleteLogic(@RequestParam String uuids)
     {
         System.out.println("uuids:"+uuids);
         String[] arrUUID=uuids.split("_");
@@ -140,6 +138,15 @@ public class UserInfoController
         JSONObject result = new JSONObject();
         result.put("valid", blStatus);
         return result.toJSONString();
+    }
+
+    //根据UUID删除，物理删除用户信息
+    @PostMapping("/deletePhysics")
+    @ResponseBody
+    public String deletePhysics(String uuid)
+    {
+        userinfoService.delete(uuid);
+        return "OK";
     }
 
 }

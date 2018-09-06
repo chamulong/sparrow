@@ -44,4 +44,7 @@ public interface UserinfoRepo extends JpaRepository<UserInfo,Long>,JpaSpecificat
     //查询对应的邮箱是否存在（服务层用于唯一性验证）
     @Query(value = "select count(*) from userinfo where email=?1",nativeQuery = true)
     int validateEmail(String email);
+
+    //根据用户的uuid查询对应的用户实体
+    UserInfo findByUuid(String uuid);
 }

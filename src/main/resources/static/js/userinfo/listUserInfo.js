@@ -15,7 +15,17 @@ require(
                         alert("姓名:"+row.realname+",index:"+index);
                     },
                     'click .delete':function(e,value,row,index){
-                        alert("value:"+value+",删除");
+                        var uuid=row.uuid;
+                        $.ajax({
+                            url:'/userinfo/deletePhysics',
+                            type:'post',
+                            data:{uuid:uuid},
+                            async:true,//true为异步，false为同步
+                            complete:function(){
+                                $("#tb_UserInfos").bootstrapTable('refresh');
+                            }
+
+                        });
                     }
                 };
 
@@ -162,7 +172,7 @@ require(
                             else{uuids=uuids+"_"+arrData[i].uuid;}
                         }
                         $.ajax({
-                            url:'/userinfo/delete',
+                            url:'/userinfo/deleteLogic',
                             type:'post',
                             data:{uuids:uuids},
                             async:true,//true为异步，false为同步

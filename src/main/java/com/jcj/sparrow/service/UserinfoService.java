@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,8 +60,7 @@ public class UserinfoService
     }
 
     @Transactional
-    public void deleteByUuid(String uuid){
-        userinfoRepo.deleteByUuid(uuid);}
+    public void deleteByUuid(String uuid){userinfoRepo.deleteByUuid(uuid);}
 
     public List<UserInfo> findAll()
     {
@@ -128,6 +128,15 @@ public class UserinfoService
         int intCount=userinfoRepo.validateEmail(email);
         if(intCount==0){return true;}
         else{return false;}
+    }
+
+    //根据用户uuid得到用户实体，根据实体进行用户数据库记录的删除
+    //（不直接根据uuid进行删除，是想通过用户实体配置的关联关系，级联删除权限中的账号信息）
+    @Transactional
+    public void delete(String uuid)
+    {
+        UserInfo userInfo=userinfoRepo.findByUuid(uuid);
+        userinfoRepo.delete(userInfo);
     }
 
 }
