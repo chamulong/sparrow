@@ -92,7 +92,7 @@ public class UserInfoController
 
 
         Sort sort=new Sort(Sort.Direction.DESC,"birthdate");
-        Page<UserInfo> pageinfo=userinfoService.queryDynamic(reqMap,new PageRequest(page,size,sort));
+        Page<UserInfo> pageinfo=userinfoService.queryDynamic(reqMap,PageRequest.of(page,size,sort));
         List<UserInfo> userInfos =pageinfo.getContent();
         JSONObject result = new JSONObject();
         result.put("rows", userInfos);

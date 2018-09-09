@@ -5,18 +5,22 @@ import com.jcj.sparrow.repository.UserinfoRepo;
 import com.jcj.sparrow.security.ServiceSysRole;
 import com.jcj.sparrow.security.SysRole;
 import com.jcj.sparrow.security.SysUser;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -57,6 +61,10 @@ public class UserinfoService
 
         userInfo.setPassword(hashedPassword);
         userinfoRepo.save(userInfo);
+
+        //新增用户操作记录如日志
+
+
     }
 
     @Transactional
@@ -84,6 +92,22 @@ public class UserinfoService
 
     public Page<UserInfo>  queryDynamic(Map<String,Object> reqMap, Pageable pageable)
     {
+        //测试service层中获取session
+        //获取到当前线程绑定的请求对象
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        UserInfo userInfo=(UserInfo)request.getSession().getAttribute("userinfo");
+        System.out.println("测试service层中获取session："+userInfo.getRealname());
+
+        //获取用户相关信息（IP、浏览器、操作系统）
+        System.out.println("IP："+request.getRemoteAddr());
+        System.out.println("User-Agent："+request.getHeader("user-agent"));
+
+        //利用UserAgent工具类进行User-Agent解析
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        System.out.println("浏览器:"+userAgent.getBrowser());
+        System.out.println("操作系统:"+userAgent.getOperatingSystem());
+
+
         Specification querySpecifi=new Specification<UserInfo>()
         {
             @Override
