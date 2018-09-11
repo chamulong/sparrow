@@ -1,10 +1,13 @@
 package com.jcj.sparrow.service;
 
+import com.alibaba.fastjson.JSON;
 import com.jcj.sparrow.domain.UserInfo;
 import com.jcj.sparrow.repository.UserinfoRepo;
 import com.jcj.sparrow.security.ServiceSysRole;
 import com.jcj.sparrow.security.SysRole;
 import com.jcj.sparrow.security.SysUser;
+import com.jcj.sparrow.systemaop.SystemAnnotationLog;
+import com.jcj.sparrow.utils.FilterPureEntity;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -92,22 +95,6 @@ public class UserinfoService
 
     public Page<UserInfo>  queryDynamic(Map<String,Object> reqMap, Pageable pageable)
     {
-        //测试service层中获取session
-        //获取到当前线程绑定的请求对象
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        UserInfo userInfo=(UserInfo)request.getSession().getAttribute("userinfo");
-        System.out.println("测试service层中获取session："+userInfo.getRealname());
-
-        //获取用户相关信息（IP、浏览器、操作系统）
-        System.out.println("IP："+request.getRemoteAddr());
-        System.out.println("User-Agent："+request.getHeader("user-agent"));
-
-        //利用UserAgent工具类进行User-Agent解析
-        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
-        System.out.println("浏览器:"+userAgent.getBrowser());
-        System.out.println("操作系统:"+userAgent.getOperatingSystem());
-
-
         Specification querySpecifi=new Specification<UserInfo>()
         {
             @Override
@@ -156,11 +143,15 @@ public class UserinfoService
 
     //根据用户uuid得到用户实体，根据实体进行用户数据库记录的删除
     //（不直接根据uuid进行删除，是想通过用户实体配置的关联关系，级联删除权限中的账号信息）
+    @SystemAnnotationLog(actiondesc = "删除用户")
     @Transactional
-    public void delete(String uuid)
+    public String delete(String uuid)
     {
         UserInfo userInfo=userinfoRepo.findByUuid(uuid);
         userinfoRepo.delete(userInfo);
+
+        Map map = FilterPureEntity.getKeyAndValue(userInfo);
+        return JSON.toJSONString(map);
     }
 
 }

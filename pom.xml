@@ -117,6 +117,12 @@
 			<version>1.20</version>
 		</dependency>
 
+		<!--AOP，用于系统日志-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 
     </dependencies>
 

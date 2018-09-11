@@ -29,14 +29,26 @@ public class Systemlog
     @Column(length = 19)
     private String operatetime;//操作时间
 
-    @Column(length = 200)
+    @Column(length = 2000)
     private String operetedesc;//操作内容
 
     @Column(length = 60)
+    private String operetetype;//操作简述
+
+    @Column(length = 30)
     private String osname;//操作系统名称
+
+    @Column(length = 30)
+    private String browser;//浏览器名称
 
     @Column(length = 20)
     private String ip;//用户IP
+
+    @Column(length = 30)
+    private String methodname;//调用的方法
+
+    @Column(length = 120)
+    private String classname;//类模块
 
     public String getUuid() {
         return uuid;
@@ -86,6 +98,14 @@ public class Systemlog
         this.operetedesc = operetedesc;
     }
 
+    public String getOperetetype() {
+        return operetetype;
+    }
+
+    public void setOperetetype(String operetetype) {
+        this.operetetype = operetetype;
+    }
+
     public String getOsname() {
         return osname;
     }
@@ -94,11 +114,35 @@ public class Systemlog
         this.osname = osname;
     }
 
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
+
     public String getIp() {
         return ip;
     }
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getMethodname() {
+        return methodname;
+    }
+
+    public void setMethodname(String methodname) {
+        this.methodname = methodname;
+    }
+
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
     }
 }
