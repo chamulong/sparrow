@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo项目- 登录</title>
     <script type="text/javascript" data-main="/js/login.js" src="/lib/require.js"></script>
+    <!--session过期，跳转到首页并跳出iframe-->
+    <script type="text/javascript">
+        if (window != top)
+            top.location.href = location.href;
+    </script>
 </head>
 
 <body class="gray-bg">

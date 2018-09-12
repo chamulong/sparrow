@@ -1,5 +1,6 @@
 package com.jcj.sparrow.security;
 
+import com.jcj.sparrow.systemaop.SystemAnnotationLog;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,15 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ControllerHome
 {
     @RequestMapping(value = "/home")
+    @SystemAnnotationLog(actiondesc = "用户登录")
     public String index()
     {
         return "home";
-    }
-
-    @RequestMapping(value = "/listuserinfo")
-    public String listemployee()
-    {
-        return "/userinfo/listUserInfo";
     }
 
     @RequestMapping(value = "/listRoleAuth")
@@ -34,5 +30,5 @@ public class ControllerHome
 
 
     @RequestMapping(value="/login")
-    public String login(){return "login";}
+    public String login(){return "/login";}
 }

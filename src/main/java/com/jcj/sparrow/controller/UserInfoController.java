@@ -68,6 +68,14 @@ public class UserInfoController
         return uploadFile.receiveFile(file,"img");
     }
 
+    //访问用户列表，跳转的页面
+    @RequestMapping(value = "/listhtml")
+    public String listemployee()
+    {
+        return "/userinfo/listUserInfo";
+    }
+
+
     /*
         实现动态查询、分页
      */

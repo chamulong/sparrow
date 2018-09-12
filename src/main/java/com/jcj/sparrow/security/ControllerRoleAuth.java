@@ -1,6 +1,7 @@
 package com.jcj.sparrow.security;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jcj.sparrow.systemaop.SystemAnnotationLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,7 @@ public class ControllerRoleAuth
 
     //保存角色
     @PostMapping("/save")
+    @SystemAnnotationLog(actiondesc = "添加用户角色")
     @ResponseBody
     public String save(SysRole sysRole)
     {
@@ -73,6 +75,7 @@ public class ControllerRoleAuth
 
     //保存一级目录
     @PostMapping("/saveMainAuth")
+    @SystemAnnotationLog(actiondesc = "添加一级目录")
     @ResponseBody
     public String saveMainAuth(SysAuth sysAuth)
     {

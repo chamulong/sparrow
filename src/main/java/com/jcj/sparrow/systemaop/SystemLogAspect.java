@@ -113,11 +113,17 @@ public class SystemLogAspect
 
         //根据切点的args来获取目标对象的参数,转换为json方式
         Object[] args = joinPoint.getArgs();
-        if(strOperetetype.indexOf("查询")>-1)
+        if((strOperetetype.indexOf("查询")>-1))
         {
             systemlog.setOperetedesc(JSON.toJSONString(args[0]));
             systemlogService.save(systemlog);
         }
+
+        if((strOperetetype.indexOf("登录")>-1))
+        {
+            systemlogService.save(systemlog);
+        }
+
 
         if(strOperetetype.indexOf("添加")>-1)
         {

@@ -42,9 +42,13 @@ public class SystemlogService
                 {
                     predicates.add(criteriaBuilder.like(root.get("operetedesc"),"%"+reqMap.get("operetedesc").toString()+"%"));
                 }
-                if(!reqMap.get("realname").toString().equals("请选择"))//操作者真实姓名，精确查询
+                if(!reqMap.get("operetetype").toString().equals(""))//操作简述，like 模糊查询
                 {
-                    predicates.add(criteriaBuilder.equal(root.get("realname"),reqMap.get("realname").toString()));
+                    predicates.add(criteriaBuilder.like(root.get("operetetype"),"%"+reqMap.get("operetetype").toString()+"%"));
+                }
+                if(!reqMap.get("realname").toString().equals(""))//操作者真实姓名，like 模糊查询
+                {
+                    predicates.add(criteriaBuilder.like(root.get("realname"),"%"+reqMap.get("realname").toString()+"%"));
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }

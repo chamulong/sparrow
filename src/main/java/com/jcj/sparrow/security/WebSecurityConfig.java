@@ -85,6 +85,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .logout()
                 .permitAll();
 
+        http.sessionManagement()//配置session的功能实现单点登录
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false)//强制让之前登录的同一账号被挤出去
+                .expiredUrl("/login");
+
 
     }
 }

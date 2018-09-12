@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" data-main="/js/systembasic/listSystemLog.js" src="/lib/require.js"></script>
+    <title>日志列表</title>
+</head>
+<body>
+<div class="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
+    <!--查询条件-->
+    <div class="row" style="margin-bottom: 5px">
+        <div CLASS="col-md-12 text-right">
+            <form class="form-inline">
+                <label for="realname">操作人:</label>
+                <input type="text" class="form-control input-sm" id="realname" name="realname" placeholder="如：张三" style="width: 100px;margin-right: 15px">
+
+                <label for="operetetype">操作简述:</label>
+                <input type="text" class="form-control input-sm" id="operetetype" name="operetetype" placeholder="如：添加" style="width: 120px;margin-right: 15px">
+
+                <label for="operetedesc">操作内容:</label>
+                <input type="text" class="form-control input-sm" id="operetedesc" name="operetedesc" placeholder="模糊查询" style="width: 120px;margin-right: 15px">
+
+                <button type="button" class="btn btn-sm" id="btnSearch">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!--列表展示-->
+    <table id="tb_SystemLog" style="word-break:break-all; word-wrap:break-all;"> </table>
+
+</div>
+
+</body>
+</html>

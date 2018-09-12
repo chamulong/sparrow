@@ -56,7 +56,7 @@
                                 <a class="J_menuItem" th:href="@{department/PageDepartments}">部门信息</a>
                             </li>
                             <li sec:authorize="hasAuthority('部门及人员_成员信息')">
-                                <a class="J_menuItem" th:href="@{/listuserinfo}">成员信息</a>
+                                <a class="J_menuItem" th:href="@{/userinfo/listhtml}">成员信息</a>
                             </li>
                         </ul>
                     </li>
@@ -70,8 +70,11 @@
                             <li sec:authorize="hasAuthority('系统管理_角色权限')">
                                 <a class="J_menuItem" th:href="@{/roleauth/listrole}">角色权限</a>
                             </li>
+                            <li sec:authorize="hasAuthority('系统管理_系统日志')">
+                                <a class="J_menuItem" th:href="@{/systemlog/listhtml}">系统日志</a>
+                            </li>
                             <li sec:authorize="hasAuthority('系统管理_Druid数据分析')">
-                                <a class="J_menuItem" href="http://localhost:8080/druid/">Druid数据源分析</a>
+                                <a class="J_menuItem" href="http://127.0.0.1:8080/druid/">Druid数据源分析</a>
                             </li>
                         </ul>
                     </li>

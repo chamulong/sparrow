@@ -1,6 +1,8 @@
 package com.jcj.sparrow.security;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jcj.sparrow.systemaop.SystemAnnotationLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,11 +52,13 @@ public class ServiceSysAuth
     public void deleteByName(String name){repoSysAuth.deleteByName(name+"%");}
 
     //根据节点的id删除节点及子节点
+    @SystemAnnotationLog(actiondesc = "删除节点及子节点")
     @Transactional
-    public void deleteByChild(int id)
+    public String deleteByChild(int id)
     {
         SysAuth sysAuth=repoSysAuth.findById(id);
         repoSysAuth.deleteByName(sysAuth.getName()+"%");
+        return JSON.toJSONString(sysAuth);
     }
 
     //查询所有权限明细(为多个权限树提供数据)
@@ -104,6 +108,7 @@ public class ServiceSysAuth
     //首先根据节点id查询到对应的节点信息，
     //再根据该节点信息和新的节点名称进行名称组合，以该组合名称查询对应的节点信息是否存在，
     //如果新节点信息不存在，则保存该新节点
+    @SystemAnnotationLog(actiondesc = "添加权限节点")
     public String saveChildAuth(int id,String childname)
     {
         SysAuth sysAuth_Parent=repoSysAuth.findById(id);
