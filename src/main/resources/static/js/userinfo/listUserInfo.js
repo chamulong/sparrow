@@ -14,17 +14,42 @@ require(
                     'click .detail':function(e,value,row,index){
                         alert("姓名:"+row.realname+",index:"+index);
                     },
-                    'click .delete':function(e,value,row,index){
-                        var uuid=row.uuid;
-                        $.ajax({
-                            url:'/userinfo/deletePhysics',
-                            type:'post',
-                            data:{uuid:uuid},
-                            async:true,//true为异步，false为同步
-                            complete:function(){
+                    'click .delete':function(e,value,row,index) {
+                        parent.layer.confirm('是否要彻底删除['+row.realname+']？',{
+                                icon: 0,
+                                btn:['取 消','确 定']
+                            },function(){
+                                parent.layer.closeAll();
+                            },function(){
+                                var uuid = row.uuid;
+                                $.ajax({
+                                    url: '/userinfo/deletePhysics',
+                                    type: 'post',
+                                    data: {uuid: uuid},
+                                    async: true,//true为异步，false为同步
+                                    complete: function () {
+                                        $("#tb_UserInfos").bootstrapTable('refresh');
+                                    }
+
+                                });
+                        });
+
+                    },
+                    'click .modify':function(e,value,row,index){
+                        var uuid = row.uuid;
+                        //弹出新增员工窗口
+                        parent.layer.open({
+                            type: 2,
+                            skin: 'layui-layer-molv',
+                            title: '修改员工信息',
+                            shadeClose: true,
+                            shade: 0.2,
+                            maxmin: false,
+                            area: ['45%', '80%'],
+                            content: '/userinfo/modifyUserInfo.html?uuid='+uuid,
+                            end: function () {
                                 $("#tb_UserInfos").bootstrapTable('refresh');
                             }
-
                         });
                     }
                 };
@@ -32,8 +57,10 @@ require(
                 //判断行详情和行删除按钮是否存在，用于处理是否显示对应的按钮
                 var blRowDetail=true;
                 var blRowDelete=true;
+                var blRowModify=true;
                 if($("#rowdetail").length>0){blRowDetail=true;}else{blRowDetail=false;}
                 if($("#rowdelete").length>0){blRowDelete=true;}else{blRowDelete=false;}
+                if($("#rowmodify").length>0){blRowModify=true;}else{blRowModify=false;}
 
                 //数据列表展示
                 $('#tb_UserInfos').bootstrapTable({
@@ -103,6 +130,9 @@ require(
                         field: 'email',
                         title: '邮箱'
                     },{
+                        field: 'mobile',
+                        title: '手机'
+                    },{
                         field: 'position',
                         title: '职位'
                     },{
@@ -122,11 +152,15 @@ require(
                             var btnInfo='';
                             if(blRowDetail)
                             {
-                                btnInfo+='<button style="margin-right: 10px" type="button" class="detail btn btn-outline btn-info btn-sm">详 情</button>';
+                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="detail btn btn-outline btn-info btn-sm">详 情</button>';
                             }
                             if(blRowDelete)
                             {
-                                btnInfo+='<button style="margin-right: 10px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                            }
+                            if(blRowModify)
+                            {
+                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="modify btn btn-outline btn-warning btn-sm">修 改</button>';
                             }
 
                             return btnInfo;
@@ -148,7 +182,7 @@ require(
                         shadeClose: true,
                         shade: 0.2,
                         maxmin: false,
-                        area: ['55%', '95%'],
+                        area: ['45%', '80%'],
                         content: '/userinfo/addUserInfo.html',
                         end: function () {
                             $("#tb_UserInfos").bootstrapTable('refresh');

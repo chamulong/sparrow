@@ -1,9 +1,11 @@
 package com.jcj.sparrow.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jcj.sparrow.domain.UserInfo;
 import com.jcj.sparrow.service.UserinfoService;
 import com.jcj.sparrow.systemaop.SystemAnnotationLog;
+import com.jcj.sparrow.utils.FilterPureEntity;
 import com.jcj.sparrow.utils.UploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +43,17 @@ public class UserInfoController
     public String saveUserinfo(UserInfo userInfo)
     {
         userinfoService.save(userInfo);
+        return "OK";
+    }
+
+    /*
+      修改信息
+     */
+    @RequestMapping("/modify")
+    @ResponseBody
+    public String modifyUserinfo(UserInfo userInfo)
+    {
+        userinfoService.modify(userInfo);
         return "OK";
     }
 
@@ -140,6 +153,28 @@ public class UserInfoController
         return result.toJSONString();
     }
 
+    //用于修改,手机号唯一性验证(如果已经存在，返回false，否则返回true；返回json数据，格式为{"valid",true})
+    @PostMapping("/validateMobileModify")
+    @ResponseBody
+    public String validateMobileModify(@RequestParam String mobile,String uuid)
+    {
+        boolean blStatus=userinfoService.validateMobileModify(mobile,uuid);
+        JSONObject result = new JSONObject();
+        result.put("valid", blStatus);
+        return result.toJSONString();
+    }
+
+    //用于修改,邮箱号唯一性验证(如果已经存在，返回false，否则返回true；返回json数据，格式为{"valid",true})
+    @PostMapping("/validateEmailModify")
+    @ResponseBody
+    public String validateEmailModify(@RequestParam String email,String uuid)
+    {
+        boolean blStatus=userinfoService.validateEmailModify(email,uuid);
+        JSONObject result = new JSONObject();
+        result.put("valid", blStatus);
+        return result.toJSONString();
+    }
+
     //根据UUID删除，物理删除用户信息
     @PostMapping("/deletePhysics")
     @ResponseBody
@@ -147,6 +182,16 @@ public class UserInfoController
     {
         userinfoService.delete(uuid);
         return "OK";
+    }
+
+    //根据UUID删除，查询用户信息
+    @PostMapping("/findByUuid")
+    @ResponseBody
+    public String findByUuid(String uuid)
+    {
+        UserInfo userInfo=userinfoService.findByUuid(uuid);
+        Map map = FilterPureEntity.getKeyAndValue(userInfo);
+        return JSON.toJSONString(map);
     }
 
 }

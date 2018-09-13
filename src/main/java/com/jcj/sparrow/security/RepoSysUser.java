@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RepoSysUser extends JpaRepository<SysUser,Long>
 {
-    //使用SpringDataJPA方法定义查询（账号名）
+    //使用SpringDataJPA方法定义查询账户信息（账号名）
     SysUser findByUsername(String username);
+
+    //使用SpringDataJPA方法定义删除账户信息（账号名）
+    SysUser deleteByUsername(String username);
 }

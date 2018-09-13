@@ -49,9 +49,11 @@
         <!--列表展示-->
         <table id="tb_UserInfos"> </table>
 
-        <!--隐藏元素，对应行中的操作的权限-->
+        <!--隐藏元素，对应行中的操作的权限,用于脚本中的判断-->
         <span id="rowdetail" sec:authorize="hasAuthority('部门及人员_成员信息_详情')" style="display: none"></span>
         <span id="rowdelete" sec:authorize="hasAuthority('部门及人员_成员信息_删除')" style="display: none"></span>
+        <span id="rowmodify" sec:authorize="hasAuthority('部门及人员_成员信息_修改')" style="display: none"></span>
+
 
     </div>
 

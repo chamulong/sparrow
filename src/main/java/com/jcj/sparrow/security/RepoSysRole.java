@@ -25,7 +25,8 @@ public interface RepoSysRole  extends JpaRepository<SysRole,Long>
     @Query(value = "delete from sysrole_sys_auths where sys_role_uuid=?1",nativeQuery = true)
     void deleteMaptabByUuid(String uuid);
 
-    //查询所有的角色，‘超级管理员除外’
-    @Query(value = "select * from sysrole where name!='超级管理员'",nativeQuery = true)
+    //查询所有的角色
+    @Query(value = "select * from sysrole",nativeQuery = true)
     List<SysRole> findRolesNoAdmin();
+
 }

@@ -132,7 +132,7 @@ public class SystemLogAspect
             systemlogService.save(systemlog);
         }
 
-        if(strOperetetype.indexOf("删除")>-1)
+        if((strOperetetype.indexOf("删除")>-1)||(strOperetetype.indexOf("修改")>-1))
         {
             systemlog.setOperetedesc(strInfo);
             systemlogService.save(systemlog);
