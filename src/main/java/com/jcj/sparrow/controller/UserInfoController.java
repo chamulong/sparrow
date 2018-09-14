@@ -38,7 +38,6 @@ public class UserInfoController
       保存信息
      */
     @RequestMapping("/save")
-    @SystemAnnotationLog(actiondesc = "新添加用户")
     @ResponseBody
     public String saveUserinfo(UserInfo userInfo)
     {
@@ -93,7 +92,6 @@ public class UserInfoController
         实现动态查询、分页
      */
     @PostMapping("/list")
-    @SystemAnnotationLog(actiondesc = "查询用户信息")
     @ResponseBody
     public String queryDynamic(@RequestBody Map<String,Object> reqMap)
     {

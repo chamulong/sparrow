@@ -57,20 +57,24 @@ require(
                             var pageSize=$('#tb_SystemLog').bootstrapTable('getOptions').pageSize;
                             var pageNumber=$('#tb_SystemLog').bootstrapTable('getOptions').pageNumber;
                             return pageSize * (pageNumber - 1) + index + 1;
-                        }
+                        },
+                        align:'center',
+                        width:'50'
                     }, {
                         field: 'username',
                         title: '账号',
                         visible:false
                     }, {
                         field: 'realname',
-                        title: '姓名'
+                        title: '姓名',
+                        width:'60'
                     }, {
                         field: 'depname',
                         title: '所属部门'
                     }, {
                         field: 'operatetime',
-                        title: '操作时间'
+                        title: '操作时间',
+                        width:'140'
                     },{
                         field: 'operetetype',
                         title: '操作简述',
@@ -90,16 +94,20 @@ require(
 
                     }, {
                         field: 'osname',
-                        title: '操作系统'
+                        title: '操作系统',
+                        width:'110'
                     }, {
                         field: 'browser',
-                        title: '浏览器'
+                        title: '浏览器',
+                        width:'80'
                     },{
                         field: 'ip',
-                        title: 'IP'
+                        title: 'IP',
+                        width:'80'
                     },{
                         field: 'methodname',
-                        title: '调用方法'
+                        title: '调用方法',
+                        width:'80'
                     },{
                         field: 'classname',
                         title: '调用类',

@@ -32,8 +32,6 @@ require(
                 //保存员工信息
                 $("#btn_Save").click(function(){
                     var bootstrapValidator = $('#FormUserInfo').data('bootstrapValidator');//获取表单对象
-                    //$('#FormUserInfo').data('bootstrapValidator').validateField('email');//触发email验证
-                    //$('#FormUserInfo').data('bootstrapValidator').validateField('mobile');//触发mobile验证
                     bootstrapValidator.validate();//触发全部的验证
                     if(bootstrapValidator.isValid())//全部验证通过，才能提交表单
                     {
@@ -64,6 +62,7 @@ require(
                                 invalid: 'glyphicon glyphicon-remove',
                                 validating: 'glyphicon glyphicon-refresh'
                             },
+                            trigger:'focus blur keyup',
                             fields: {
                                 password: {
                                     validators: {
@@ -148,6 +147,7 @@ require(
                         var jsonObj=$.parseJSON(data);
                         $("#uuid").val(jsonObj.uuid);
                         $("#username").val(jsonObj.username);
+                        $("#password").val(null);
                         $("#realname").val(jsonObj.realname);
                         $("#depname").val(jsonObj.depname);
                         $("#birthdate").val(jsonObj.birthdate);
@@ -156,6 +156,14 @@ require(
                         $("#email").val(jsonObj.email);
                         $("#mobile").val(jsonObj.mobile);
                         $("#position").val(jsonObj.position);
+
+                        var sextype=jsonObj.sextype;
+                        if(sextype=='男'){$('#sextype1').prop('checked',true);}
+                        else{$('#sextype2').prop('checked',true);}
+
+                        //表单全部赋值完毕后，先进行一次校验（避免提交时，第二次点击才触发返回true（remote））
+                        var bootstrapValidator = $('#FormUserInfo').data('bootstrapValidator');//获取表单对象
+                        bootstrapValidator.validate();//触发全部的验证
                     }
 
                 });

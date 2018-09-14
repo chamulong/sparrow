@@ -110,7 +110,8 @@ require(
                         title: '账号'
                     }, {
                         field: 'realname',
-                        title: '姓名'
+                        title: '姓名',
+                        width:'60'
                     }, {
                         field: 'sextype',
                         title: '性别'
@@ -119,7 +120,8 @@ require(
                         title: '所属部门名称'
                     }, {
                         field: 'birthdate',
-                        title: '出生日期'
+                        title: '出生日期',
+                        width:'100'
                     }, {
                         field: 'nativeplace',
                         title: '籍贯'
@@ -147,6 +149,7 @@ require(
                     },{
                         field:'',
                         title:'操 作',
+                        width:'160',
                         events:operateEvents,
                         formatter:function (value, row, index){
                             var btnInfo='';
