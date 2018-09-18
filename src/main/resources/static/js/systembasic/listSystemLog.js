@@ -95,7 +95,7 @@ require(
                     }, {
                         field: 'osname',
                         title: '操作系统',
-                        width:'110'
+                        width:'95'
                     }, {
                         field: 'browser',
                         title: '浏览器',
@@ -103,7 +103,7 @@ require(
                     },{
                         field: 'ip',
                         title: 'IP',
-                        width:'80'
+                        width:'90'
                     },{
                         field: 'methodname',
                         title: '调用方法',
@@ -132,8 +132,10 @@ require(
                     $("#tb_SystemLog").bootstrapTable('refresh');
                 });
 
+                fucntion transformJSON()
+                {
 
-
+                }
 
 
 
