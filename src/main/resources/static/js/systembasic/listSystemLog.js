@@ -132,13 +132,14 @@ require(
                     $("#tb_SystemLog").bootstrapTable('refresh');
                 });
 
-                fucntion transformJSON()
+                //在表单值不为空的情况下，进行字符串到json对象的转换
+                function transStringToJson(strinfo)
                 {
-
+                    if($("#userinfo").html()!=null)
+                    {
+                        return JSON.stringify($("#userinfo").html());
+                    }
                 }
-
-
-
 
             });
     });
