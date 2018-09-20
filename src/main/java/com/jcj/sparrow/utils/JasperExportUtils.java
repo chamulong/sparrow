@@ -12,7 +12,9 @@ import org.springframework.core.io.ClassPathResource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,8 +52,10 @@ public class JasperExportUtils {
      */
     public static void exportToHtml(String jasperPath, Map<String, Object> params, JRDataSource datasource, HttpServletRequest request, HttpServletResponse response) throws JRException, IOException {
         //指定模板文件
-        File reportFile = new File(new ClassPathResource(jasperPath).getURI());
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile.getPath(), params, datasource);
+        //File reportFile = new File(new ClassPathResource(jasperPath).getURI());
+        ClassPathResource classPathResource = new ClassPathResource(jasperPath);
+        InputStream inputStream=classPathResource.getInputStream();
+        JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, params, datasource);
         request.setCharacterEncoding(ENCODING);
         response.setCharacterEncoding(ENCODING);
         HtmlExporter exporter = new HtmlExporter();

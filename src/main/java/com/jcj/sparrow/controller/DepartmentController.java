@@ -31,7 +31,7 @@ public class DepartmentController
     {
         List<Department> list=departmentService.findAll();
         model.addAttribute("departments",list);
-        return "department/listDepartment";
+        return "/department/listDepartment";
 
     }
 
@@ -41,7 +41,7 @@ public class DepartmentController
         Sort sort = new Sort(Sort.Direction.DESC, "depname");
         Page<Department> pageDep=departmentService.findAllPage(new PageRequest(page,size,sort));
         model.addAttribute("page",pageDep);
-        return "department/listDepartment";
+        return "/department/listDepartment";
     }
 
 }

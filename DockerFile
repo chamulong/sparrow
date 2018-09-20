@@ -1,0 +1,8 @@
+# from base image java:8
+FROM java:8
+MAINTAINER chamu
+#inatall app
+#ADD <src> <dest> from appUrl to container destUrl
+ADD /target/sparrow-0.0.1-SNAPSHOT.jar /usr/project/sparrow-0.0.1-SNAPSHOT.jar
+#start app
+ENTRYPOINT ["java" ,"-jar","/usr/project/sparrow-0.0.1-SNAPSHOT.jar"]

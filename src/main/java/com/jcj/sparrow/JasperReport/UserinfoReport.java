@@ -43,7 +43,7 @@ public class UserinfoReport
     {
         JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
         Map<String, Object> map = new HashMap<>();
-        JasperExportUtils.exportToHtml("/jaspertemplate/UserinfoReport.jasper", map, datasource, request, response);
+        JasperExportUtils.exportToHtml("static/jaspertemplate/UserinfoReport.jasper", map, datasource, request, response);
 
     }
 
@@ -58,7 +58,7 @@ public class UserinfoReport
     {
         JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
         Map<String, Object> map = new HashMap<>();
-        JasperExportUtils.exportToPdf("/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
+        JasperExportUtils.exportToPdf("static/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
 
     }
 
@@ -72,7 +72,7 @@ public class UserinfoReport
     {
         JRDataSource datasource=new JRBeanCollectionDataSource(userinfoService.findAll());
         Map<String, Object> map = new HashMap<>();
-        JasperExportUtils.exportToXls("/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
+        JasperExportUtils.exportToXls("static/jaspertemplate/UserinfoReport.jasper","报表", map, datasource, response);
 
     }
 
@@ -112,7 +112,7 @@ public class UserinfoReport
 
         JRDataSource datasource=new JRBeanCollectionDataSource(listDU);
         Map<String, Object> map = new HashMap<>();
-        JasperExportUtils.exportToHtml("/jaspertemplate/depart_user.jasper", map, datasource, request, response);
+        JasperExportUtils.exportToHtml("static/jaspertemplate/depart_user.jasper", map, datasource, request, response);
 
     }
 

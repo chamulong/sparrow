@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @Author：江成军
@@ -19,7 +20,7 @@ public class ControllerHome
     @SystemAnnotationLog(actiondesc = "用户登录")
     public String index()
     {
-        return "home";
+        return "/home";
     }
 
     @RequestMapping(value = "/listRoleAuth")

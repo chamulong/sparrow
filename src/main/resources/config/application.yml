@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pmdemo?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.198.128:3306/pmdemo?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
     username: root
     password: root
     platform: mysql
@@ -31,6 +31,7 @@ spring:
     servlet:
       content-type: text/html
     suffix: .html
+    prefix: classpath:/templates
   resources:
     static-locations: classpath:/static/,classpath:/templates/
   mail:
