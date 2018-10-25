@@ -31,6 +31,7 @@ require(
 
                 //保存员工信息
                 $("#btn_Save").click(function(){
+                    alert('上传文档的路径：'+$('#case').attr('data-value'));
                     var bootstrapValidator = $('#FormUserInfo').data('bootstrapValidator');//获取表单对象
                     bootstrapValidator.validate();//手动触发验证
                     if(bootstrapValidator.isValid())//全部验证通过，才能提交表单

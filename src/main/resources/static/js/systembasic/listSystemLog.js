@@ -95,7 +95,7 @@ require(
                     }, {
                         field: 'osname',
                         title: '操作系统',
-                        width:'95'
+                        width:'105'
                     }, {
                         field: 'browser',
                         title: '浏览器',
@@ -103,7 +103,7 @@ require(
                     },{
                         field: 'ip',
                         title: 'IP',
-                        width:'90'
+                        width:'105'
                     },{
                         field: 'methodname',
                         title: '调用方法',
