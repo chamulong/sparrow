@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * @Description:  定义日志切入类，拦截Service
@@ -94,6 +95,7 @@ public class SystemLogAspect
         //获取方法执行时间
         Date date=new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("GMT+8"));//输出CST（北京时间）在东8区
         systemlog.setOperatetime(format.format(date));
 
         systemlog.setIp(request.getRemoteAddr());//获取用户IP
