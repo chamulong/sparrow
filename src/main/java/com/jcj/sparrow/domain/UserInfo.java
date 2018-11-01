@@ -66,6 +66,9 @@ public class UserInfo
     @Column(length = 10)
     private String status;
 
+    @Column(length = 500)
+    private String upload;
+
     @Column(length = 32)
     private String roleuuid;
 
@@ -181,6 +184,10 @@ public class UserInfo
     public String getStatus() {return status;}
 
     public void setStatus(String status) {this.status = status;}
+
+    public String getUpload() {return upload;}
+
+    public void setUpload(String upload) {this.upload = upload;}
 
     public String getPassword()
     {
