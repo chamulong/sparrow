@@ -19,11 +19,15 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="/lib/Hplus/img/profile_small.jpg" /></span>
+                            <!--th:href="@{/Controller/behavior(param1=1,param2=${person.id})}"。就是使用逗号隔开多个参数！！-->
+                            <span>
+                                <img th:if="${session.userinfo.getUpload() =='无'}" alt="头像" class="img-square" width="120" height="120" src="/lib/Hplus/img/profile_small.jpg" />
+                                <img th:if="${session.userinfo.getUpload() !='无'}" alt="头像" class="img-square" width="120" height="120" th:src="@{/showimg(imgpath=${session.userinfo.getUpload()})}" />
+                            </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">信息技术部 江成军</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold" th:text="${session.userinfo.getRealname()+'，'+session.userinfo.getPosition()}"></strong><span><b class="caret"></b></span></span>
+                                <span class="text-muted text-xs block"><span th:text="${session.userinfo.getDepname()}"></span></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">

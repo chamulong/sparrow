@@ -31,14 +31,10 @@ require(
 
                 //保存员工信息
                 $("#btn_Save").click(function(){
-                    //**获取上传文件的真实文件名和保存文件名，并重新赋值给（插件临时创建）隐藏表单‘upload’**
-                    //遍历class为‘item success’，获取当前上传成功的所有文件的原文件名
+                    //遍历class为‘item success’，获取当前上传成功的所有文件的原文件名，并重新赋值给（插件临时创建）隐藏表单‘upload’
                     $(".filename").each(function(){
                         $("[name=upload]").val($("[name=upload]").val()+','+$(this).html());
                     });
-
-                    //alert("上传文件名称："+$("[name=upload]").val());
-
 
                     var bootstrapValidator = $('#FormUserInfo').data('bootstrapValidator');//获取表单对象
                     bootstrapValidator.validate();//手动触发验证

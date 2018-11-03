@@ -41,6 +41,10 @@ public class UserInfoController
     @ResponseBody
     public String saveUserinfo(UserInfo userInfo)
     {
+        if(userInfo.getUpload()==null||userInfo.getUpload().equals(""))
+        {
+            userInfo.setUpload("无");
+        }
         userinfoService.save(userInfo);
         return "OK";
     }
@@ -52,6 +56,10 @@ public class UserInfoController
     @ResponseBody
     public String modifyUserinfo(UserInfo userInfo)
     {
+        if(userInfo.getUpload()==null||userInfo.getUpload().equals(""))
+        {
+            userInfo.setUpload("无");
+        }
         userinfoService.modify(userInfo);
         return "OK";
     }
