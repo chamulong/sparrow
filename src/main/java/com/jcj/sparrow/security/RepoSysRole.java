@@ -27,6 +27,6 @@ public interface RepoSysRole  extends JpaRepository<SysRole,Long>
 
     //查询所有的角色
     @Query(value = "select * from sysrole",nativeQuery = true)
-    List<SysRole> findRolesNoAdmin();
+    List<SysRole> findRoles();
 
 }

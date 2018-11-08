@@ -6,6 +6,12 @@ spring:
     username: root
     password: root
     platform: mysql
+    #初始化数据（主要是超级管理用户角色及管理员账号,注：只有检测到spring.datasource.initialization-mode=ALWAYS配置后，再检测spring.datasource.schema之后，且配置的sql角本命令不为空，才会去执行schema和spring.datasource.data）
+    schema: classpath:initialsql/schema.sql
+    data: classpath:initialsql/data.sql
+    sql-script-encoding: utf-8
+    initialization-mode: always
+    #Druid数据源配置
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
     minIdle: 3
@@ -33,7 +39,7 @@ spring:
     suffix: .html
     prefix: classpath:/templates
   resources:
-    static-locations: classpath:/static/,classpath:/templates/
+    static-locations: classpath:/static/,classpath:/templates/,classpath:/initialsql/
   mail:
     default-encoding: UTF-8
     host: smtp.sina.com

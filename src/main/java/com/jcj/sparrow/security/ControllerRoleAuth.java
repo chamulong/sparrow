@@ -33,7 +33,7 @@ public class ControllerRoleAuth
     @ResponseBody
     public List<SysRole> findRoles()
     {
-        List<SysRole> list=serviceSysRole.findRolesNoAdmin();
+        List<SysRole> list=serviceSysRole.findRoles();
         return list;
     }
 
@@ -42,7 +42,7 @@ public class ControllerRoleAuth
     @RequestMapping("/listrole")
     public String findAllRole(Model model)
     {
-        List<SysRole> list=serviceSysRole.findRolesNoAdmin();
+        List<SysRole> list=serviceSysRole.findRoles();
         model.addAttribute("sysroles",list);
         return "/authority/listRoleAuth";
     }

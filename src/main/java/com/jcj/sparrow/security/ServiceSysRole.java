@@ -28,10 +28,10 @@ public class ServiceSysRole
         return repoSysRole.findByUuid(uuid);
     }
 
-    //查询所有的角色，‘超级管理员除外’
-    public List<SysRole> findRolesNoAdmin()
+    //查询所有的角色
+    public List<SysRole> findRoles()
     {
-        return repoSysRole.findRolesNoAdmin();
+        return repoSysRole.findRoles();
     }
 
     @Transactional
