@@ -10,7 +10,7 @@ spring:
     schema: classpath:initialsql/schema.sql
     data: classpath:initialsql/data.sql
     sql-script-encoding: utf-8
-    initialization-mode: always
+    #initialization-mode: always
     #Druid数据源配置
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
