@@ -1,3 +1,6 @@
+#服务端口设置，默认是8080
+server:
+  port: 8082
 #数据库设置
 spring:
   datasource:
@@ -47,3 +50,4 @@ spring:
     port: 25
     protocol: smtp
     username: chamulong@sina.com
+
