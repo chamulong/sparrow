@@ -1,6 +1,6 @@
 #服务端口设置，默认是8080
 server:
-  port: 8082
+  port: 8080
 #数据库设置
 spring:
   datasource:
@@ -50,4 +50,11 @@ spring:
     port: 25
     protocol: smtp
     username: chamulong@sina.com
+
+#引入日志配置文件
+logging:
+  config: classpath:config/logback-spring.xml
+
+
+
 
