@@ -123,6 +123,13 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
+		<!--Netty依赖（用于搭建数据通讯的Server端）-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.9.Final</version>
+		</dependency>
+
 
     </dependencies>
 
