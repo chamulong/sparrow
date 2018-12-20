@@ -130,8 +130,7 @@
 			<version>4.1.9.Final</version>
 		</dependency>
 
-
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

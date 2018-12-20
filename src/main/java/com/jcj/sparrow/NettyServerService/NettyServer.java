@@ -3,7 +3,7 @@
  * @Date: 2018/12/19 16:07
  * @Description: 暂无
  */
-package com.jcj.sparrow.NettyServer;
+package com.jcj.sparrow.NettyServerService;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -12,12 +12,14 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  *@Author 江成军
  *@Date 2018/12/19 16:07
  *@Description 基于Netty的Server端
  */
+@Component
 public class NettyServer
 {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

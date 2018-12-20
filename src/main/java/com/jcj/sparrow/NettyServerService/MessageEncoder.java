@@ -3,7 +3,7 @@
  * @Date: 2018/12/19 16:40
  * @Description: 暂无
  */
-package com.jcj.sparrow.NettyServer;
+package com.jcj.sparrow.NettyServerService;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

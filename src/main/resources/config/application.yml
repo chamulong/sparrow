@@ -55,6 +55,17 @@ spring:
 logging:
   config: classpath:config/logback-spring.xml
 
+#Netty相关配置参数
+netty:
+  port: 9000
+  url: 127.0.0.1
+  keepalive: true
+  backlog: 100
+  bossthreadcount: 200
+  workerthreadcount: 200
+
+
+
 
 
 
