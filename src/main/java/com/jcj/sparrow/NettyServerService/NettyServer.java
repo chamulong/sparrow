@@ -1,10 +1,6 @@
-/**
- * @Author: 江成军
- * @Date: 2018/12/19 16:07
- * @Description: 暂无
- */
 package com.jcj.sparrow.NettyServerService;
 
+import com.jcj.sparrow.NettyServerService.protocol.MessageFrame;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -22,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NettyServer
 {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(NettyServer.class);
     public void bind(int port) throws InterruptedException
     {
         EventLoopGroup bossGroup=new NioEventLoopGroup();
@@ -37,7 +33,7 @@ public class NettyServer
                         @Override
                         protected void initChannel(SocketChannel channel) throws Exception {
                             ChannelPipeline cpl=channel.pipeline();
-                            cpl.addLast(new MessageDecoder(1<<20, 10, 4));
+                            cpl.addLast(new MessageDecoder(122880, 6, 2));
                             cpl.addLast(new MessageEncoder());
                             cpl.addLast(new ServerHandler());
                         }
@@ -53,14 +49,14 @@ public class NettyServer
         }
     }
 
-    private class ServerHandler extends SimpleChannelInboundHandler<MessageHeader>
+    private class ServerHandler extends SimpleChannelInboundHandler<MessageFrame>
     {
         @Override
-        protected void channelRead0(ChannelHandlerContext ctx, MessageHeader msg) throws Exception
+        protected void channelRead0(ChannelHandlerContext ctx, MessageFrame msg) throws Exception
         {
             logger.info("server read msg:{}", msg);
-            MessageHeader resp = new MessageHeader(msg.getMagicType(), msg.getType(), msg.getRequestId(), "Hello world from server");
-            ctx.writeAndFlush(resp);
+            //MessageFrame resp = new MessageFrame(msg.getMagicType(), msg.getType(), msg.getRequestId(), "Hello world from server");
+            //ctx.writeAndFlush(resp);
         }
     }
 

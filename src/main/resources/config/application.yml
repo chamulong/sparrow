@@ -64,6 +64,13 @@ netty:
   bossthreadcount: 200
   workerthreadcount: 200
 
+#雷达数据协议相关
+radar:
+  #命令头,0x5A5A，2字节
+  headerCommand: 23130
+  #应答头,0x3C3C，2字节
+  headerAnswer: 15420
+
 
 
 
