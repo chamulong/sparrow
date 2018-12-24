@@ -6,11 +6,12 @@ import io.netty.buffer.Unpooled;
 
 /**
  * @Author: 江成军
- * @Date: 2018/12/23 22:18
- * @Description: 0x00，参数设置,具体内容部分(发出的命令内容、收到的应答内容)
+ * @Date: 2018/12/24 10:45
+ * @Description: 0x01，查询设备参数，具体内容部分(发出的命令内容、收到的应答内容)
  */
-public class Radar_00 implements IMessageBody
+public class Radar_01 implements IMessageBody
 {
+
     // 雷达核心参数，起始频率(单位：MHz)
     private float RCP_Startfreq;
 
@@ -23,6 +24,7 @@ public class Radar_00 implements IMessageBody
     // 雷达核心参数，重复频率(单位：MHz)
     private float RCP_Repeatedfreq;
 
+
     // 数字采集参数，采样频率(单位：MHz)
     private float DAP_Samplefreq;
 
@@ -34,6 +36,7 @@ public class Radar_00 implements IMessageBody
 
     // 数字采集参数，采样点数(单位：个)
     private float DAP_Samplepoints;
+
 
     // 布站观测参数，目标类型(桥/塔)
     private String CSO_Targettype;
@@ -56,7 +59,7 @@ public class Radar_00 implements IMessageBody
     // 布站观测参数，环境校正(无/GCP校正/大气参数校正/自适应补偿)
     private String CSO_Environmentalcorrection;
 
-    // GCP参数，数量(单位：个)
+    // GCP参数，数量(单位：个，范围：0~15)
     private float GCP_Num;
 
     // GCP参数，距离(单位：米)
@@ -65,7 +68,7 @@ public class Radar_00 implements IMessageBody
     // GCP参数，视角（单位：度）
     private float[] GCP_Visualangle;
 
-    // 观测目标参数，数量（单位：个）
+    // 观测目标参数，数量（单位：个，范围：0~99）
     private float OOP_Num;
 
     // 观测目标参数，距离（单位：米）
@@ -74,26 +77,24 @@ public class Radar_00 implements IMessageBody
     // 观测目标参数，视角（单位：度）
     private float[] OOP_Visualangle;
 
-    public Radar_00()
+    public Radar_01()
     {
-        RCP_Startfreq = 24000f;
-        RCP_Endfreq = 25000f;
-        RCP_Pulsewidth = 2000f;
+        RCP_Startfreq = 0f;
+        RCP_Endfreq = 0f;
+        RCP_Pulsewidth = 0f;
+        RCP_Repeatedfreq = 0f;
 
-        //设置重复频率（采样频率，默认200Hz）
-        RCP_Repeatedfreq = 200f;
-
-        DAP_Samplefreq = 10f;
+        DAP_Samplefreq = 0f;
         DAP_Channelgain = 0f;
-        DAP_Channeldelay = 100f;
-        DAP_Samplepoints = 16384f;
+        DAP_Channeldelay = 0f;
+        DAP_Samplepoints = 0f;
 
         CSO_Targettype = "桥";
         CSO_Obsernearestdistance = 0f;
-        CSO_Obsermaximumdistance = 100f;
+        CSO_Obsermaximumdistance = 0f;
         CSO_Noisereductionindex = "无";
-        CSO_Pointinterval = 1f;
-        CSO_Targetverticaldistance = 10f;
+        CSO_Pointinterval = 0f;
+        CSO_Targetverticaldistance = 0f;
         CSO_Environmentalcorrection = "无";
 
         GCP_Num = 0f;
@@ -101,88 +102,73 @@ public class Radar_00 implements IMessageBody
         OOP_Num = 0f;
     }
 
-
     @Override
     public byte[] WriteToBytes()
     {
         ByteBuf buff= ByteBufAllocator.DEFAULT.ioBuffer();
-        buff.writeFloat(RCP_Startfreq);
-        buff.writeFloat(RCP_Endfreq);
-        buff.writeFloat(RCP_Pulsewidth);
-        buff.writeFloat(RCP_Repeatedfreq);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-
-        buff.writeFloat(DAP_Samplefreq);
-        buff.writeFloat(DAP_Channelgain);
-        buff.writeFloat(DAP_Channeldelay);
-        buff.writeFloat(DAP_Samplepoints);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-        buff.writeFloat(0f);
-
-        buff.writeFloat(CSO_Targettype.equals("桥") ? 0 : 1);
-        buff.writeFloat(CSO_Obsernearestdistance);
-        buff.writeFloat(CSO_Obsermaximumdistance);
-        float noisereductionindex = 0;
-        if (CSO_Noisereductionindex.equals("弱")){noisereductionindex = 1;}
-        else if (CSO_Noisereductionindex.equals("中")){noisereductionindex = 2;}
-        else if (CSO_Noisereductionindex.equals("强")){noisereductionindex = 3;}
-        buff.writeFloat(noisereductionindex);
-        buff.writeFloat(CSO_Pointinterval);
-        buff.writeFloat(CSO_Targetverticaldistance);
-        float environmentalcorrection = 0;
-        if (CSO_Environmentalcorrection.equals("GCP校正")){environmentalcorrection = 1;}
-        else if (CSO_Environmentalcorrection.equals("大气参数校准")){environmentalcorrection = 2;}
-        else if (CSO_Environmentalcorrection.equals("自适应补偿")) { environmentalcorrection = 3; }
-        buff.writeFloat(environmentalcorrection);
-        buff.writeFloat(0f);
-
-        //GCP
-        buff.writeFloat(GCP_Num);
-        buff.writeFloat(0f);
-        for (int i = 0; i < GCP_Num; i++)
-        {
-            buff.writeFloat(GCP_Distance[i]);
-            buff.writeFloat(GCP_Visualangle[i]);
-        }
-        int intOtherGCP = 15 - (int)GCP_Num;
-        for (int i = 0; i < intOtherGCP; i++)
-        {
-            buff.writeFloat(0f);
-            buff.writeFloat(0f);
-        }
-
-        //观测目标参数
-        buff.writeFloat(OOP_Num);
-        buff.writeFloat(0f);
-        for (int i = 0; i < OOP_Num; i++)
-        {
-            buff.writeFloat(OOP_Distance[i]);
-            buff.writeFloat(OOP_Visualangle[i]);
-        }
-        int intOtherTarget = 99 - (int)OOP_Num;
-        for (int i = 0; i < intOtherTarget; i++)
-        {
-            buff.writeFloat(0f);
-            buff.writeFloat(0f);
-        }
-
+        buff.writeShort(0);
         return buff.array();
     }
 
     @Override
     public void ReadFromBytes(byte[] messageBodyBytes)
     {
-        if (messageBodyBytes==null)
-        {
-            return;
-        }
-    }
+        ByteBuf buff = Unpooled.copiedBuffer(messageBodyBytes);
+        //雷达核心参数
+        RCP_Startfreq =buff.readFloat();
+        RCP_Endfreq = buff.readFloat();
+        RCP_Pulsewidth = buff.readFloat();
+        RCP_Repeatedfreq = buff.readFloat();
+        buff.readBytes(16);
 
+        //数字采集参数
+        DAP_Samplefreq = buff.readFloat();
+        DAP_Channelgain =buff.readFloat();
+        DAP_Channeldelay =buff.readFloat();
+        DAP_Samplepoints =buff.readFloat();
+        buff.readBytes(16);
+
+        //布站观测参数
+        if ((int)buff.readFloat() == 1) { CSO_Targettype = "塔"; }
+        CSO_Obsernearestdistance = buff.readFloat();
+        CSO_Obsermaximumdistance = buff.readFloat();
+        int intNoisereductionindex = (int)buff.readFloat();
+        if (intNoisereductionindex == 1) { CSO_Noisereductionindex = "弱"; }
+        else if (intNoisereductionindex == 2) { CSO_Noisereductionindex = "中"; }
+        else if (intNoisereductionindex == 3) { CSO_Noisereductionindex = "强"; }
+        CSO_Pointinterval = buff.readFloat();
+        CSO_Targetverticaldistance = buff.readFloat();
+        int intEnvironmentalcorrection = (int)buff.readFloat();
+        if (intEnvironmentalcorrection == 0) { CSO_Environmentalcorrection = "无校正"; }
+        else  if (intEnvironmentalcorrection == 1) { CSO_Environmentalcorrection = "GCP校正"; }
+        else if (intEnvironmentalcorrection == 2) { CSO_Environmentalcorrection = "大气参数校正"; }
+        else if (intEnvironmentalcorrection == 3) { CSO_Environmentalcorrection = "自适应补偿"; }
+        buff.readBytes(4);
+
+        //GCP参数
+        GCP_Num = buff.readFloat();
+        buff.readFloat();
+        GCP_Distance = new float[15];
+        GCP_Visualangle = new float[15];
+        for (int i = 0; i < 15; i++)
+        {
+            GCP_Visualangle[i] = buff.readFloat();
+            GCP_Distance[i] = buff.readFloat();
+        }
+
+        //观测目标参数
+        OOP_Num = buff.readFloat();
+        buff.readFloat();
+        OOP_Visualangle = new float[99];
+        OOP_Distance = new float[99];
+        for (int j = 0; j< 99; j++)
+        {
+            OOP_Visualangle[j] = buff.readFloat();
+            OOP_Distance[j] = buff.readFloat();
+        }
+
+
+    }
 
     public float getRCP_Startfreq() {
         return RCP_Startfreq;

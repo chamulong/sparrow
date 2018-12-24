@@ -61,6 +61,7 @@ public class MessageFrame
             if (executeState == 0)//状态为‘正确执行’才进行内容的解析
             {
                 dataLength=buff.readShort();
+                infoContent=new byte[dataLength];
                 buff.readBytes(infoContent);
             }
         }
