@@ -177,10 +177,7 @@ public class Radar_00 implements IMessageBody
     @Override
     public void ReadFromBytes(byte[] messageBodyBytes)
     {
-        if (messageBodyBytes==null)
-        {
-            return;
-        }
+
     }
 
 
