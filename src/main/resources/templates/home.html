@@ -47,20 +47,41 @@
                         </div>
                     </li>
                     <li>
+                        <a sec:authorize="hasAuthority('信息总览')" href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">信息总览</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse in">
+                            <li sec:authorize="hasAuthority('信息总览_首页信息')">
+                                <a class="J_menuItem" href="/main.html">首页信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a sec:authorize="hasAuthority('部门及人员')" href="#">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">部门及人员</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level collapse in">
-                            <li sec:authorize="hasAuthority('部门及人员_信息总览')">
-                                <a class="J_menuItem" href="/main.html" data-index="0">信息总览</a>
-                            </li>
                             <li sec:authorize="hasAuthority('部门及人员_部门信息')">
                                 <a class="J_menuItem" th:href="@{/department/PageDepartments}">部门信息</a>
                             </li>
                             <li sec:authorize="hasAuthority('部门及人员_成员信息')">
                                 <a class="J_menuItem" th:href="@{/userinfo/listhtml}">成员信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a sec:authorize="hasAuthority('现场数据')" href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">现场数据</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse in">
+                            <li sec:authorize="hasAuthority('现场数据_测量数据')">
+                                <a class="J_menuItem" th:href="@{/measuredata/listhtml}">测量数据</a>
                             </li>
                         </ul>
                     </li>
@@ -78,7 +99,7 @@
                                 <a class="J_menuItem" th:href="@{/systemlog/listhtml}">系统日志</a>
                             </li>
                             <li sec:authorize="hasAuthority('系统管理_Druid数据分析')">
-                                <a class="J_menuItem" href="http://192.168.198.129:8080/druid/">Druid数据源分析</a>
+                                <a class="J_menuItem" href="http://127.0.0.1:8080/druid/">Druid数据源分析</a>
                             </li>
                         </ul>
                     </li>
@@ -151,7 +172,7 @@
                 </button>
                 <nav class="page-tabs J_menuTabs">
                     <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="/main.html">信息总览</a>
+                        <a href="javascript:;" class="active J_menuTab" data-id="/main.html">首页信息</a>
                     </div>
                 </nav>
                 <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>

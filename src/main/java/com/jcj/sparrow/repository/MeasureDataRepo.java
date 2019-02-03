@@ -1,0 +1,20 @@
+package com.jcj.sparrow.repository;
+
+import com.jcj.sparrow.domain.MeasureData;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+/**
+ * @Author 江成军
+ * @Date 2019/01/30 11:16
+ * @Description 测量信息访问接口，对应MongoDB
+ */
+@Repository
+public interface MeasureDataRepo extends MongoRepository<MeasureData,ObjectId>
+{
+    //根据类别进行查询
+    List<MeasureData> findByDatatype(String datatype);
+}

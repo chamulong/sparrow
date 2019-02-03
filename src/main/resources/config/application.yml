@@ -5,7 +5,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.198.129:3306/pmdemo?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+    #url: jdbc:mysql://192.168.198.129:3306/pmdemo?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://127.0.0.1:3306/pmdemo?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
     username: root
     password: root
     platform: mysql
@@ -50,6 +51,12 @@ spring:
     port: 25
     protocol: smtp
     username: chamulong@sina.com
+  data:
+    #MongoDB数据源设置
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: measuredb
+
 
 #引入日志配置文件
 logging:
