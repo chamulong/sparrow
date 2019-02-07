@@ -109,6 +109,18 @@ require(
                                         }
                                     }
                                 },
+                                realname: {
+                                    validators: {
+                                        notEmpty: {
+                                            message: '真实姓名不能为空'
+                                        },
+                                        stringLength: {
+                                            min: 2,
+                                            max: 5,
+                                            message: '姓名长度在2-5个汉字范围内'
+                                        }
+                                    }
+                                },
                                 mobile: {
                                     validators: {
                                         notEmpty: {

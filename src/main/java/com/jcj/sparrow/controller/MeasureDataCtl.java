@@ -53,7 +53,7 @@ public class MeasureDataCtl
         int size=3;
         if(reqMap.get("size").toString()!=null){size= Integer.parseInt(reqMap.get("size").toString());}
 
-        Sort sort=new Sort(Sort.Direction.DESC,"poiname");
+        Sort sort=new Sort(Sort.Direction.ASC,"poiname");
         Page<MeasureData> pageinfo=measureDataService.basicPageList(PageRequest.of(page,size,sort));
         List<MeasureData> userInfos =pageinfo.getContent();
         JSONObject result = new JSONObject();

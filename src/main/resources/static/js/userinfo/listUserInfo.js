@@ -58,9 +58,11 @@ require(
                 var blRowDetail=true;
                 var blRowDelete=true;
                 var blRowModify=true;
+                var username='';
                 if($("#rowdetail").length>0){blRowDetail=true;}else{blRowDetail=false;}
                 if($("#rowdelete").length>0){blRowDelete=true;}else{blRowDelete=false;}
                 if($("#rowmodify").length>0){blRowModify=true;}else{blRowModify=false;}
+                if($("#loginusername").length>0){username=$("#loginusername").text();}else{username='';}
 
                 //数据列表展示
                 $('#tb_UserInfos').bootstrapTable({
@@ -159,11 +161,17 @@ require(
                             }
                             if(blRowDelete)
                             {
-                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                                if(row.username!="admin")
+                                {
+                                    btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                                }
                             }
                             if(blRowModify)
                             {
-                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="modify btn btn-outline btn-warning btn-sm">修 改</button>';
+                                if(row.username==username)
+                                {
+                                    btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="modify btn btn-outline btn-warning btn-sm">修 改</button>';
+                                }
                             }
 
                             return btnInfo;
