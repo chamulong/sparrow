@@ -9,6 +9,23 @@
 </head>
 <body>
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
+    <!--查询条件-->
+    <div class="row" style="margin-bottom: 5px">
+        <div CLASS="col-md-12 text-right">
+            <form class="form-inline">
+                <label for="poiname">测点名称:</label>
+                <input type="text" class="form-control input-sm" id="poiname" name="poiname" placeholder="模糊查询" style="width: 100px;margin-right: 15px">
+
+                <label for="datatype">部门名称:</label>
+                <input type="text" class="form-control input-sm" id="datatype" name="datatype" placeholder="精确查询" style="width: 100px;margin-right: 15px">
+
+                <button type="button" class="btn btn-sm" id="btnSearch">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查 询
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!--列表展示-->
     <table id="tb_Measuredatas"> </table>
 </div>

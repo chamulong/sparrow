@@ -10,7 +10,7 @@ require(
                 //***自定义功能块 Region***
                 //数据列表展示
                 $('#tb_Measuredatas').bootstrapTable({
-                    url: '/measuredata/basiclist',         //请求后台的URL（*）
+                    url: '/measuredata/list',         //请求后台的URL（*）
                     method: 'post',                      //请求方式（*）post/get
                     //contentType: "application/json",//post请求的话就加上这句话
                     //toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -38,7 +38,10 @@ require(
                         //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
                         var temp = {
                             size: params.limit,//页面大小
-                            page: (params.offset / params.limit)//页码
+                            page: (params.offset / params.limit),//页码
+                            //页面动态查询条件
+                            poiname:$("#poiname").val(),
+                            datatype:$("#datatype").val()
                         };
                         return temp;
                     },
@@ -63,6 +66,13 @@ require(
                         title: '位移(mm)'
                     }]
                 });
+
+                //多条件查询刷新
+                $("#btnSearch").click(function(){
+                    $("#tb_Measuredatas").bootstrapTable('refresh');
+                });
+
+
                 //***自定义功能块 EndRegion***
             });
     });
