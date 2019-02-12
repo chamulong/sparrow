@@ -9,9 +9,16 @@
 </head>
 <body>
 <div class="wrapper wrapper-content animated fadeInRight" style="padding: 8px" >
-    <!--查询条件-->
+    <!--添加和条件查询-->
     <div class="row" style="margin-bottom: 5px">
-        <div CLASS="col-md-12 text-right">
+        <!--添加按钮-->
+        <div class="col-md-4">
+            <button sec:authorize="hasAuthority('现场数据_测量数据_新增')" style="margin-right: 10px" id="btn_add" type="button" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-plus"></span>新增
+            </button>
+        </div>
+        <!--条件查询-->
+        <div CLASS="col-md-8 text-right">
             <form class="form-inline">
                 <label for="poiname">测点名称:</label>
                 <input type="text" class="form-control input-sm" id="poiname" name="poiname" placeholder="模糊查询" style="width: 100px;margin-right: 15px">
@@ -28,6 +35,10 @@
 
     <!--列表展示-->
     <table id="tb_Measuredatas"> </table>
+
+    <!--隐藏元素，对应行中的操作的权限,用于脚本中的判断-->
+    <span id="rowdelete" sec:authorize="hasAuthority('现场数据_测量数据_删除')" style="display: none"></span>
+
 </div>
 </body>
 </html>

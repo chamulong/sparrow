@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增测量数据</title>
+    <script type="text/javascript" data-main="/js/measuredata/addMeasuredata.js" src="/lib/require.js"></script>
+    <style>
+        .table  tbody  tr  td ,th{
+            border:1px solid white;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper wrapper-content">
+    <form role="form" id="FormMeasuredata" method="post" style="margin-right: 20px;margin-left: 20px">
+        <table class="table table-hover" style="border-top: none">
+            <tbody>
+            <tr class="form-group">
+                <td class="text-right" style="width: 100px"><label for="poiname"><span style="color: red">*</span>测点名称：</label></td>
+                <td><input type="text" name="poiname" id="poiname" class="form-control" placeholder="不大于15个字符" style="width: 200px"></td>
+            </tr >
+            <tr class="form-group">
+                <td class="text-right"><label for="datatype"><span style="color: red">*</span>数据类型：</label></td>
+                <td>
+                    <select class="form-control" name="datatype" id="datatype" style="width: 200px">
+                        <option>静态荷载</option>
+                        <option>动态荷载</option>
+                        <option>其它</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="form-group">
+                <td class="text-right"><label for="num">测点数量：</label></td>
+                <td><input type="text" name="num" id="num" class="form-control" placeholder="仅数字" style="width: 200px"></td>
+            </tr>
+            <tr class="form-group">
+                <td class="text-right"><label for="unitprice">位移值：</label></td>
+                <td><input type="text" name="unitprice" id="unitprice" class="form-control" placeholder="仅数字" style="width: 200px"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="form-inline text-center" style="margin-bottom: 6px;padding-top: 10px">
+            <button id="btn_Save" type="button" class="btn btn-primary btn-md" > 提 交 </button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-primary btn-md"> 重 置 </button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

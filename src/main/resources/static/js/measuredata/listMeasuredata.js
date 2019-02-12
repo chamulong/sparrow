@@ -5,9 +5,38 @@ require(
     ['/js/GlobleConfig.js'],
     function(){
         requirejs(
-            ['jquery','bootstrap','bootstraptable','bootstraptableCN','layer','jqueryupload'],
+            ['jquery','bootstrap','bootstraptable','bootstraptableCN','layer'],
             function($){
                 //***自定义功能块 Region***
+
+                //绑定列表中各按钮的事件
+                window.operateEvents={
+                    'click .delete':function(e,value,row,index) {
+                        parent.layer.confirm('是否要彻底删除['+row.uuid+']？',{
+                            icon: 0,
+                            btn:['取 消','确 定']
+                        },function(){
+                            parent.layer.closeAll();
+                        },function(){
+                            var uuid = row.uuid;
+                            $.ajax({
+                                url: '/measuredata/deleteByUuid',
+                                type: 'post',
+                                data: {uuid: uuid},
+                                async: true,//true为异步，false为同步
+                                complete: function () {
+                                    $("#tb_Measuredatas").bootstrapTable('refresh');
+                                }
+
+                            });
+                        });
+
+                    }
+                };
+
+                //判断行详情和行删除按钮是否存在，用于处理是否显示对应的按钮
+                var blRowDelete=true;
+                if($("#rowdelete").length>0){blRowDelete=true;}else{blRowDelete=false;}
                 //数据列表展示
                 $('#tb_Measuredatas').bootstrapTable({
                     url: '/measuredata/list',         //请求后台的URL（*）
@@ -46,11 +75,17 @@ require(
                         return temp;
                     },
                     columns: [{
-                        checkbox: true
+                        title:'编号',
+                        width:'60',
+                        align:'center',
+                        formatter:function(value,row,index){
+                            return index+1;
+                        }
                     },{
-                        field: 'id',
-                        title: 'id',
-                        visible:false
+                        field: 'uuid',
+                        title: 'UUID',
+                        width:'300',
+                        visible:true
                     },{
                         field: 'poiname',
                         title: '测点名称'
@@ -64,12 +99,43 @@ require(
                     }, {
                         field: 'unitprice',
                         title: '位移(mm)'
+                    },{
+                        field:'',
+                        title:'操 作',
+                        width:'150',
+                        events:operateEvents,
+                        formatter:function (value, row, index){
+                            var btnInfo='';
+                            if(blRowDelete)
+                            {
+                                btnInfo+='<button style="margin-right: 10px;padding: 2px" type="button" class="delete btn btn-outline btn-danger btn-sm">删 除</button>';
+                            }
+
+                            return btnInfo;
+                        }
                     }]
                 });
 
                 //多条件查询刷新
                 $("#btnSearch").click(function(){
                     $("#tb_Measuredatas").bootstrapTable('refresh');
+                });
+
+                //弹出新增窗口
+                $("#btn_add").on('click',function(){
+                    parent.layer.open({
+                        type: 2,
+                        skin: 'layui-layer-molv',
+                        title: '新增数据',
+                        shadeClose: true,
+                        shade: 0.2,
+                        maxmin: false,
+                        area: ['35%', '30%'],
+                        content: '/measuredata/addMeasuredata.html',
+                        end: function () {
+                            $("#tb_Measuredatas").bootstrapTable('refresh');
+                        }
+                    });
                 });
 
 

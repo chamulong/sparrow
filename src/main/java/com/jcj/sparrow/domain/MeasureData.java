@@ -1,8 +1,11 @@
 package com.jcj.sparrow.domain;
 
-import org.bson.types.ObjectId;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+
 
 /**
  * @Author: 江成军
@@ -12,19 +15,18 @@ import javax.persistence.Id;
 @Document(collection = "measuredata")
 public class MeasureData
 {
-    @Id
-    private ObjectId id;
+    private String uuid;
     private String poiname;
     private String datatype;
     private int num;
     private float unitprice;
 
-    public ObjectId getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getPoiname() {

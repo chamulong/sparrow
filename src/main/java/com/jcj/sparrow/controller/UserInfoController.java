@@ -186,6 +186,7 @@ public class UserInfoController
     @ResponseBody
     public String deletePhysics(String uuid)
     {
+        System.out.println("uuid:"+uuid);
         userinfoService.delete(uuid);
         return "OK";
     }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author: 江成军
@@ -28,6 +29,24 @@ public class MeasureDataCtl
 {
     @Autowired
     private MeasureDataService measureDataService;
+
+    @RequestMapping("/save")
+    @ResponseBody
+    public String save(MeasureData measureData)
+    {
+        measureData.setUuid(UUID.randomUUID().toString());
+        measureDataService.save(measureData);
+        return "OK";
+    }
+
+    //根据UUID删除，物理删除用户信息
+    @PostMapping("/deleteByUuid")
+    @ResponseBody
+    public String deleteByUuid(String uuid)
+    {
+        measureDataService.deleteByUuid(uuid);
+        return "OK";
+    }
 
     //访问测量列表，跳转的页面,注意：返回的是页面的路径，不是方法
     @RequestMapping(value = "/listhtml")

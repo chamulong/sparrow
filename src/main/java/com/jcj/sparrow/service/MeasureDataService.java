@@ -1,8 +1,10 @@
 package com.jcj.sparrow.service;
 
+import com.alibaba.fastjson.JSON;
 import com.jcj.sparrow.domain.MeasureData;
 import com.jcj.sparrow.repository.MeasureDataRepo;
 import com.jcj.sparrow.systemaop.SystemAnnotationLog;
+import com.jcj.sparrow.utils.FilterPureEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -11,7 +13,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -19,7 +20,8 @@ import java.util.regex.Pattern;
 /**
  * @Author: 江成军
  * @Date: 2019/01/30 15:08
- * @Description: 测量信息业务层，对应MongoDB
+ * @Description: 测量信息业务层，对应MongoDB,
+ *               (混合利用MongoRepository和MongoTemplate，前者便利，后者灵活，简单固定条件的查询用MongoRepository，可变动态复杂查询用MongoTemplate)
  */
 @Service
 public class MeasureDataService
@@ -29,12 +31,6 @@ public class MeasureDataService
 
     @Autowired
     private MeasureDataRepo measureDataRepo;
-
-    @SystemAnnotationLog(actiondesc = "mongodb添加数据")
-    public void save(MeasureData measureData)
-    {
-        measureDataRepo.save(measureData);
-    }
 
     public Page<MeasureData> basicPageList(Pageable pageable)
     {
@@ -79,6 +75,54 @@ public class MeasureDataService
         List<MeasureData> list=mongoTemplate.find(query,MeasureData.class);
         Page<MeasureData> pages=new PageImpl(list,pageable,total);
         return pages;
+    }
+
+
+    @SystemAnnotationLog(actiondesc = "新添加测量数据(mongodb)")
+    public void save(MeasureData measureData)
+    {
+        /**
+        *@Author 江成军
+        *@Description 单条保存记录
+        *@Date 2019/02/12 10:43
+        *@Param
+        *@return
+        **/
+
+        mongoTemplate.insert(measureData);
+    }
+
+    public void batchSave(List<MeasureData> measureDatas)
+    {
+        /**
+         *@Author 江成军
+         *@Description 单条保存记录
+         *@Date 2019/02/12 10:43
+         *@Param
+         *@return
+         **/
+
+        mongoTemplate.insert(measureDatas);
+    }
+
+    @SystemAnnotationLog(actiondesc = "删除现场测量信息")
+    public String deleteByUuid(String uuid)
+    {
+        /**
+        *@Author 江成军
+        *@Description 利用MongoTemplate的remove进行记录的删除
+        *@Date 2019/02/12 16:08
+        *@Param
+        *@return
+        **/
+
+        MeasureData measureData=measureDataRepo.findByUuid(uuid);
+
+        Query q=new Query(new Criteria("uuid").is(uuid));
+        mongoTemplate.remove(q,MeasureData.class);
+
+        Map map = FilterPureEntity.getKeyAndValue(measureData);
+        return JSON.toJSONString(measureData);
     }
 
 
