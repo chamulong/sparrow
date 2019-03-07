@@ -17,6 +17,8 @@ spring:
     #initialization-mode: always
     #Druid数据源配置
     type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
     initialSize: 5
     minIdle: 3
     maxActive: 20
