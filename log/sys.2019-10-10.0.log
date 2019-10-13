@@ -1,0 +1,132 @@
+2019-10-10 23:05:53,367 INFO (StartupInfoLogger.java:50)- Starting SparrowApplication on DESKTOP-H2T0EB0 with PID 7032 (C:\Users\gold\IdeaProjects\sparrow\target\classes started by gold in C:\Users\gold\IdeaProjects\sparrow)
+2019-10-10 23:05:53,371 INFO (SpringApplication.java:659)- No active profile set, falling back to default profiles: default
+2019-10-10 23:05:53,407 INFO (AbstractApplicationContext.java:590)- Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e377400: startup date [Thu Oct 10 23:05:53 CST 2019]; root of context hierarchy
+2019-10-10 23:05:54,183 INFO (RepositoryConfigurationDelegate.java:163)- Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-10-10 23:05:54,296 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.repository.MeasureDataRepo.
+2019-10-10 23:05:54,381 INFO (RepositoryConfigurationDelegate.java:163)- Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-10-10 23:05:54,452 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.repository.DepartmentRepo.
+2019-10-10 23:05:54,453 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.repository.MailInfoRepo.
+2019-10-10 23:05:54,455 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.repository.SystemlogRepo.
+2019-10-10 23:05:54,456 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.repository.UserinfoRepo.
+2019-10-10 23:05:54,456 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.security.RepoSysAuth.
+2019-10-10 23:05:54,457 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.security.RepoSysRole.
+2019-10-10 23:05:54,458 INFO (RepositoryConfigurationExtensionSupport.java:297)- Spring Data MongoDB - Could not safely identify store assignment for repository candidate interface com.jcj.sparrow.security.RepoSysUser.
+2019-10-10 23:05:54,775 INFO (AutowiredAnnotationBeanPostProcessor.java:154)- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-10-10 23:05:54,908 INFO (PostProcessorRegistrationDelegate.java:328)- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a59b4d1d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-10 23:05:55,325 INFO (TomcatWebServer.java:91)- Tomcat initialized with port(s): 8080 (http)
+2019-10-10 23:05:55,349 INFO (DirectJDKLog.java:180)- Initializing ProtocolHandler ["http-nio-8080"]
+2019-10-10 23:05:55,364 INFO (DirectJDKLog.java:180)- Starting service [Tomcat]
+2019-10-10 23:05:55,364 INFO (DirectJDKLog.java:180)- Starting Servlet Engine: Apache Tomcat/8.5.29
+2019-10-10 23:05:55,369 INFO (DirectJDKLog.java:180)- The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\gold\AppData\Local\Microsoft\WindowsApps;;.]
+2019-10-10 23:05:55,638 INFO (DirectJDKLog.java:180)- Initializing Spring embedded WebApplicationContext
+2019-10-10 23:05:55,638 INFO (ServletWebServerApplicationContext.java:285)- Root WebApplicationContext: initialization completed in 2231 ms
+2019-10-10 23:05:55,889 INFO (AbstractFilterRegistrationBean.java:244)- Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-10-10 23:05:55,890 INFO (AbstractFilterRegistrationBean.java:244)- Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-10-10 23:05:55,890 INFO (AbstractFilterRegistrationBean.java:244)- Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-10-10 23:05:55,891 INFO (AbstractFilterRegistrationBean.java:244)- Mapping filter: 'requestContextFilter' to: [/*]
+2019-10-10 23:05:55,891 INFO (AbstractFilterRegistrationBean.java:244)- Mapping filter: 'springSecurityFilterChain' to: [/*]
+2019-10-10 23:05:55,892 INFO (AbstractFilterRegistrationBean.java:257)- Mapping filter: 'webStatFilter' to urls: [/*]
+2019-10-10 23:05:55,892 INFO (AbstractFilterRegistrationBean.java:257)- Mapping filter: 'druidWebStatFilter' to urls: [/*]
+2019-10-10 23:05:55,892 INFO (ServletRegistrationBean.java:185)- Servlet dispatcherServlet mapped to [/]
+2019-10-10 23:05:55,893 INFO (ServletRegistrationBean.java:185)- Servlet statViewServlet mapped to [/druid/*]
+2019-10-10 23:05:55,894 INFO (ServletRegistrationBean.java:185)- Servlet com.jcj.sparrow.druid.DruidStatViewServlet mapped to [/druid/*]
+2019-10-10 23:05:55,928 INFO (DruidDataSourceAutoConfigure.java:56)- Init DruidDataSource
+2019-10-10 23:05:56,056 INFO (DruidDataSource.java:928)- {dataSource-1} inited
+2019-10-10 23:05:56,218 INFO (ScriptUtils.java:444)- Executing SQL script from class path resource [initialsql/schema.sql]
+2019-10-10 23:05:56,227 INFO (ScriptUtils.java:510)- Executed SQL script from class path resource [initialsql/schema.sql] in 8 ms.
+2019-10-10 23:05:56,231 INFO (ScriptUtils.java:444)- Executing SQL script from class path resource [initialsql/data.sql]
+2019-10-10 23:05:56,247 INFO (ScriptUtils.java:510)- Executed SQL script from class path resource [initialsql/data.sql] in 16 ms.
+2019-10-10 23:05:56,398 INFO (LocalContainerEntityManagerFactoryBean.java:361)- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-10-10 23:05:56,409 INFO (LogHelper.java:31)- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-10-10 23:05:56,486 INFO (Version.java:45)- HHH000412: Hibernate Core {5.2.16.Final}
+2019-10-10 23:05:56,489 INFO (Environment.java:213)- HHH000206: hibernate.properties not found
+2019-10-10 23:05:56,539 INFO (JavaReflectionManager.java:66)- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-10-10 23:05:57,211 INFO (Dialect.java:157)- HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-10-10 23:05:57,432 WARN (UUIDHexGenerator.java:42)- HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019-10-10 23:05:58,127 INFO (AbstractEntityManagerFactoryBean.java:415)- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-10-10 23:05:58,910 INFO (SLF4JLogger.java:71)- Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-10-10 23:05:59,644 WARN (TemplateMode.java:150)- [THYMELEAF][main] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-10-10 23:05:59,772 INFO (AbstractUrlHandlerMapping.java:373)- Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-10 23:06:00,413 INFO (RequestMappingHandlerAdapter.java:574)- Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2e377400: startup date [Thu Oct 10 23:05:53 CST 2019]; root of context hierarchy
+2019-10-10 23:06:00,459 WARN (JpaBaseConfiguration.java:235)- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-10-10 23:06:00,495 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/department/departments],methods=[GET]}" onto public java.lang.String com.jcj.sparrow.controller.DepartmentController.findAll(org.springframework.ui.Model)
+2019-10-10 23:06:00,496 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/department/PageDepartments],methods=[GET]}" onto public java.lang.String com.jcj.sparrow.controller.DepartmentController.findAll(org.springframework.ui.Model,int,int)
+2019-10-10 23:06:00,498 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/measuredata/save]}" onto public java.lang.String com.jcj.sparrow.controller.MeasureDataCtl.save(com.jcj.sparrow.domain.MeasureData)
+2019-10-10 23:06:00,498 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/measuredata/listhtml]}" onto public java.lang.String com.jcj.sparrow.controller.MeasureDataCtl.listredirect()
+2019-10-10 23:06:00,498 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/measuredata/basiclist],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.MeasureDataCtl.basicPageList(java.util.Map<java.lang.String, java.lang.Object>)
+2019-10-10 23:06:00,499 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/measuredata/deleteByUuid],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.MeasureDataCtl.deleteByUuid(java.lang.String)
+2019-10-10 23:06:00,499 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/measuredata/list],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.MeasureDataCtl.queryDynamic(java.util.Map<java.lang.String, java.lang.Object>)
+2019-10-10 23:06:00,500 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/systemlog/listhtml]}" onto public java.lang.String com.jcj.sparrow.controller.SystemlogController.listemployee()
+2019-10-10 23:06:00,500 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/systemlog/list],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.SystemlogController.queryDynamic(java.util.Map<java.lang.String, java.lang.Object>)
+2019-10-10 23:06:00,503 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/validateEmailModify],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.validateEmailModify(java.lang.String,java.lang.String)
+2019-10-10 23:06:00,503 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/validateMobileModify],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.validateMobileModify(java.lang.String,java.lang.String)
+2019-10-10 23:06:00,504 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/deletePhysics],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.deletePhysics(java.lang.String)
+2019-10-10 23:06:00,504 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/listhtml]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.listemployee()
+2019-10-10 23:06:00,504 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/list],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.queryDynamic(java.util.Map<java.lang.String, java.lang.Object>)
+2019-10-10 23:06:00,505 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/validateEmail],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.validateEmail(java.lang.String)
+2019-10-10 23:06:00,505 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/modify]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.modifyUserinfo(com.jcj.sparrow.domain.UserInfo)
+2019-10-10 23:06:00,505 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/deleteLogic],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.deleteLogic(java.lang.String)
+2019-10-10 23:06:00,505 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/findByUuid],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.findByUuid(java.lang.String)
+2019-10-10 23:06:00,506 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/upload],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.upload(org.springframework.web.multipart.MultipartFile)
+2019-10-10 23:06:00,506 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/validateUsername],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.validateUsername(java.lang.String)
+2019-10-10 23:06:00,506 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/save]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.saveUserinfo(com.jcj.sparrow.domain.UserInfo)
+2019-10-10 23:06:00,506 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/validateMobile],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.controller.UserInfoController.validateMobile(java.lang.String)
+2019-10-10 23:06:00,507 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinfo/userinfos],methods=[GET]}" onto public java.util.List<com.jcj.sparrow.domain.UserInfo> com.jcj.sparrow.controller.UserInfoController.getAll()
+2019-10-10 23:06:00,507 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinforeport_javabean]}" onto public void com.jcj.sparrow.JasperReport.UserinfoReport.reportHtml_javabean(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,net.sf.jasperreports.engine.JRException
+2019-10-10 23:06:00,508 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinforeport_PDF]}" onto public void com.jcj.sparrow.JasperReport.UserinfoReport.reportPDF(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,net.sf.jasperreports.engine.JRException
+2019-10-10 23:06:00,508 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinforeport_xls]}" onto public void com.jcj.sparrow.JasperReport.UserinfoReport.reportExcel(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,net.sf.jasperreports.engine.JRException
+2019-10-10 23:06:00,509 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/userinforeport]}" onto public void com.jcj.sparrow.JasperReport.UserinfoReport.reportHtml(org.springframework.ui.Model,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException,net.sf.jasperreports.engine.JRException
+2019-10-10 23:06:00,509 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/home]}" onto public java.lang.String com.jcj.sparrow.security.ControllerHome.index()
+2019-10-10 23:06:00,510 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/login]}" onto public java.lang.String com.jcj.sparrow.security.ControllerHome.login()
+2019-10-10 23:06:00,510 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/listRoleAuth]}" onto public java.lang.String com.jcj.sparrow.security.ControllerHome.listRoleAuth()
+2019-10-10 23:06:00,761 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/save],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.save(com.jcj.sparrow.security.SysRole)
+2019-10-10 23:06:00,762 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/deleterole],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.deleteByUuid(java.lang.String)
+2019-10-10 23:06:00,762 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/listrole]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.findAllRole(org.springframework.ui.Model)
+2019-10-10 23:06:00,762 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/saveMainAuth],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.saveMainAuth(com.jcj.sparrow.security.SysAuth)
+2019-10-10 23:06:00,762 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/deleteByName],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.deleteByName(java.lang.String)
+2019-10-10 23:06:00,763 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/deleteByChild],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.deleteByChild(int)
+2019-10-10 23:06:00,763 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/saveChildAuth],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.saveChildAuth(int,java.lang.String)
+2019-10-10 23:06:00,763 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/editRole],methods=[POST]}" onto public java.lang.String com.jcj.sparrow.security.ControllerRoleAuth.editRole(java.lang.String,java.lang.String)
+2019-10-10 23:06:00,763 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/roles]}" onto public java.util.List<com.jcj.sparrow.security.SysRole> com.jcj.sparrow.security.ControllerRoleAuth.findRoles()
+2019-10-10 23:06:00,764 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/findMainAuth]}" onto public java.util.List<com.jcj.sparrow.security.SysAuth> com.jcj.sparrow.security.ControllerRoleAuth.findMainAuth()
+2019-10-10 23:06:00,764 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/roleauth/listAuth]}" onto public java.util.Map<java.lang.String, java.util.List<com.jcj.sparrow.security.ServiceSysAuth$ztree>> com.jcj.sparrow.security.ControllerRoleAuth.listAuth(java.lang.String)
+2019-10-10 23:06:00,764 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/showimg]}" onto public java.lang.String com.jcj.sparrow.utils.showImg.createFolw(javax.servlet.http.HttpServletResponse,java.lang.String)
+2019-10-10 23:06:00,766 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-10-10 23:06:00,766 INFO (AbstractHandlerMethodMapping.java:547)- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-10-10 23:06:00,798 INFO (AbstractUrlHandlerMapping.java:373)- Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-10 23:06:00,799 INFO (AbstractUrlHandlerMapping.java:373)- Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-10-10 23:06:00,952 INFO (SLF4JLogger.java:76)- Exception in monitor thread while connecting to server localhost:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:62)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:126)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:114)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:59)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:57)
+	... 3 common frames omitted
+2019-10-10 23:06:01,301 INFO (DefaultSecurityFilterChain.java:43)- Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7da77305, org.springframework.security.web.context.SecurityContextPersistenceFilter@79d49790, org.springframework.security.web.header.HeaderWriterFilter@70543cae, org.springframework.security.web.authentication.logout.LogoutFilter@3c544c9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7d626f2, org.springframework.security.web.session.ConcurrentSessionFilter@2d4e99de, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1851c7d2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@538aa83f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3cdfbbef, org.springframework.security.web.session.SessionManagementFilter@1a5b7394, org.springframework.security.web.access.ExceptionTranslationFilter@4f7bb8df, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5aa7cfdf]
+2019-10-10 23:06:01,409 INFO (MBeanExporter.java:433)- Registering beans for JMX exposure on startup
+2019-10-10 23:06:01,410 INFO (MBeanExporter.java:895)- Bean with name 'statFilter' has been autodetected for JMX exposure
+2019-10-10 23:06:01,411 INFO (MBeanExporter.java:895)- Bean with name 'dataSource' has been autodetected for JMX exposure
+2019-10-10 23:06:01,416 INFO (MBeanExporter.java:668)- Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.spring.boot.autoconfigure:name=dataSource,type=DruidDataSourceWrapper]
+2019-10-10 23:06:01,417 INFO (MBeanExporter.java:668)- Located MBean 'statFilter': registering with JMX server as MBean [com.alibaba.druid.filter.stat:name=statFilter,type=StatFilter]
+2019-10-10 23:06:01,426 INFO (DirectJDKLog.java:180)- Starting ProtocolHandler ["http-nio-8080"]
+2019-10-10 23:06:01,434 INFO (DirectJDKLog.java:180)- Using a shared selector for servlet write/read
+2019-10-10 23:06:01,450 INFO (TomcatWebServer.java:206)- Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-10 23:06:01,453 INFO (StartupInfoLogger.java:59)- Started SparrowApplication in 8.618 seconds (JVM running for 10.42)
+2019-10-10 23:06:01,776 INFO (NettyServer.java:42)- server bind port:9000
+2019-10-10 23:06:41,788 INFO (DirectJDKLog.java:180)- Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-10-10 23:06:41,789 INFO (FrameworkServlet.java:494)- FrameworkServlet 'dispatcherServlet': initialization started
+2019-10-10 23:06:41,816 INFO (FrameworkServlet.java:509)- FrameworkServlet 'dispatcherServlet': initialization completed in 27 ms
+2019-10-10 23:06:52,494 INFO (QueryTranslatorFactoryInitiator.java:47)- HHH000397: Using ASTQueryTranslatorFactory

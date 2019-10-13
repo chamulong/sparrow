@@ -24,7 +24,7 @@ require(
                     pageSize: 15,                       //每页的记录行数（*）
                     pageList: [12,15,20],        //可供选择的每页的行数（*）
                     search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-                    strictSearch: true,
+                    strictSearch: true,                 //默认为false，设置为 true启用 全匹配搜索，否则为模糊搜索
                     showColumns: false,                  //是否显示所有的列
                     showRefresh: false,                  //是否显示刷新按钮
                     minimumCountColumns: 2,             //最少允许的列数
