@@ -94,7 +94,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.17</version>
+			<version>4.1.1</version>
 		</dependency>
 
 		<!--引入时如果只引poi,则无XSSFWorkbook和SXSSHWorkbook,还需引入下面的jar包，SXSSHWorkbook适用于处理大量数据-->
